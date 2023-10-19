@@ -1,0 +1,39 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.Measures.GetAllModel
+@{
+}
+
+<form method="post">
+    <div class="form-group">
+        <label>Create a new Measure Unit</label>
+        <input name="name" class="form-control" placeholder="Enter Measure Unit">
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var measure in Model.measures)
+        {
+            <tr>
+                <td>@measure.Name</td>
+                <td>
+                    <a asp-page="/Measures/Delete" asp-route-id="@measure.Id">Delete</a> /
+                    <a asp-page="/Measures/GetById" asp-route-id="@measure.Id">View</a> /
+                    <a asp-page="/Measures/Update" asp-route-id="@measure.Id">Update</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

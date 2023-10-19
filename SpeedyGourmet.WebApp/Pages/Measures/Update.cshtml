@@ -1,0 +1,15 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.Measures.UpdateModel
+@{
+}
+
+<form method="post">
+    <div class="form-group">
+        <label>Id</label>
+        <input readonly name="id" class="form-control" value="@Model.measure.Id">
+        <label>Name</label>
+        <input name="name" class="form-control" value="@Model.measure.Name">
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

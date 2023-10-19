@@ -1,0 +1,49 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.Favourites.GetAllModel
+@{
+    int i = 0;
+}
+
+<form method="post">
+    <div class="form-group">
+        <label>Create a new favourite</label>
+        <input name="id_user" class="form-control" placeholder="Enter User">
+        <input name="id_recipe" class="form-control" placeholder="Enter Recipe">
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">User</th>
+            <th scope="col">User Id</th>
+            <th scope="col">Recipe</th>
+            <th scope="col">Recipe Id</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (Model.Favourite favourite in Model.favourites)
+        {
+            <tr>
+                <th scope="row">@i</th>
+                <td><a href="#" class="list-group-item list-group-item-action">@favourite.User.Name</a></td>
+                <td><a href="#" class="list-group-item list-group-item-action">@favourite.User.Id</a></td>
+                <td><a href="#" class="list-group-item list-group-item-action">@favourite.Recipe.Title</a></td>
+                <td><a href="#" class="list-group-item list-group-item-action">@favourite.Recipe.Id</a></td>
+                <td>
+                    <a asp-page="/Favourites/Delete" asp-route-id="@favourite.Id">Delete</a> /
+                    <a asp-page="/Favourites/GetById" asp-route-id="@favourite.Id">View</a>
+                </td>
+            </tr>
+            i++;
+        }
+        
+    </tbody>
+
+</table>

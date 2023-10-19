@@ -1,0 +1,61 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.IngredientLines.GetAllModel
+@{
+}
+
+<form method="post">
+    <div class="form-group">
+        <label>Create a new Ingredient Line</label>
+        <br />
+
+        <label>Select an ingredient</label>
+        <select name="id_ingredient">
+            <label>Choose an ingredient: </label>
+            @foreach (var ingredient in Model.ingredients)
+            {
+                <option value="@ingredient.Id">@ingredient.Name</option>
+            }
+        </select>
+
+        <input name="quantity" class="form-control" placeholder="Enter Quantity">
+
+        <label>Select an Measure Unit: </label>
+        <select name="id_measure">
+            @foreach (var measure in Model.measures)
+            {
+                <option value="@measure.Id">@measure.Name</option>
+            }
+        </select>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Ingredient</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Measure Unit</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (Model.IngredientLine ingredientLine in Model.ingredientLines)
+        {
+            <tr>
+                <td><a href="#" class="list-group-item list-group-item-action">@ingredientLine.Ingredient.Id</a></td>
+                <td><a href="#" class="list-group-item list-group-item-action">@ingredientLine.Quantity</a></td>
+                <td><a href="#" class="list-group-item list-group-item-action">@ingredientLine.Measure.Id</a></td>
+                <td>
+                    <a asp-page="/IngredientLines/Delete" asp-route-id="@ingredientLine.Id">Delete</a> /
+                    <a asp-page="/IngredientLines/GetById" asp-route-id="@ingredientLine.Id">View</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>

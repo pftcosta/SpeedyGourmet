@@ -1,0 +1,21 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.Favourites.GetByIdModel
+@{
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Favourites</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>@Model.favourite.User.Name</td>
+        </tr>
+        <tr>
+            <td>@Model.favourite.Recipe.Title</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,43 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.Ingredients.GetAllModel
+@{
+    int i = 0;
+}
+
+<form method="post">
+    <div class="form-group">
+        <label>Create a new category</label>
+        <input name="name" class="form-control" placeholder="Enter Ingredient">
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            @*<th scope="col">Id</th>*@
+            <th scope="col">Name</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var ingredient in Model.ingredients)
+        {
+            <tr>
+                @*<th scope="row">@i</th>*@
+                <td>@ingredient.Name</td>
+                <td>
+                    <a asp-page="/ingredients/Delete" asp-route-id="@ingredient.Id">Delete</a> /
+                    <a asp-page="/ingredients/GetById" asp-route-id="@ingredient.Id">View</a> /
+                    <a asp-page="/ingredients/Update" asp-route-id="@ingredient.Id">Update</a>
+                </td>
+            </tr>
+            i++;
+        }
+    </tbody>
+
+</table>
