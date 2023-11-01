@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="C:\Users\pftco\Desktop\stuff\Recipe\GetAll.cshtml" Link="GetAll.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SpeedyGourmet.Service\SpeedyGourmet.Service.csproj" />
   </ItemGroup>
 </Project>

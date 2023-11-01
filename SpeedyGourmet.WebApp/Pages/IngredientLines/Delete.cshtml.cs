@@ -7,17 +7,19 @@ namespace SpeedyGourmet.WebApp.Pages.IngredientLines
 {
     public class DeleteModel : PageModel
     {
-        private readonly IILPostService<IngredientLine, int> _iLService;
+        private readonly IILPostService<IngredientLine, int> _ilService;
 
-        public DeleteModel(IILPostService<IngredientLine, int> iLService)
+        public DeleteModel(IILPostService<IngredientLine, int> ilService)
         {
-            _iLService = iLService;
+            _ilService = ilService;
         }
+
+        public IngredientLine ingredientLine = new();
 
         public IActionResult OnGet(int id)
         {
-            _iLService.Delete(id);
-            return Redirect("/IngredientLines/GetAll");
+            _ilService.Delete(id);
+            return Redirect("/IngredientLines/GetAllByRecipe");
         }
     }
 }

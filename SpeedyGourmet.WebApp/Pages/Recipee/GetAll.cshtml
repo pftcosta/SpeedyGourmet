@@ -1,0 +1,40 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.Recipee.GetAllModel
+@{
+}
+
+<h1>All Recipes List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">User</th>
+            <th scope="col">Recipe</th>
+            <th scope="col">Category</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (Model.Recipe recipe in Model.Recipes)
+        {
+            <tr>
+                <td>@recipe.Author.UserName</td>
+                <td>@recipe.Title</td>
+                <td>@recipe.Category.Name</td>
+                <td>
+                    <a asp-page="/Recipee/Delete" asp-route-id="@recipe.Id">Delete</a> /
+                    <a asp-page="/Recipee/GetById" asp-route-id="@recipe.Id">View</a> /
+                    <a asp-page="/Recipee/Update" asp-route-id="@recipe.Id">Update</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+
+<div class="d-flex justify-content-between">
+    <a class="btn btn-danger" asp-area="" asp-page="/Recipee/CreateRecipe"> Create New Recipe <i class="bi bi-arrow-left"></i></a>
+    <a class="btn btn-danger" asp-area="" asp-page="/Recipee/GetById"><i class="bi bi-arrow-right"></i> Get All Recipes By User Id</a>
+</div>

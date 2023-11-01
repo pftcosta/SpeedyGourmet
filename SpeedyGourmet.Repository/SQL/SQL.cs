@@ -32,6 +32,7 @@ namespace SpeedyGourmet.Repository
             }
             return -1;
         }
+
         private static void HangUpCall()
         {
             if (_isClosed)

@@ -3,42 +3,47 @@
 @{
 }
 
-<form method="post">
-    <div class="form-group">
-        <label>Create a new category</label>
-        <input name="name" class="form-control" placeholder="Enter Category">
-    </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<br>
 
-<br />
+<div class="d-flex">
+
+    <form method="post">
+
+        <div class="form-group">
+            <input name="name" class="form-control" placeholder="Insert new Category">
+        </div>
+
+        <br>
+
+        <button type="submit" class="btn btn-primary ml-2">Create</button>
+
+    </form>
+
+
+</div>
+
+<br>
 
 <table class="table">
+
     <thead>
         <tr>
-            <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
 
     <tbody>
-        @{
-            int i = 1;
-        }
         @foreach (var category in Model.categories)
         {
             <tr>
-                <th scope="row">@i</th>
                 <td>@category.Name</td>
                 <td>
                     <a asp-page="/Categories/Delete" asp-route-id="@category.Id">Delete</a> /
                     <a asp-page="/Categories/GetById" asp-route-id="@category.Id">View</a> /
-                    <a asp-page="/Categories/Update" asp-route-id="@category.Id">Update</a>
+                    <a asp-page="/Categories/Update" asp-route-id="@category.Id">Edit</a>
                 </td>
             </tr>
-            i++;
         }
     </tbody>
 

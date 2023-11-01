@@ -1,0 +1,88 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.Users.GetByIdModel
+@{
+}
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">Password</th>
+            <th scope="col">Admin</th>
+            <th scope="col">Blocked</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>@Model.user.Id</td>
+            <td>@Model.user.Name</td>
+            <td>@Model.user.UserName</td>
+            <td>@Model.user.Email</td>
+            <td>*****</td>
+            <td>@Model.user.IsAdmin</td>
+            <td>@Model.user.IsBlocked</td>
+            <td>
+                <a asp-page="/users/Delete" asp-route-id="@Model.user.Id">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+<form method="post">
+
+    <div class="form-group">
+        <input name="name" class="mr-2" placeholder=@Model.user.Name>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+        <input name="username" class="mr-2" placeholder=@Model.user.UserName>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+        <input name="email" class="mr-2" placeholder=@Model.user.Email>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+        <input name="password" class="mr-2" placeholder=@Model.user.Password>
+    </div>
+
+    <br>
+
+    <p>Admin User</p>
+    <input type="radio" id="iszero" name="is_admin" value="false">
+    <label for="iszero">No</label>
+    <input type="radio" id="isone" name="is_admin" value="true">
+    <label for="isone">Yes</label>
+
+    <br>
+
+    <p>Block User</p>
+    <input type="radio" id="iszero" name="is_blocked" value="false">
+    <label for="iszero">No</label>
+    <input type="radio" id="isone" name="is_blocked" value="true">
+    <label for="isone">Yes</label>
+
+    <br>
+    <br>
+    <br>
+
+    <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary"> Submit <i class="bi bi-arrow-right"></i> </button>
+        <a class="btn btn-danger" asp-area="" asp-page="/Users/GetAll"> Return <i class="bi bi-arrow-left"></i></a>
+    </div>
+
+</form>
+

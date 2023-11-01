@@ -1,0 +1,85 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.Recipee.AddIngredientsModel
+@{
+}
+
+@* <input hidden type="number" value="@Model.Recipe.Id" name="id" /> *@
+
+<h1>@Model.Recipe.Title ID: @Model.Recipe.Id</h1>
+<br />
+<h4> <p>@Model.Recipe.Category.Name</p></h4>
+<h6> <p>@Model.Recipe.PrepTime Minutes</p></h6>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ingredient's List</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ingredients in Model.Recipe.Ingredients)
+        {
+            <tr>
+                <td>@ingredients.Quantity @ingredients.Measure.Name de @ingredients.Ingredient.Name</td>
+                <td>
+                    <a asp-page="/Recipee/DeleteILine" asp-route-id="@Model.Recipe.Id">Delete</a> /
+                    <a asp-page="/Recipee/GetById" asp-route-id="@Model.Recipe.Id">View</a> /
+                    <a asp-page="/Recipee/Update" asp-route-id="@Model.Recipe.Id">Update</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Preparation Method</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>@Model.Recipe.PrepMethod</tr>
+    </tbody>
+</table>
+
+
+
+
+
+
+<form method="post">
+    <div class="form-group">
+        <h3>Add Ingredients</h3>
+        <select name="id_ingredient" class="form-select" aria-label="Default select example">
+            <option selected>Select an Ingredient</option>
+            @foreach (Model.Ingredient ingredient in Model.Ingredients)
+            {
+
+                <option value="@ingredient.Id">@ingredient.Name</option>
+            }
+
+        </select>
+        <br />
+
+        <label>Quantity</label>
+        <input type="number" name="quantity" class="form-control" placeholder="Enter Quantity Number">
+        <br />
+
+
+        <p>Measurement</p>
+        <select name="id_measure" class="form-select" aria-label="Default select example">
+            <option selected>Select a Measure Unit</option>
+            @foreach (Model.Measure measure in Model.Measures)
+            {
+
+                <option value="@measure.Id">@measure.Name</option>
+            }
+        </select>
+        <br />
+    </div>
+    <br />
+
+    <button type="submit" class="btn btn-primary">AddIngredient</button>
+</form>

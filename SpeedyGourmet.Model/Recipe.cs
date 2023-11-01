@@ -11,5 +11,6 @@
         public int PrepTime { get; set; } // in minutes
         public string PrepMethod { get; set; }
         public bool IsApproved { get; set; }
+        public User User { get; set; }
     }
 }

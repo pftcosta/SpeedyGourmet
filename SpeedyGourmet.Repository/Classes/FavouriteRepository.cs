@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 
 namespace SpeedyGourmet.Repository
 {
-    public class FavouriteRepository : IFavouriteRepository
+    public class FavouriteRepository : IRecFavRepository<Favourite, int>
     {
         private readonly string _tableName = "favourites";
 
@@ -78,6 +78,11 @@ namespace SpeedyGourmet.Repository
         {
             string sql = $"DELETE FROM {_tableName} WHERE id_user = {userId};";
             SQL.ExecuteNonQuery(sql);
+        }
+
+        public Favourite Update(Favourite Type)
+        {
+            throw new NotImplementedException();
         }
     }
 }

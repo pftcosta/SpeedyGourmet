@@ -37,7 +37,7 @@ namespace SpeedyGourmet.Repository
             return categories;
         }
 
-        public Category Parse (SqlDataReader reader)
+        private Category Parse (SqlDataReader reader)
         {
             Category category = new Category();
             category.Id = Convert.ToInt32(reader["id"]);

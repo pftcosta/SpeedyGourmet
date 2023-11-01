@@ -3,18 +3,29 @@
 @{
 }
 
-<form method="post">
-    <div class="form-group">
-        <label>Create a new Measure Unit</label>
-        <input name="name" class="form-control" placeholder="Enter Measure Unit">
-    </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<br>
+
+<div class="d-flex">
+
+    <form method="post">
+
+        <div class="form-group">
+            <input name="name" class="form-control" placeholder="Insert new Measure Unit">
+        </div>
+
+        <br>
+
+        <button type="submit" class="btn btn-primary ml-2">Create</button>
+
+    </form>
+
+
+</div>
 
 <br />
 
 <table class="table">
+
     <thead>
         <tr>
             <th scope="col">Name</th>
@@ -23,7 +34,7 @@
     </thead>
 
     <tbody>
-        @foreach (var measure in Model.measures)
+        @foreach (Model.Measure measure in Model.measures)
         {
             <tr>
                 <td>@measure.Name</td>

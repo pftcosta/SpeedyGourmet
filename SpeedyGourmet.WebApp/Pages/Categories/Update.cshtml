@@ -4,12 +4,19 @@
 }
 
 <form method="post">
+
     <div class="form-group">
         <label>Id</label>
         <input readonly name="id" class="form-control" value="@Model.category.Id">
         <label>Name</label>
         <input name="name" class="form-control" value="@Model.category.Name">
     </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
+
+    <br>
+
+    <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary"> Submit <i class="bi bi-arrow-right"></i> </button>
+        <a class="btn btn-danger" asp-area="" asp-page="/Categories/GetAll"> Return <i class="bi bi-arrow-left"></i></a>
+    </div>
+
 </form>

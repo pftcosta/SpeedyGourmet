@@ -10,23 +10,23 @@ builder.Services.AddRazorPages();
 //Adding Repositories
 builder.Services.AddScoped<IRepository<Category, int>, CategoryRepository>();
 builder.Services.AddScoped<IRepository<Difficulty, int>, DifficultyRepository>();
-builder.Services.AddScoped<IFavouriteRepository, FavouriteRepository>();
+builder.Services.AddScoped<IRecFavRepository<Favourite, int>, FavouriteRepository>();
 builder.Services.AddScoped<IRepository<Ingredient, int>, IngredientRepository>();
 builder.Services.AddScoped<IILPostRepository<IngredientLine, int>, IngredientLineRepository>();
 builder.Services.AddScoped<IRepository<Measure, int>, MeasureRepository>();
 builder.Services.AddScoped<IILPostRepository<Post, int>, PostRepository>();
-builder.Services.AddScoped<IRepository<Recipe, int>, RecipeRepository>();
+builder.Services.AddScoped<IRecFavRepository<Recipe, int>, RecipeRepository>();
 builder.Services.AddScoped<IRepository<User, int>, UserRepository>();
 
 //Adding Services
 builder.Services.AddScoped<IService<Category, int>, CategoryService>();
 builder.Services.AddScoped<IService<Difficulty, int>, DifficultyService>();
-builder.Services.AddScoped<IFavouriteService, FavouriteService>();
+builder.Services.AddScoped<IRecFavService<Favourite, int>, FavouriteService>();
 builder.Services.AddScoped<IService<Ingredient, int>, IngredientService>();
 builder.Services.AddScoped<IILPostService<IngredientLine, int>, IngredientLineService>();
 builder.Services.AddScoped<IService<Measure, int>, MeasureService>();
 builder.Services.AddScoped<IILPostService<Post, int>, PostService>();
-builder.Services.AddScoped<IService<Recipe, int>, RecipeService>();
+builder.Services.AddScoped<IRecFavService<Recipe, int>, RecipeService>();
 builder.Services.AddScoped<IService<User, int>, UserService>();
 
 var app = builder.Build();

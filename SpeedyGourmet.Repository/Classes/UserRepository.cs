@@ -16,8 +16,8 @@ namespace SpeedyGourmet.Repository
                 $"CONVERT(VARCHAR(32), HashBytes('MD5', '{user.Password}'), 2), " +
                 $"'{user.Name}', " +
                 $"'{user.Email}', " +
-                $"{isAdmin}, " +
-                $"{isBlocked});";
+                $"'{user.IsAdmin}', " +
+                $"'{user.IsBlocked}');";
             SQL.ExecuteNonQuery(sql);
             int maxId = SQL.GetMax("id", _tableName);
             return GetById(maxId);
@@ -70,8 +70,8 @@ namespace SpeedyGourmet.Repository
                 $"password = CONVERT(VARCHAR(32), HashBytes('MD5', '{user.Password}'), 2)," +
                 $"name = '{user.Name}', " +
                 $"email = '{user.Email}', " +
-                $"admin = {user.IsAdmin}, " +
-                $"blocked = {user.IsBlocked} " +
+                $"is_admin = '{user.IsAdmin}', " +
+                $"is_blocked = '{user.IsBlocked}' " +
                 $"WHERE id = {user.Id};";
             SQL.ExecuteNonQuery(sql);
             return GetById(user.Id);

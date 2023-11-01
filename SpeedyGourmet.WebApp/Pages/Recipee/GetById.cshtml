@@ -1,0 +1,47 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.Recipee.GetByIdModel
+@{
+}
+
+<h1>@Model.Recipe.Title</h1>
+
+<br />
+
+<h4> <p>@Model.Recipe.Category.Name</p></h4>
+<h6> <p>@Model.Recipe.PrepTime Minutes</p></h6>
+
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ingredient's List</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ingredients in Model.Recipe.Ingredients)
+        {
+            <tr>
+                <td>@ingredients.Quantity @ingredients.Measure.Name de @ingredients.Ingredient.Name</td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Preparation Method</th>
+        </tr>
+    </thead>
+    <tbody>
+         <tr>
+            <td>@Model.Recipe.PrepMethod</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<a asp-page="/Recipee/AddIngredients" asp-route-id="@Model.Recipe.Id"><i class="fa-regular fa-pen-to-square"></i></a>

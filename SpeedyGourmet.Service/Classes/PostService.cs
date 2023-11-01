@@ -7,9 +7,9 @@ namespace SpeedyGourmet.Service
     {
         private readonly IILPostRepository<Post, int> _postRepository;
         private readonly IService<User, int> _userService;
-        private readonly IService<Recipe, int> _recipeService;
+        private readonly IRecFavService<Recipe, int> _recipeService;
 
-        public PostService(IILPostRepository<Post, int> postRepositor, IService<User, int> userService, IService<Recipe, int> recipeService)
+        public PostService(IILPostRepository<Post, int> postRepositor, IService<User, int> userService, IRecFavService<Recipe, int> recipeService)
         {
             _postRepository = postRepositor;
             _userService = userService;
@@ -41,9 +41,19 @@ namespace SpeedyGourmet.Service
             return posts;
         }
 
-        public List<Post> GetAllByRecipeId(int id)
+        public List<Post> GetAllByRecipeId(int recipeId)
         {
-            List<Post> posts = _postRepository.GetAllByRecipeId(id);
+            List<Post> posts = _postRepository.GetAllByRecipeId(recipeId);
+            foreach (Post post in posts)
+            {
+                post.User = _userService.GetById(post.User.Id);
+                post.Recipe = _recipeService.GetById(post.Recipe.Id);
+            }
+            return posts;
+        }
+        public List<Post> GetAllByUserId(int userId)
+        {
+            List<Post> posts = _postRepository.GetAllByUserId(userId);
             foreach (Post post in posts)
             {
                 post.User = _userService.GetById(post.User.Id);
@@ -57,9 +67,15 @@ namespace SpeedyGourmet.Service
             _postRepository.Delete(id);
         }
 
-        public void DeleteAllByRecipeId(int id)
+        public void DeleteAllByRecipeId(int recipeId)
         {
-            _postRepository.DeleteAllByRecipeId(id);
+            _postRepository.DeleteAllByRecipeId(recipeId);
+        }
+
+        
+        public void DeleteAllByUserId(int userId)
+        {
+            _postRepository.DeleteAllByUserId(userId);
         }
     }
 }

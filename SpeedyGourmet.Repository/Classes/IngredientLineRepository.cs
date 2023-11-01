@@ -43,7 +43,18 @@ namespace SpeedyGourmet.Repository
 
         public List<IngredientLine> GetAllByRecipeId(int recipeId)
         {
-            string sql = $"SELECT * FROM {_tableName} WHERE id = {recipeId} ORDER BY id ASC;";
+            string sql = $"SELECT * FROM {_tableName} WHERE id_recipe = {recipeId} ORDER BY id ASC;";
+            SqlDataReader reader = SQL.Execute(sql);
+            List<IngredientLine> ingredientLines = new List<IngredientLine>();
+            while (reader.Read())
+            {
+                ingredientLines.Add(Parse(reader));
+            }
+            return ingredientLines;
+        }
+        public List<IngredientLine> GetAllByUserId(int userId)
+        {
+            string sql = $"SELECT * FROM {_tableName} WHERE id_user = {userId} ORDER BY id ASC;";
             SqlDataReader reader = SQL.Execute(sql);
             List<IngredientLine> ingredientLines = new List<IngredientLine>();
             while (reader.Read())
@@ -60,11 +71,11 @@ namespace SpeedyGourmet.Repository
             ingredientLine.Quantity = Convert.ToInt64(reader["quantity"]);
 
             Ingredient ingredient = new Ingredient();
-            ingredient.Id = Convert.ToInt32(reader["id"]);
+            ingredient.Id = Convert.ToInt32(reader["id_ingredient"]);
             ingredientLine.Ingredient = ingredient;
 
             Measure measure = new Measure();
-            measure.Id = Convert.ToInt32(reader["id"]);
+            measure.Id = Convert.ToInt32(reader["id_measure"]);
             ingredientLine.Measure = measure;
 
             return ingredientLine;
@@ -79,6 +90,13 @@ namespace SpeedyGourmet.Repository
         public void DeleteAllByRecipeId(int recipeId)
         {
             string sql = $"DELETE FROM {_tableName} WHERE id_recipe = {recipeId};";
+            SQL.ExecuteNonQuery(sql);
+        }
+
+        
+        public void DeleteAllByUserId(int userId)
+        {
+            string sql = $"DELETE FROM {_tableName} WHERE id_user = {userId};";
             SQL.ExecuteNonQuery(sql);
         }
     }

@@ -31,6 +31,7 @@ namespace SpeedyGourmet.Service
         {
             return _categoryRepository.Update(category);
         }
+
         public void Delete(int id)
         {
             _categoryRepository.Delete(id);

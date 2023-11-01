@@ -7,16 +7,12 @@ namespace SpeedyGourmet.WebApp.Pages.IngredientLines
 {
     public class GetAllModel : PageModel
     {
-
         private readonly IILPostService<IngredientLine, int> _iLService;
-
         private readonly IService<Ingredient, int> _ingredientService;
-
         private readonly IService<Measure, int> _measureService;
+        private readonly IRecFavService<Recipe, int> _recipeService;
 
-        private readonly IService<Recipe, int> _recipeService;
-
-        public GetAllModel(IILPostService<IngredientLine, int> iLService, IService<Ingredient, int> ingredientService, IService<Measure, int> measureService, IService<Recipe, int> recipeService)
+        public GetAllModel(IILPostService<IngredientLine, int> iLService, IService<Ingredient, int> ingredientService, IService<Measure, int> measureService, IRecFavService<Recipe, int> recipeService)
         {
             _iLService = iLService;
             _ingredientService = ingredientService;
@@ -25,21 +21,23 @@ namespace SpeedyGourmet.WebApp.Pages.IngredientLines
         }
 
         public List<IngredientLine> ingredientLines = new();
-
         public List<Ingredient> ingredients = new();
-
         public List<Measure> measures = new();
+        public List<Recipe> recipes = new();
+
+        public IngredientLine ingredientLine = new();
+        public Recipe recipe = new();
 
         public void OnGet()
         {
             ingredientLines = _iLService.GetAll();
             ingredients = _ingredientService.GetAll();
             measures = _measureService.GetAll();
+            recipes = _recipeService.GetAll();
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
-            IngredientLine ingredientLine = new();
             ingredientLine.Quantity = Convert.ToInt32(Request.Form["quantity"]);
 
             Ingredient ingredient = new();
@@ -51,13 +49,14 @@ namespace SpeedyGourmet.WebApp.Pages.IngredientLines
             ingredientLine.Measure.Id = Convert.ToInt32(Request.Form["id_measure"]);
 
             Recipe recipe = new();
-            recipe = _recipeService.GetById(1);
             ingredientLine.Recipe = recipe;
-            //ingredientLine.Measure.Id = Convert.ToInt32(Request.Form["id_recipe"]);
+            ingredientLine.Recipe.Id = Convert.ToInt32(Request.Form["id_recipe"]);
 
             _iLService.Create(ingredientLine);
 
-            OnGet();
+            //OnGet();
+
+            return RedirectToPage("/IngredientLines/CreateRecipe", new { id = recipe.Id });
         }
     }
 }

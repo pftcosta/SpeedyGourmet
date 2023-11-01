@@ -1,23 +1,34 @@
 ﻿@page
 @model SpeedyGourmet.WebApp.Pages.Favourites.GetAllModel
 @{
-    int i = 0;
 }
 
+<br>
+
 <form method="post">
+
     <div class="form-group">
         <label>Create a new favourite</label>
-        <input name="id_user" class="form-control" placeholder="Enter User">
-        <input name="id_recipe" class="form-control" placeholder="Enter Recipe">
+        <input name="id_user" class="mr-2" placeholder="Enter User ID">
+        <input name="id_recipe" class="mr-1" placeholder="Enter Recipe ID">
     </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
+
+    <br>
+
+    <button type="submit" class="btn btn-primary ml-2">Submit</button>
+
 </form>
 
+<br>
+
+<a asp-page="/Favourites/GetAllByUser" asp-route-id="@Model.user.Id">View Favourites by user id</a>
+
+<br>
+
 <table class="table">
+
     <thead>
         <tr>
-            <th scope="col">Id</th>
             <th scope="col">User</th>
             <th scope="col">User Id</th>
             <th scope="col">Recipe</th>
@@ -31,19 +42,16 @@
         @foreach (Model.Favourite favourite in Model.favourites)
         {
             <tr>
-                <th scope="row">@i</th>
-                <td><a href="#" class="list-group-item list-group-item-action">@favourite.User.Name</a></td>
-                <td><a href="#" class="list-group-item list-group-item-action">@favourite.User.Id</a></td>
-                <td><a href="#" class="list-group-item list-group-item-action">@favourite.Recipe.Title</a></td>
-                <td><a href="#" class="list-group-item list-group-item-action">@favourite.Recipe.Id</a></td>
+                <td><a>@favourite.User.Name</a></td>
+                <td><a>@favourite.User.Id</a></td>
+                <td><a>@favourite.Recipe.Title</a></td>
+                <td><a>@favourite.Recipe.Id</a></td>
                 <td>
                     <a asp-page="/Favourites/Delete" asp-route-id="@favourite.Id">Delete</a> /
                     <a asp-page="/Favourites/GetById" asp-route-id="@favourite.Id">View</a>
                 </td>
             </tr>
-            i++;
         }
-        
     </tbody>
 
 </table>

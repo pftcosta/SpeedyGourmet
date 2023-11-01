@@ -1,22 +1,33 @@
 ﻿@page
 @model SpeedyGourmet.WebApp.Pages.Difficulties.GetAllModel
 @{
-    int i = 1;
 }
 
-<form method="post">
-    <div class="form-group">
-        <label>Create a new difficulty</label>
-        <input name="name" class="form-control" placeholder="Enter Difficulty">
-    </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<br>
+
+<div class="d-flex">
+
+    <form method="post">
+
+        <div class="form-group">
+            <input name="name" class="form-control" placeholder="Insert new Difficulty">
+        </div>
+
+        <br>
+
+        <button type="submit" class="btn btn-primary ml-2">Create</button>
+
+    </form>
+
+
+</div>
+
+<br>
 
 <table class="table">
+
     <thead>
         <tr>
-            <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Actions</th>
         </tr>
@@ -27,7 +38,6 @@
         @foreach (Model.Difficulty difficulty in Model.difficulties)
         {
             <tr>
-                <th scope="row">@i</th>
                 <td><a href="#" class="list-group-item list-group-item-action">@difficulty.Name</a></td>
                 <td>
                     <a asp-page="/Difficulties/Delete" asp-route-id="@difficulty.Id">Delete</a> /
@@ -35,7 +45,6 @@
                     <a asp-page="/Difficulties/Update" asp-route-id="@difficulty.Id">Update</a>
                 </td>
             </tr>
-            i++;
         }
     </tbody>
 

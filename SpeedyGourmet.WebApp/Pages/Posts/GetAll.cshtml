@@ -1,0 +1,84 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.Posts.GetAllModel
+@{
+}
+
+<br>
+<a class="btn btn-danger" asp-area=" "asp-page="/Posts/GetAllByRecipe">View all posts by recipe <i class="bi bi-arrow-left"></i></a>
+
+<br>
+<a class="btn btn-danger" asp-area=" " asp-page="/Posts/GetAllByUser">View all posts by user <i class="bi bi-arrow-left"></i></a>
+
+<br>
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th scope="col">User</th>
+            <th scope="col">Recipe</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (Model.Post post in Model.posts)
+        {
+            <tr>
+                <td>@post.User.UserName</td>
+                <td>@post.Recipe.Title</td>
+                <td>@post.Rating</td>
+                <td>
+                    <a asp-page="/posts/Delete" asp-route-id="@post.Id">Delete</a> /
+                    <a asp-page="/posts/GetById" asp-route-id="@post.Id">View</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<br>
+
+<form method="post">
+
+    <div class="form-group">
+        <label>Create a new Post</label>
+
+        <br>
+        <br>
+        
+        <label>Select a user</label>
+        <select name="id_user">
+            <label> Choose an ingredient: </label>
+            @foreach (Model.User user in Model.users)
+            {
+                <option value="@user.Id">@user.UserName</option>
+            }
+        </select>
+
+        <label>Select a Recipe</label>
+        <select name="id_recipe">
+            <label>Choose a recipe: </label>
+            @foreach (Model.Recipe recipe in Model.recipes)
+            {
+                <option value="@recipe.Id">@recipe.Title</option>
+            }
+        </select>
+
+        <br>
+
+        <input name="rating" class="mr-2" placeholder="Enter Rating (1-10)">
+
+        <br>
+
+        <input name="comment" class="form-control" placeholder="Enter Post">
+
+    </div>
+
+    <br>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>

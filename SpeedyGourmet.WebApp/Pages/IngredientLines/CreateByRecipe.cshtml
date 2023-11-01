@@ -1,0 +1,68 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.IngredientLines.CreateByRecipeModel
+@{
+}
+
+<form method="post">
+    <p>Select a Ingredient</p>
+    <select name="id_ingredient" class="form-select" aria-label="Default select example">
+        <option selected>Select a option</option>
+        @foreach (Model.Ingredient ingredient in Model.ingredients)
+        {
+
+            <option value="@ingredient.Id">@ingredient.Name</option>
+        }
+
+    </select>
+
+    <label>Quantity</label>
+    <input type="number" name="quantity" class="form-control" placeholder="Enter Quantity">
+    <br />
+
+    <input hidden type="number" value="@Model.ingredientLine.Recipe.Id" name="id_recipe" />
+
+    <p>Select a Measure</p>
+    <select name="id_measure" class="form-select" aria-label="Default select example">
+        <option selected>Select a option</option>
+        @foreach (Model.Measure measure in Model.measures)
+        {
+
+            <option value="@measure.Id">@measure.Name</option>
+        }
+
+    </select>
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Recipe: @Model.ingredientLine.Recipe.Title</th>
+        </tr>
+        <tr>
+            <th scope="col">Ingredient List</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (Model.IngredientLine ingredientLine in Model.ingredientLines)
+        {
+            <tr>
+                <td><a>@ingredientLine.Quantity @ingredientLine.Measure.Name de @ingredientLine.Ingredient.Name</a></td>
+                <td>
+                    <a asp-page="/IngredientLines/Delete" asp-route-id="@ingredientLine.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<div class="d-flex justify-content-between">
+    <a class="btn btn-danger" asp-area="" asp-page="/IngredientLines/GetAll"> Return to all ingredient list <i class="bi bi-arrow-left"></i></a>
+    <a class="btn btn-danger" asp-area="" asp-page="/IngredientLines/DeleteAllByRecipe" asp-route-id="@Model.ingredientLine.Recipe.Id">
+        <i class="bi bi-arrow-right"></i> Delete all
+    </a>
+</div>
+<a asp-page="/Recipes/GetAll" asp-route-id="@Model.ingredientLine.Recipe.Id"><button type="button" class="btn btn-primary btn-sm">Finish</button></a>

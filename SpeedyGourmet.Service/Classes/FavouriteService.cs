@@ -3,13 +3,13 @@ using SpeedyGourmet.Repository;
 
 namespace SpeedyGourmet.Service
 {
-    public class FavouriteService : IFavouriteService
+    public class FavouriteService : IRecFavService<Favourite, int>
     {
-        private readonly IFavouriteRepository _favouriteRepository;
+        private readonly IRecFavRepository<Favourite, int> _favouriteRepository;
         private readonly IService<User, int> _userService;
-        private readonly IService<Recipe, int> _recipeService;
+        private readonly IRecFavService<Recipe, int> _recipeService;
 
-        public FavouriteService(IFavouriteRepository favouriteRepository, IService<User, int> userService, IService<Recipe, int> recipeService)
+        public FavouriteService(IRecFavRepository<Favourite, int> favouriteRepository, IService<User, int> userService, IRecFavService<Recipe, int> recipeService)
         {
             _favouriteRepository = favouriteRepository;
             _userService = userService;
@@ -42,9 +42,9 @@ namespace SpeedyGourmet.Service
             return favourites;
         }
 
-        public List<Favourite> GetAllByUserId()
+        public List<Favourite> GetAllByUserId(int userId)
         {
-            List<Favourite> favourites = new List<Favourite>();
+            List<Favourite> favourites = _favouriteRepository.GetAllByUserId(userId);
             foreach (Favourite favourite in favourites)
             {
                 favourite.User = _userService.GetById(favourite.User.Id);
@@ -63,6 +63,9 @@ namespace SpeedyGourmet.Service
             _favouriteRepository.DeleteAllByUserId(userId);
         }
 
-
+        public Favourite Update(Favourite Type)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,0 +1,46 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.Posts.GetByIdModel
+@{
+}
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Recipe</th>
+            <th>Rating</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr>
+            <td>@Model.post.User.UserName</td>
+            <td>@Model.post.Recipe.Title</td>
+            <td>@Model.post.Rating</td>
+        </tr>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Comment</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>@Model.post.Comment</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </tbody>
+
+</table>
+
+<div class="d-flex justify-content-between">
+    <a class="btn btn-danger" asp-area="" asp-page="/Posts/GetAllByRecipe"> Return to Get All by Recipe <i class="bi bi-arrow-right"></i></a>
+    <a class="btn btn-danger" asp-area="" asp-page="/Posts/GetAllByUser"> Return to Get All by User <i class="bi bi-arrow-centre"></i></a>
+    <a class="btn btn-danger" asp-area="" asp-page="/Posts/GetAll"> Return to Get All <i class="bi bi-arrow-left"></i></a>
+</div>

@@ -1,14 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SpeedyGourmet.Model;
 using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Favourites
 {
     public class DeleteModel : PageModel
     {
-        private readonly IFavouriteService _favouriteService;
+        private readonly IRecFavService<Favourite, int> _favouriteService;
 
-        public DeleteModel(IFavouriteService favouriteService)
+        public DeleteModel(IRecFavService<Favourite, int> favouriteService)
         {
             _favouriteService = favouriteService;
         }

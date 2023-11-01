@@ -32,17 +32,27 @@ namespace SpeedyGourmet.Service
         public List<IngredientLine> GetAll()
         {
             List<IngredientLine> ingredientLines = _ingredientLineRepository.GetAll();
-            //foreach (IngredientLine ingredientLine in ingredientLines)
-            //{
-            //    ingredientLine.Ingredient = _ingredientService.GetById(ingredientLine.Ingredient.Id);
-            //    ingredientLine.Measure = _measureService.GetById(ingredientLine.Measure.Id);
-            //}
+            foreach (IngredientLine ingredientLine in ingredientLines)
+            {
+                ingredientLine.Ingredient = _ingredientService.GetById(ingredientLine.Ingredient.Id);
+                ingredientLine.Measure = _measureService.GetById(ingredientLine.Measure.Id);
+            }
             return ingredientLines;
         }
 
         public List<IngredientLine> GetAllByRecipeId(int recipeId)
         {
             List<IngredientLine> ingredientLines = _ingredientLineRepository.GetAllByRecipeId(recipeId);
+            foreach (IngredientLine ingredientLine in ingredientLines)
+            {
+                ingredientLine.Ingredient = _ingredientService.GetById(ingredientLine.Ingredient.Id);
+                ingredientLine.Measure = _measureService.GetById(ingredientLine.Measure.Id);
+            }
+            return ingredientLines;
+        }
+        public List<IngredientLine> GetAllByUserId(int userId)
+        {
+            List<IngredientLine> ingredientLines = _ingredientLineRepository.GetAllByUserId(userId);
             foreach (IngredientLine ingredientLine in ingredientLines)
             {
                 ingredientLine.Ingredient = _ingredientService.GetById(ingredientLine.Ingredient.Id);
@@ -59,6 +69,12 @@ namespace SpeedyGourmet.Service
         public void DeleteAllByRecipeId(int recipeId)
         {
             _ingredientLineRepository.DeleteAllByRecipeId(recipeId);
+        }
+
+        
+        public void DeleteAllByUserId(int userId)
+        {
+            _ingredientLineRepository.DeleteAllByUserId(userId);
         }
     }
 }

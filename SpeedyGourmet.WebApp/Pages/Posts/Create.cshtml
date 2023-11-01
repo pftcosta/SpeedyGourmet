@@ -1,0 +1,40 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.Posts.CreateModel
+@{
+}
+
+<form method="post">
+
+    <div class="form-group">
+        <label>Create a new Ingredient Line</label>
+        <br />
+
+        <label>Select a Recipe</label>
+        <select name="id_recipe">
+            <label>Choose a recipe: </label>
+            @foreach (var recipe in Model.recipes)
+            {
+                <option value="@recipe.Id">@recipe.Title</option>
+            }
+        </select>
+
+        <label>Select a user</label>
+        <select name="id_user">
+            <label>Choose an ingredient: </label>
+            @foreach (var user in Model.users)
+            {
+                <option value="@user.Id">@user.UserName</option>
+            }
+        </select>
+
+        <input name="rating" class="form-control" placeholder="Enter Rating (1-10)">
+
+        <input name="comment" class="form-control" placeholder="Enter Post">
+
+    </div>
+    
+    <br>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>

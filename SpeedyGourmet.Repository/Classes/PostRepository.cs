@@ -8,7 +8,7 @@ namespace SpeedyGourmet.Repository
         private readonly string _tableName = "posts";
         public Post Create(Post post)
         {
-            string sql = $"INSERT INTO {_tableName} (id_user, id_recipe) VALUES ({post.User.Id}, {post.Recipe.Id});";
+            string sql = $"INSERT INTO {_tableName} (id_user, id_recipe, comment, rating) VALUES ({post.User.Id}, {post.Recipe.Id}, '{post.Comment}', {post.Rating});";
             SQL.ExecuteNonQuery(sql);
             int id = SQL.GetMax("id", _tableName);
             return GetById(id);
@@ -49,6 +49,18 @@ namespace SpeedyGourmet.Repository
             return comments;
         }
 
+        public List<Post> GetAllByUserId(int userId)
+        {
+            string sql = $"SELECT * FROM {_tableName} WHERE id_user = {userId};";
+            SqlDataReader reader = SQL.Execute(sql);
+            List<Post> comments = new List<Post>();
+            while (reader.Read())
+            {
+                comments.Add(Parse(reader));
+            }
+            return comments;
+        }
+
         private Post Parse(SqlDataReader reader)
         {
             Post post = new Post();
@@ -76,6 +88,12 @@ namespace SpeedyGourmet.Repository
         public void DeleteAllByRecipeId(int recipeId)
         {
             string sql = $"DELETE FROM {_tableName} WHERE id_recipe = {recipeId};";
+            SQL.ExecuteNonQuery(sql);
+        }
+
+        public void DeleteAllByUserId(int userId)
+        {
+            string sql = $"DELETE FROM {_tableName} WHERE id_user = {userId};";
             SQL.ExecuteNonQuery(sql);
         }
     }
