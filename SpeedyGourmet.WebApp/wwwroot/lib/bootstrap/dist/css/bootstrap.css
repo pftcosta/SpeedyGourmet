@@ -112,12 +112,12 @@ h1, .h1 {
 }
 
 h2, .h2 {
-  font-size: calc(1.325rem + 0.9vw);
+    font-size: calc(1.325rem + 0.9vw);
 }
 @media (min-width: 1200px) {
-  h2, .h2 {
-    font-size: 2rem;
-  }
+    h2, .h2 {
+        font-size: 2rem;
+    }
 }
 
 h3, .h3 {

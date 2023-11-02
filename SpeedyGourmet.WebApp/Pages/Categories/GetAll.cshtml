@@ -3,33 +3,26 @@
 @{
 }
 
-<br>
+<h2>List of Categories <i class="fa-solid fa-burger"></i></h2>
+<br />
 
 <div class="d-flex">
-
-    <form method="post">
-
+    <form method="post" class="d-flex">
         <div class="form-group">
-            <input name="name" class="form-control" placeholder="Insert new Category">
+            <input type="text" name="name" class="form-control" placeholder="Insert new Category">
         </div>
-
-        <br>
-
-        <button type="submit" class="btn btn-primary ml-2">Create</button>
-
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary mx-2">Create <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
     </form>
-
-
 </div>
-
-<br>
+<br />
 
 <table class="table">
-
     <thead>
         <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Actions</th>
+            <th scope="col"> </th>
+            <th scope="col"> </th>
         </tr>
     </thead>
 
@@ -39,12 +32,11 @@
             <tr>
                 <td>@category.Name</td>
                 <td>
-                    <a asp-page="/Categories/Delete" asp-route-id="@category.Id">Delete</a> /
-                    <a asp-page="/Categories/GetById" asp-route-id="@category.Id">View</a> /
-                    <a asp-page="/Categories/Update" asp-route-id="@category.Id">Edit</a>
+                    <a asp-page="/Categories/Delete" asp-route-id="@category.Id"><i class="fa-regular fa-trash-can"></i></a> /
+                    <a asp-page="/Categories/GetById" asp-route-id="@category.Id"><i class="fa-regular fa-eye"></i></a> /
+                    <a asp-page="/Categories/Update" asp-route-id="@category.Id"><i class="fa-solid fa-pencil"></i></a>
                 </td>
             </tr>
         }
     </tbody>
-
 </table>
