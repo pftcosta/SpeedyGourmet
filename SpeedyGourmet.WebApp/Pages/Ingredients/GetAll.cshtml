@@ -3,33 +3,27 @@
 @{
 }
 
-<br>
+<h2>List of Ingredients <i class="fa-solid fa-wheat-awn"></i></h2>
+<br />
 
 <div class="d-flex">
-
-    <form method="post">
-
+    <form method="post" class="d-flex">
         <div class="form-group">
-            <input name="name" class="form-control" placeholder="Insert new Ingredient">
+            <input type="text" name="name" class="form-control" placeholder="Insert new Ingredient">
         </div>
-
-        <br>
-
-        <button type="submit" class="btn btn-primary ml-2">Create</button>
-
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary mx-2">Create <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
     </form>
-
-
 </div>
-
-<br>
+<br />
 
 <table class="table">
 
     <thead>
         <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Actions</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
 
@@ -39,12 +33,11 @@
             <tr>
                 <td>@ingredient.Name</td>
                 <td>
-                    <a asp-page="/ingredients/Delete" asp-route-id="@ingredient.Id">Delete</a> /
-                    <a asp-page="/ingredients/GetById" asp-route-id="@ingredient.Id">View</a> /
-                    <a asp-page="/ingredients/Update" asp-route-id="@ingredient.Id">Update</a>
+                    <a asp-page="/ingredients/Delete" asp-route-id="@ingredient.Id"><i class="fa-regular fa-trash-can"></i></a> /
+                    <a asp-page="/ingredients/GetById" asp-route-id="@ingredient.Id"><i class="fa-regular fa-eye"></i></a> /
+                    <a asp-page="/ingredients/Update" asp-route-id="@ingredient.Id"><i class="fa-solid fa-pencil"></i></a>
                 </td>
             </tr>
         }
     </tbody>
-
 </table>

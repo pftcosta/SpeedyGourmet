@@ -3,33 +3,26 @@
 @{
 }
 
-<br>
+<h2>List of Units of Measurement <i class="fa-solid fa-scale-balanced"></i></h2>
+<br />
 
 <div class="d-flex">
-
-    <form method="post">
-
+    <form method="post" class="d-flex">
         <div class="form-group">
-            <input name="name" class="form-control" placeholder="Insert new Measure Unit">
+            <input type="text" name="name" class="form-control" placeholder="Insert new Measure Unit">
         </div>
-
-        <br>
-
-        <button type="submit" class="btn btn-primary ml-2">Create</button>
-
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary mx-2">Create</button>
+        </div>
     </form>
-
-
 </div>
-
 <br />
 
 <table class="table">
-
     <thead>
         <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Actions</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
 
@@ -39,12 +32,11 @@
             <tr>
                 <td>@measure.Name</td>
                 <td>
-                    <a asp-page="/Measures/Delete" asp-route-id="@measure.Id">Delete</a> /
-                    <a asp-page="/Measures/GetById" asp-route-id="@measure.Id">View</a> /
-                    <a asp-page="/Measures/Update" asp-route-id="@measure.Id">Update</a>
+                    <a asp-page="/Measures/Delete" asp-route-id="@measure.Id"><i class="fa-regular fa-trash-can"></i></a> /
+                    <a asp-page="/Measures/GetById" asp-route-id="@measure.Id"><i class="fa-regular fa-eye"></i></a> /
+                    <a asp-page="/Measures/Update" asp-route-id="@measure.Id"><i class="fa-solid fa-pencil"></i></a>
                 </td>
             </tr>
         }
     </tbody>
-
 </table>

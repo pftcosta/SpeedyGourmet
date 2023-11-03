@@ -3,49 +3,40 @@
 @{
 }
 
-<br>
+<h2>List of Difficulties <i class="fa-solid fa-chart-simple"></i></h2>
+<br />
 
 <div class="d-flex">
-
-    <form method="post">
-
+    <form method="post" class="d-flex">
         <div class="form-group">
-            <input name="name" class="form-control" placeholder="Insert new Difficulty">
+            <input type="text" name="name" class="form-control" placeholder="Insert new Difficulty">
         </div>
-
-        <br>
-
-        <button type="submit" class="btn btn-primary ml-2">Create</button>
-
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary mx-2">Create <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
     </form>
-
-
 </div>
-
-<br>
+<br />
 
 <table class="table">
-
     <thead>
         <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Actions</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
 
     <tbody>
-
         @foreach (Model.Difficulty difficulty in Model.difficulties)
         {
             <tr>
-                <td><a href="#" class="list-group-item list-group-item-action">@difficulty.Name</a></td>
+                <td>@difficulty.Name</td>
                 <td>
-                    <a asp-page="/Difficulties/Delete" asp-route-id="@difficulty.Id">Delete</a> /
-                    <a asp-page="/Difficulties/GetById" asp-route-id="@difficulty.Id">View</a> /
-                    <a asp-page="/Difficulties/Update" asp-route-id="@difficulty.Id">Update</a>
+                    <a asp-page="/Difficulties/Delete" asp-route-id="@difficulty.Id"><i class="fa-regular fa-trash-can"></i></a> /
+                    <a asp-page="/Difficulties/GetById" asp-route-id="@difficulty.Id"><i class="fa-regular fa-eye"></i></a> /
+                    <a asp-page="/Difficulties/Update" asp-route-id="@difficulty.Id"><i class="fa-solid fa-pencil"></i></a>
                 </td>
             </tr>
         }
     </tbody>
-
 </table>

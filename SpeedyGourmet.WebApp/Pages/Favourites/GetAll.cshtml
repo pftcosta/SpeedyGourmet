@@ -3,55 +3,58 @@
 @{
 }
 
-<br>
+<h2>List of Favourites <i class="fa-solid fa-heart"></i></h2>
+<br />
 
-<form method="post">
-
+<div class="d-flex">
     <div class="form-group">
-        <label>Create a new favourite</label>
-        <input name="id_user" class="mr-2" placeholder="Enter User ID">
-        <input name="id_recipe" class="mr-1" placeholder="Enter Recipe ID">
+        <a class="btn btn-danger" asp-page="/Favourites/GetAllByUser" asp-route-id="@Model.user.Id">View <i class="fa-regular fa-heart"></i> by <i class="fa-regular fa-user"></i></a>
     </div>
 
-    <br>
-
-    <button type="submit" class="btn btn-primary ml-2">Submit</button>
-
-</form>
-
-<br>
-
-<a asp-page="/Favourites/GetAllByUser" asp-route-id="@Model.user.Id">View Favourites by user id</a>
-
-<br>
+    <form method="post" class="d-flex">
+        <div class="form-group mx-2">
+            <select name="id_user" class="form-control">
+                <option selected>Select User</option>
+                @foreach (Model.User user in Model.users)
+                {
+                    <option value="@user.Id">@user.UserName</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <select name="id_recipe" class="form-control">
+                <option selected>Select Recipe</option>
+                @foreach (Model.Recipe recipe in Model.recipes)
+                {
+                    <option value="@recipe.Id">@recipe.Title</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary mx-2">Create <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </form>
+</div>
+<br />
 
 <table class="table">
-
     <thead>
         <tr>
-            <th scope="col">User</th>
-            <th scope="col">User Id</th>
-            <th scope="col">Recipe</th>
-            <th scope="col">Recipe Id</th>
-            <th scope="col">Actions</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
 
     <tbody>
-
         @foreach (Model.Favourite favourite in Model.favourites)
         {
             <tr>
-                <td><a>@favourite.User.Name</a></td>
-                <td><a>@favourite.User.Id</a></td>
-                <td><a>@favourite.Recipe.Title</a></td>
-                <td><a>@favourite.Recipe.Id</a></td>
+                <td><a><i class="fa-solid fa-user"></i> @favourite.User.UserName <i class="fa-solid fa-heart"></i> @favourite.Recipe.Title</a></td>
                 <td>
-                    <a asp-page="/Favourites/Delete" asp-route-id="@favourite.Id">Delete</a> /
-                    <a asp-page="/Favourites/GetById" asp-route-id="@favourite.Id">View</a>
+                    <a asp-page="/Favourites/Delete" asp-route-id="@favourite.Id"><i class="fa-regular fa-trash-can"></i></a> /
+                    <a asp-page="/Favourites/GetById" asp-route-id="@favourite.Id"><i class="fa-regular fa-eye"></i></a>
                 </td>
             </tr>
         }
     </tbody>
-
 </table>
