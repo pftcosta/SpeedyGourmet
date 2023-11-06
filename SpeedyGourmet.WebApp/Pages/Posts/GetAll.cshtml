@@ -3,22 +3,27 @@
 @{
 }
 
-<br>
-<a class="btn btn-danger" asp-area=" "asp-page="/Posts/GetAllByRecipe">View all posts by recipe <i class="bi bi-arrow-left"></i></a>
+<h2>List of Comments <i class="fa-regular fa-comments"></i></h2>
+<br />
 
-<br>
-<a class="btn btn-danger" asp-area=" " asp-page="/Posts/GetAllByUser">View all posts by user <i class="bi bi-arrow-left"></i></a>
+<div class="d-flex">
+    <div class="form-group">
+        <a class="btn btn-danger" asp-area=" "asp-page="/Posts/GetAllByRecipe">View all posts by recipe <i class="bi bi-arrow-left"></i></a>
+    </div>
 
-<br>
+    <div class="form-group">
+        <a class="btn btn-danger mx-2" asp-area=" " asp-page="/Posts/GetAllByUser">View all posts by user <i class="bi bi-arrow-left"></i></a>
+    </div>
+</div>
+<br />
 
 <table class="table">
-
     <thead>
         <tr>
-            <th scope="col">User</th>
-            <th scope="col">Recipe</th>
-            <th scope="col">Rating</th>
-            <th scope="col">Actions</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
     </thead>
 
@@ -26,59 +31,54 @@
         @foreach (Model.Post post in Model.posts)
         {
             <tr>
-                <td>@post.User.UserName</td>
-                <td>@post.Recipe.Title</td>
-                <td>@post.Rating</td>
+                <td><i class="fa-solid fa-user"></i> @post.User.UserName Posted on @post.Recipe.Title by @post.Recipe.Author with @post.Rating <i class="fa-regular fa-star"></i>'s</td>
+                <td></td>
                 <td>
-                    <a asp-page="/posts/Delete" asp-route-id="@post.Id">Delete</a> /
-                    <a asp-page="/posts/GetById" asp-route-id="@post.Id">View</a>
+                    <a asp-page="/posts/Delete" asp-route-id="@post.Id"><i class="fa-regular fa-trash-can"></i></a> /
+                    <a asp-page="/posts/GetById" asp-route-id="@post.Id"><i class="fa-regular fa-eye"></i></a>
                 </td>
             </tr>
         }
     </tbody>
-
 </table>
 
-<br>
+<br />
 
-<form method="post">
+<h2>Create a new Post</h2>
+    <form method="post" class="d-grid">
+        <div class="form-group">
+        <select name="id_user" class="form-control" style="width: 130px;">
+                <option selected>Select User</option>
+                @foreach (Model.User user in Model.users)
+                {
+                    <option value="@user.Id">@user.UserName</option>
+                }
+            </select>
+        </div>
 
-    <div class="form-group">
-        <label>Create a new Post</label>
+        <div class="form-group">
+        <select name="id_recipe" class="form-control" style="width: 130px;">
+                <option selected>Select Recipe</option>
+                @foreach (Model.Recipe recipe in Model.recipes)
+                {
+                    <option value="@recipe.Id">@recipe.Title</option>
+                }
+            </select>
+        </div>
 
-        <br>
-        <br>
-        
-        <label>Select a user</label>
-        <select name="id_user">
-            <label> Choose an ingredient: </label>
-            @foreach (Model.User user in Model.users)
-            {
-                <option value="@user.Id">@user.UserName</option>
-            }
-        </select>
+        <div>
+        <label class="form-group" style="width: 100px;" for="rating">Rating (1-10):</label>
+            <br />
+        <input type="number" name="rating" id="rating" min="1" max="10" class="form-control" style="width: 130px;"  placeholder="Enter Rating (1-10)">
+        </div>
 
-        <label>Select a Recipe</label>
-        <select name="id_recipe">
-            <label>Choose a recipe: </label>
-            @foreach (Model.Recipe recipe in Model.recipes)
-            {
-                <option value="@recipe.Id">@recipe.Title</option>
-            }
-        </select>
+        <div>
+            <label for="comment">Post:</label>
+            <br />
+        <input type="text" name="comment" id="comment" class="form-control" style="height: 200px;" placeholder="Enter Post">
+        </div>
 
-        <br>
-
-        <input name="rating" class="mr-2" placeholder="Enter Rating (1-10)">
-
-        <br>
-
-        <input name="comment" class="form-control" placeholder="Enter Post">
-
-    </div>
-
-    <br>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-
-</form>
+        <div>
+            <button type="submit" class="btn btn-primary">Create Post <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </form>

@@ -20,5 +20,10 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
         {
             favourite = _favouriteService.GetById(id);
         }
+
+        public void OnPost(int id)
+        {
+            RedirectToPage("/Favourites/GetAllByUser", new { id = id });
+        }
     }
 }

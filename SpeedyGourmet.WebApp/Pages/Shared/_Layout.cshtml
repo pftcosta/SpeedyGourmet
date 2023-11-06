@@ -21,15 +21,12 @@
         
                 <!-- Botões "Register" e "Log In" alinhados à esquerda -->
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    @* <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Shared/Layout">Register</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Shared/Layout">Log In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Recipee/GetAll">Recipes</a>
-                    </li>
+                    </li> *@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="/Categories/GetAll">Categories <i class="fa-solid fa-burger"></i></a>
                     </li>
@@ -37,25 +34,29 @@
                         <a class="nav-link text-dark" asp-area="" asp-page="/Difficulties/GetAll">Difficulties <i class="fa-solid fa-chart-simple"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Favourites/GetAll">Favourites <i class="fa-solid fa-heart"></i></a>
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Measures/GetAll">Measures <i class="fa-solid fa-scale-balanced"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Ingredients/GetAll">Ingredients <i class="fa-solid fa-wheat-awn"></i></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="/IngredientLines/GetAll">Ingredient Lines</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Ingredients/GetAll">Ingredients <i class="fa-solid fa-wheat-awn"></i></a>
-                    </li><li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Measures/GetAll">Measures <i class="fa-solid fa-scale-balanced"></i></a>
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Users/GetAll">Users <i class="fa-solid fa-users"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Posts/GetAll">Comments</a>
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Favourites/GetAll">Favourites <i class="fa-solid fa-heart"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Users/GetAll">Users</a>
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Posts/GetAll">Comments <i class="fa-solid fa-comments"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Recipee/GetAll">Recipes</a>
                     </li>
                 </ul>
                 
-                <!-- Grupo de elementos de navegação "Menu Recipe" alinhado à direita -->
+               @*  <!-- Grupo de elementos de navegação "Menu Recipe" alinhado à direita -->
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Menu Recipe</a>
@@ -68,9 +69,9 @@
                             <li><a class="nav-link text-dark" asp-area="" asp-page="/Posts/GetAll">Comments</a></li>
                         </ul>
                     </li>
-                </ul>
+                </ul> *@
         
-                <!-- Grupo de elementos de navegação "Menu Admin" alinhado à direita -->
+                @* <!-- Grupo de elementos de navegação "Menu Admin" alinhado à direita -->
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Menu Admin</a>
@@ -80,7 +81,7 @@
                             <li><a class="nav-link text-dark" asp-area="" asp-page="/Posts/GetAll">Posts</a></li>
                         </ul>
                     </li>
-                </ul>
+                </ul> *@
             </div>
         </nav>
     </header>

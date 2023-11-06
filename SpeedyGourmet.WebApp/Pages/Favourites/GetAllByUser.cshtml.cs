@@ -27,6 +27,10 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
 
         public void OnGet(int id)
         {
+            Favourite favourite = new();
+            favourite.User = user;
+            favourite.User.Id = id;
+
             favourites = _favouriteService.GetAllByUserId(id);
             users = _userService.GetAll();
             recipes = _recipeService.GetAll();

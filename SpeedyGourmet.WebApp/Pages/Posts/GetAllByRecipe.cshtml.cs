@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SpeedyGourmet.Model;
+using SpeedyGourmet.Repository;
 using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Posts

@@ -48,6 +48,7 @@ namespace SpeedyGourmet.Service
             {
                 post.User = _userService.GetById(post.User.Id);
                 post.Recipe = _recipeService.GetById(post.Recipe.Id);
+                post.Recipe.Author = _userService.GetById(post.Recipe.Author.Id);
             }
             return posts;
         }
@@ -62,6 +63,30 @@ namespace SpeedyGourmet.Service
             return posts;
         }
 
+        public double GetAverageRatingByRecipeId(int id)
+        {
+            List<Post> posts = _postRepository.GetAllByRecipeId(id);
+            double totalRating = 0.0;
+            foreach (Post post in posts)
+            {
+                totalRating += post.Rating;
+            }
+            double averageRating = totalRating / posts.Count;
+            return averageRating;
+        }
+
+        public double GetAverageRatingByUserId(int id)
+        {
+            List<Post> posts = _postRepository.GetAllByUserId(id);
+            double totalRating = 0.0;
+            foreach (Post post in posts)
+            {
+                totalRating += post.Rating;
+            }
+            double averageRating = totalRating / posts.Count;
+            return averageRating;
+        }
+
         public void Delete(int id)
         {
             _postRepository.Delete(id);
@@ -72,7 +97,6 @@ namespace SpeedyGourmet.Service
             _postRepository.DeleteAllByRecipeId(recipeId);
         }
 
-        
         public void DeleteAllByUserId(int userId)
         {
             _postRepository.DeleteAllByUserId(userId);
