@@ -5,11 +5,11 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Users
 {
-    public class RegisterUserModel : PageModel
+    public class CreateUserModel : PageModel
     {
         private readonly IService<User, int> _userService;
 
-        public RegisterUserModel(IService<User, int> userService)
+        public CreateUserModel(IService<User, int> userService)
         {
             _userService = userService;
         }

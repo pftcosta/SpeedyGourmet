@@ -1,34 +1,30 @@
 ﻿@page
-@model SpeedyGourmet.WebApp.Pages.Users.RegisterUserModel
+@model SpeedyGourmet.WebApp.Pages.Users.CreateUserModel
 @{
 }
 
-<h2>List of Users <i class="fa-regular fa-user"></i></h2>
+<h2>Register User <i class="fa-regular fa-user"></i></h2>
 <br />
 
-<form method="post">
+<form method="post form-control">
     <div class="form-group">
         <input name="name" class="mr-2" placeholder="Name">
     </div>
-
     <br />
 
     <div class="form-group">
         <input name="username" class="mr-2" placeholder="User name">
     </div>
-
     <br />
 
     <div class="form-group">
         <input name="email" class="mr-2" placeholder="Email">
     </div>
-
     <br />
 
     <div class="form-group">
         <input name="password" class="mr-2" placeholder="Password">
     </div>
-
     <br />
 
     <p>Admin User</p>
@@ -36,7 +32,6 @@
     <label for="iszero">No</label>
     <input type="radio" id="isone" name="is_admin" value="true">
     <label for="isone">Yes</label>
-
     <br />
 
     <p>Block User</p>
@@ -44,8 +39,10 @@
     <label for="iszero">No</label>
     <input type="radio" id="isone" name="is_blocked" value="true">
     <label for="isone">Yes</label>
-
     <br />
 
-    <button type="submit" class="btn btn-primary">Register User <i class="fa-solid fa-arrow-right"></i></button>
+    <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Create User <i class="fa-solid fa-arrow-right"></i></button>
+        <a class="btn btn-danger" asp-area="" asp-page="/Users/GetAll">Return <i class="fas fa-arrow-up-from-bracket"></i></a>
+    </div>
 </form>

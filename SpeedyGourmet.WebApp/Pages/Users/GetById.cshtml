@@ -3,7 +3,7 @@
 @{
 }
 
-<h2>List of Users <i class="fa-solid fa-user"></i></h2>
+<h2>User Menu/Update <i class="fa-solid fa-user"></i></h2>
 <br />
 
 <table class="table">
@@ -31,61 +31,58 @@
             <td>@Model.user.IsAdmin</td>
             <td>@Model.user.IsBlocked</td>
             <td>
-                <a asp-page="/users/Delete" asp-route-id="@Model.user.Id">Delete</a>
+                <a asp-page="/users/Delete" asp-route-id="@Model.user.Id"><i class="fa-regular fa-trash-can"></i></a>
             </td>
         </tr>
     </tbody>
 
 </table>
 
-<form method="post" class="d-flex">
-
+<form method="post" class="d-group">
     <div class="form-group">
-        <input name="name" class="mr-2" placeholder=@Model.user.Name>
+        <input name="name" class="mr-2" placeholder="Name: @Model.user.Name">
+    </div>
+    <div class="form-group">
+        <input name="username" class="mr-2" placeholder="UserName: @Model.user.UserName">
+    </div>
+    <div class="form-group">
+        <input name="email" class="mr-2" placeholder="email: @Model.user.Email">
+    </div>
+    <div class="form-group">
+        <input name="password" class="mr-2" placeholder="pass: @Model.user.Password">
     </div>
 
-    <br />
+    <fieldset class="form-group">
+        <legend>Admin</legend>
+        <div class="center">
+            <input class="centre" type="radio" id="iszero" name="is_admin" value="false">
+            <label class="centre" for="iszero">No</label>
+         </div>
+        <div class="center">
+            <input class="centre" type="radio" id="isone" name="is_admin" value="true">
+            <label class="centre" for="isone">Yes</label>
+        </div>
+    </fieldset>
 
-    <div class="form-group">
-        <input name="username" class="mr-2" placeholder=@Model.user.UserName>
-    </div>
+     <br />
 
-    <br />
-
-    <div class="form-group">
-        <input name="email" class="mr-2" placeholder=@Model.user.Email>
-    </div>
-
-    <br />
-
-    <div class="form-group">
-        <input name="password" class="mr-2" placeholder=@Model.user.Password>
-    </div>
-
-    <br />
-
-    <p>Admin User</p>
-    <input type="radio" id="iszero" name="is_admin" value="false">
-    <label for="iszero">No</label>
-    <input type="radio" id="isone" name="is_admin" value="true">
-    <label for="isone">Yes</label>
-
-    <br>
-
-    <p>Block User</p>
-    <input type="radio" id="iszero" name="is_blocked" value="false">
-    <label for="iszero">No</label>
-    <input type="radio" id="isone" name="is_blocked" value="true">
-    <label for="isone">Yes</label>
-
-    <br>
-    <br>
-    <br>
+    <fieldset class="form-group">
+        <legend>Block User</legend>
+        <div class="center">
+            <input type="radio" id="iszeroblock" name="is_blocked" value="false">
+            <label for="iszeroblock">No</label>
+        </div>
+        <div class="center">
+            <input type="radio" id="isoneblock" name="is_blocked" value="true">
+            <label for="isoneblock">Yes</label>
+        </div>
+    </fieldset>
 
     <div class="d-flex justify-content-between">
-        <button type="submit" class="btn btn-primary"> Submit <i class="bi bi-arrow-right"></i> </button>
-        <a class="btn btn-danger" asp-area="" asp-page="/Users/GetAll"> Return <i class="bi bi-arrow-left"></i></a>
+        <button type="submit" class="btn btn-primary">Edit User <i class="fa-solid fa-arrow-right"></i></button>
+        <a class="btn btn-danger" asp-area="" asp-page="/Users/GetAll">Return <i class="fas fa-arrow-up-from-bracket"></i></a>
     </div>
 
+    <br />
 </form>
 

@@ -3,10 +3,25 @@
 @{
 }
 
-<br>
+<h2>List of Ingredient Lines By Recipe<i class="fa-solid fa-list"></i></h2>
+<br />
 
-<form method="post">
+<form method="post" class="d-flex">
+    <div class="d-flex mx-2">
+        <select name="id_recipe" class="form-control" style="width: 150px;">
+        <label>Choose a recipe: </label>
+        @foreach (Model.Recipe recipe in Model.recipes)
+        {
+            <option value="@recipe.Id">@recipe.Title</option>
+        }
+        </select>
+        <div class="d-flex">
+            <button type="submit" class="btn btn-primary mx-2">Create <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+</form>
 
+@* <form method="post">
     <label>Get ingredient list by recipe id: </label>
 
     <select name="id_recipe">
@@ -21,21 +36,18 @@
     <br />
 
     <button type="submit" class="btn btn-primary ml-2">Submit</button>
-
-</form>
+</form> *@
 
 <br />
 
 <form method="post">
-    <p>Select a Ingredient</p>
-    <select name="id_ingredient" class="form-select" aria-label="Default select example">
-        <option selected>Select a option</option>
+    <select name="id_ingredient">
+        <option selected>Select an Ingredient</option>
         @foreach (Model.Ingredient ingredient in Model.ingredients)
         {
 
             <option value="@ingredient.Id">@ingredient.Name</option>
         }
-
     </select>
 
     <label>Quantity</label>
@@ -44,18 +56,16 @@
 
     <input hidden type="number" value="@Model.ingredientLine.Recipe.Id" name="id_recipe" />
 
-    <p>Select a Measure</p>
-    <select name="id_measure" class="form-select" aria-label="Default select example">
-        <option selected>Select a option</option>
+    <select name="id_measure">
+        <option selected>Select a Measure Unit</option>
         @foreach (Model.Measure measure in Model.measures)
         {
 
             <option value="@measure.Id">@measure.Name</option>
         }
-
     </select>
-    <button type="submit" class="btn btn-primary">Submit</button>
 
+    <button type="submit" class="btn btn-primary">Create </button>
 </form>
 
 <br />
@@ -81,11 +91,10 @@
             </tr>
         }
     </tbody>
-
 </table>
 
 <div class="d-flex justify-content-between">
-    <a class="btn btn-danger" asp-area="" asp-page="/IngredientLines/GetAll"> Return to all ingredient list <i class="bi bi-arrow-left"></i></a>
+    <a class="btn btn-danger" asp-area="" asp-page="/IngredientLines/GetAll"> Return to all ingredient list <i class="fa-solid fa-arrow-up-from-bracket"></i></a>
     <a class="btn btn-danger" asp-area="" asp-page="/IngredientLines/DeleteAllByRecipe" asp-route-id="@Model.ingredientLine.Recipe.Id">
         <i class="bi bi-arrow-right"></i> Delete all</a>
 </div>
