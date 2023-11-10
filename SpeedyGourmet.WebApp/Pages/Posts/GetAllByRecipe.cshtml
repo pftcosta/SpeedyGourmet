@@ -7,6 +7,7 @@
         totalRating += post.Rating;
     }
     double averageRating = totalRating / Model.posts.Count;
+    averageRating = Math.Round(averageRating, 2);
 }
 
 <h2>List of Comments <i class="fa-regular fa-comments"></i></h2>

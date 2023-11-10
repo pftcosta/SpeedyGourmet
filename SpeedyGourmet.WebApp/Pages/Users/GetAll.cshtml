@@ -6,9 +6,37 @@
 <h2>List of Users <i class="fa-solid fa-users"></i></h2>
 <br />
 
-<div class="form-group">
+@* <div class="form-group">
     <a class="btn btn-primary" asp-page="/Users/CreateUser">Create new User <i class="fa-regular fa-user"></i></a>
+</div> *@
+
+<div class="d-flex">
+    <form method="post" class="d-flex">
+        <div>
+            <input name="name" class="form-control" style="width: 150px" placeholder="Name">
+        </div>
+        <br />
+
+        <div>
+            <input name="username" class="form-control mx-2" style="width: 150px" placeholder="User name">
+        </div>
+        <br />
+
+        <div>
+            <input name="email" class="form-control mx-2" style="width: 150px" placeholder="Email">
+        </div>
+        <br />
+
+        <div>
+            <input name="password" class="form-control mx-2" style="width: 150px" placeholder="Password">
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary mx-2">Create User <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </form>
 </div>
+<br />
+
 
 <table class="table">
     <thead>

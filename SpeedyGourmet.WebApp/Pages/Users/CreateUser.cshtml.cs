@@ -25,8 +25,8 @@ namespace SpeedyGourmet.WebApp.Pages.Users
             user.Password = Convert.ToString(Request.Form["password"]);
             user.Name = Convert.ToString(Request.Form["name"]);
             user.Email = Convert.ToString(Request.Form["email"]);
-            user.IsAdmin = Convert.ToBoolean(Request.Form["is_admin"]);
-            user.IsBlocked = Convert.ToBoolean(Request.Form["is_blocked"]);
+            user.IsAdmin = false;
+            user.IsBlocked = false;
 
             _userService.Create(user);
             return RedirectToPage("/Users/GetAll");

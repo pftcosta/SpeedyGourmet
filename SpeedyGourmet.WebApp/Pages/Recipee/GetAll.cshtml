@@ -3,7 +3,14 @@
 @{
 }
 
-<h1>All Recipes List</h1>
+<h2>All Recipes List <i class="fa-solid fa-bowl-food"></i></h2>
+<br />
+
+<div class="d-flex justify-content-between">
+    <a class="btn btn-danger" asp-area="" asp-page="/Recipee/CreateRecipe"> Create New Recipe <i class="bi bi-arrow-left"></i></a>
+    <a class="btn btn-danger" asp-area="" asp-page="/Recipee/GetById"><i class="bi bi-arrow-right"></i> Get All Recipes By User Id</a>
+</div>
+<br />
 
 <table class="table">
     <thead>
@@ -23,18 +30,13 @@
                 <td>@recipe.Title</td>
                 <td>@recipe.Category.Name</td>
                 <td>
-                    <a asp-page="/Recipee/Delete" asp-route-id="@recipe.Id">Delete</a> /
-                    <a asp-page="/Recipee/GetById" asp-route-id="@recipe.Id">View</a> /
-                    <a asp-page="/Recipee/Update" asp-route-id="@recipe.Id">Update</a>
+                    <a asp-page="/Recipee/Delete" asp-route-id="@recipe.Id"><i class="fa-regular fa-trash-can"></i></a> /
+                    <a asp-page="/Recipee/GetById" asp-route-id="@recipe.Id"><i class="fa-regular fa-eye"></i></a> /
+                    <a asp-page="/Recipee/Update" asp-route-id="@recipe.Id"><i class="fa-solid fa-pencil"></i>
+
+            </a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
-<br />
-
-<div class="d-flex justify-content-between">
-    <a class="btn btn-danger" asp-area="" asp-page="/Recipee/CreateRecipe"> Create New Recipe <i class="bi bi-arrow-left"></i></a>
-    <a class="btn btn-danger" asp-area="" asp-page="/Recipee/GetById"><i class="bi bi-arrow-right"></i> Get All Recipes By User Id</a>
-</div>

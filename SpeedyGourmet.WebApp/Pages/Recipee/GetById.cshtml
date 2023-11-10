@@ -3,9 +3,32 @@
 @{
 }
 
-<h1>@Model.Recipe.Title</h1>
-
+<h1>All Recipes List </h1>
 <br />
+
+<div class="d-flex">
+    <div class="form-group">
+        <a class="btn btn-danger" asp-page="/Recipee/GetAll" asp-route-id="@Model.Recipe.Id">Return <i class="fa-solid fa-arrow-up-from-bracket"></i></a>
+    </div>
+
+    <form method="post" class="d-flex">
+        <div class="form-group mx-2">
+            <select name="id_user" class="form-control" style="width: 150px;">
+                <label>Choose a user: </label>
+                @foreach (Model.User user in Model.Users)
+                {
+                    <option value="@user.Id">@user.UserName</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Select <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </form>
+</div>
+<br />
+
+<h1>@Model.Recipe.Title <a asp-page="/Recipee/AddIngredients" asp-route-id="@Model.Recipe.Id"><i class="fa-regular fa-pen-to-square"></i></a></h1>
 
 <h4> <p>@Model.Recipe.Category.Name</p></h4>
 <h6> <p>@Model.Recipe.PrepTime Minutes</p></h6>
@@ -44,4 +67,3 @@
 
 
 
-<a asp-page="/Recipee/AddIngredients" asp-route-id="@Model.Recipe.Id"><i class="fa-regular fa-pen-to-square"></i></a>

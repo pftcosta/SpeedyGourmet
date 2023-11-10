@@ -3,7 +3,7 @@
 @{
 }
 
-<h2>User Menu/Update <i class="fa-solid fa-user"></i></h2>
+<h2>Edit User <i class="fa-solid fa-user"></i></h2>
 <br />
 
 <table class="table">
@@ -39,50 +39,54 @@
 </table>
 
 <form method="post" class="d-group">
-    <div class="form-group">
-        <input name="name" class="mr-2" placeholder="Name: @Model.user.Name">
-    </div>
-    <div class="form-group">
-        <input name="username" class="mr-2" placeholder="UserName: @Model.user.UserName">
-    </div>
-    <div class="form-group">
-        <input name="email" class="mr-2" placeholder="email: @Model.user.Email">
-    </div>
-    <div class="form-group">
-        <input name="password" class="mr-2" placeholder="pass: @Model.user.Password">
-    </div>
+    <div class="d-flex">
+        <input type="hidden" id="id" name="id" class="form-control mx-2" style="width: 150px" value="@Model.user.Id" readonly>
 
-    <fieldset class="form-group">
-        <legend>Admin</legend>
-        <div class="center">
-            <input class="centre" type="radio" id="iszero" name="is_admin" value="false">
-            <label class="centre" for="iszero">No</label>
-         </div>
-        <div class="center">
+        <div>
+            <input name="name" class="form-control" style="width: 150px" placeholder="Name">
+        </div>
+        <br />
+
+        <div>
+            <input name="username" class="form-control mx-2" style="width: 150px" placeholder="User name">
+        </div>
+        <br />
+
+        <div>
+            <input name="email" class="form-control mx-1" style="width: 150px" placeholder="Email">
+        </div>
+        <br />
+
+        <div>
+            <input name="password" class="form-control mx-1" style="width: 150px" placeholder="Password">
+        </div>
+    </div>
+    <br />
+
+    <div class="d-flex">
+        <fieldset class="form-control" style="width: 200px">
+            <label>Admin</label>
+            <input class="align-content-center" type="radio" id="iszero" name="is_admin" value="false">
+            <label class="align-content-bottom" for="iszero">No</label>
+
             <input class="centre" type="radio" id="isone" name="is_admin" value="true">
             <label class="centre" for="isone">Yes</label>
-        </div>
-    </fieldset>
-
-     <br />
-
-    <fieldset class="form-group">
-        <legend>Block User</legend>
-        <div class="center">
+        </fieldset>
+    
+        <fieldset class="form-control mx-2" style="width: 200px">
+            <label>Block User</label>
             <input type="radio" id="iszeroblock" name="is_blocked" value="false">
             <label for="iszeroblock">No</label>
-        </div>
-        <div class="center">
+
             <input type="radio" id="isoneblock" name="is_blocked" value="true">
             <label for="isoneblock">Yes</label>
-        </div>
-    </fieldset>
+        </fieldset>
+    </div>
+    <br />
 
     <div class="d-flex justify-content-between">
         <button type="submit" class="btn btn-primary">Edit User <i class="fa-solid fa-arrow-right"></i></button>
         <a class="btn btn-danger" asp-area="" asp-page="/Users/GetAll">Return <i class="fas fa-arrow-up-from-bracket"></i></a>
     </div>
-
-    <br />
 </form>
 

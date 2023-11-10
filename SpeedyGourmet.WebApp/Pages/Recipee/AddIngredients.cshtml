@@ -3,7 +3,7 @@
 @{
 }
 
-@* <input hidden type="number" value="@Model.Recipe.Id" name="id" /> *@
+
 
 <h1>@Model.Recipe.Title ID: @Model.Recipe.Id</h1>
 <br />
@@ -44,12 +44,9 @@
     </tbody>
 </table>
 
-
-
-
-
-
 <form method="post">
+    <input hidden type="number" value="@Model.Recipe.Id" name="id" />
+
     <div class="form-group">
         <h3>Add Ingredients</h3>
         <select name="id_ingredient" class="form-select" aria-label="Default select example">
@@ -81,5 +78,9 @@
     </div>
     <br />
 
-    <button type="submit" class="btn btn-primary">AddIngredient</button>
+    <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">AddIngredient</button>
+        <a class="btn btn-danger" asp-area="" asp-page="/Recipee/GetAll"> Return to Recipe's list <i class="fa-solid fa-arrow-up-from-bracket"></i></a>
+        <a class="btn btn-danger" asp-area="" asp-page="/Recipee/DeleteAllILines" asp-route-id="@Model.Recipe.Id"> Delete all</a>
+    </div>
 </form>
