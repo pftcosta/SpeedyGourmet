@@ -9,4 +9,9 @@
   <ItemGroup>
     <ProjectReference Include="..\SpeedyGourmet.Service\SpeedyGourmet.Service.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Admins\" />
+    <Folder Include="Pages\Visitors\" />
+  </ItemGroup>
 </Project>

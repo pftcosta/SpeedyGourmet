@@ -3,13 +3,13 @@
 @{
 }
 
-<h2>List of Users <i class="fa-solid fa-users"></i></h2>
+<h2>Users <i class="fa-solid fa-users"></i></h2>
 <br />
 
 @* <div class="form-group">
     <a class="btn btn-primary" asp-page="/Users/CreateUser">Create new User <i class="fa-regular fa-user"></i></a>
 </div> *@
-
+<h3>Create new User <i class="fa-solid fa-user"></i></h3>
 <div class="d-flex">
     <form method="post" class="d-flex">
         <div>
@@ -46,6 +46,8 @@
             <th scope="col">Admin</th>
             <th scope="col">Blocked</th>
             <th scope="col">Actions</th>
+            <th scope="col">True Actions</th>
+
         </tr>
     </thead>
 
@@ -57,6 +59,14 @@
                 <td>@user.UserName</td>
                 <td>@user.IsAdmin</td>
                 <td>@user.IsBlocked</td>
+                <td class="d-flex">
+                    <label>Block User</label>
+                    <input type="radio" id="iszeroblock" name="is_blocked" value="false">
+                    <label for="iszeroblock">No</label>
+
+                    <input type="radio" id="isoneblock" name="is_blocked" value="true">
+                    <label for="isoneblock">Yes</label>
+                </td>
                 <td>
                     <a asp-page="/users/Delete" asp-route-id="@user.Id"><i class="fa-regular fa-trash-can"></i></a> /
                     <a asp-page="/users/GetById" asp-route-id="@user.Id"><i class="fa-regular fa-eye"></i></a>
