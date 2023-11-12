@@ -1,0 +1,56 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.Recipee.GetAllByUserIdModel
+@{
+}
+
+<h2>All Recipes List <i class="fa-solid fa-bowl-food"></i></h2>
+<br />
+
+<div class="d-flex">
+    <div class="form-group">
+        <a class="btn btn-danger" asp-page="/Recipee/GetAll">Return <i class="fa-solid fa-arrow-up-from-bracket"></i></a>
+    </div>
+
+    <form method="post" class="d-flex">
+        <div class="form-group mx-2">
+            <select name="id_user" class="form-control" style="width: 150px;">
+                <label>Choose a user: </label>
+                @foreach (Model.User user in Model.Users)
+                {
+                    <option value="@user.Id">@user.UserName</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Select <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </form>
+</div>
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">User</th>
+            <th scope="col">Recipe</th>
+            <th scope="col">Category</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (Model.Recipe recipe in Model.Recipes)
+        {
+            <tr>
+                <td>@recipe.Author.UserName</td>
+                <td>@recipe.Title</td>
+                <td>@recipe.Category.Name</td>
+                <td>
+                    <a asp-page="/Recipee/DeleteRecipe" asp-route-id="@recipe.Id"><i class="fa-regular fa-trash-can"></i></a> /
+                    <a asp-page="/Recipee/GetById" asp-route-id="@recipe.Id"><i class="fa-regular fa-eye"></i></a> /
+                    <a asp-page="/Recipee/AddIngredients" asp-route-id="@recipe.Id"><i class="fa-solid fa-pencil"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

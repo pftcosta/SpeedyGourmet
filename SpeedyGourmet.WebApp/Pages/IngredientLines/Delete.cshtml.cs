@@ -19,7 +19,7 @@ namespace SpeedyGourmet.WebApp.Pages.IngredientLines
         public IActionResult OnGet(int id)
         {
             _ilService.Delete(id);
-            return Redirect("/IngredientLines/GetAllByRecipe");
+            return RedirectToPage("/IngredientLines/GetAllByRecipe", new { id = id });
         }
     }
 }

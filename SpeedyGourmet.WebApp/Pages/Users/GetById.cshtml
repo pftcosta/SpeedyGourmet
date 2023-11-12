@@ -10,37 +10,101 @@
 
     <thead>
         <tr>
+            <th scope="col">Delete</th>
             <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Username</th>
             <th scope="col">Email</th>
             <th scope="col">Password</th>
             <th scope="col">Admin</th>
-            <th scope="col">Blocked</th>
+            <th scope="col">Block</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
 
     <tbody>
-        <tr>
-            <td>@Model.user.Id</td>
-            <td>@Model.user.Name</td>
-            <td>@Model.user.UserName</td>
-            <td>@Model.user.Email</td>
-            <td>*****</td>
-            <td>@Model.user.IsAdmin</td>
-            <td>@Model.user.IsBlocked</td>
+        <form method="post" class="align-middle text-center">
+            <tr>
             <td>
-                <a asp-page="/users/Delete" asp-route-id="@Model.user.Id"><i class="fa-regular fa-trash-can"></i></a>
+                <a asp-page="/users/Delete" asp-route-id="@Model.user.Id"><i class="fa-solid fa-user-xmark"></i></a>
             </td>
-        </tr>
+                <td>
+                    <div>
+                        <input id="id" name="id" class="form-control" style="width: 50px" value="@Model.user.Id" readonly>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input type="text" name="name" class="form-control" style="width: 150px" value="@Model.user.Name">
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input name="username" class="form-control" style="width: 150px" value="@Model.user.UserName">
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input name="email" class="form-control" style="width: 150px" placeholder="@Model.user.Email">
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input name="password" class="form-control" style="width: 100px" placeholder="*****">
+                    </div>
+                </td>
+
+                <td>
+                    <div class="form-control d-flex" style="width: 150px">
+                        @if (Model.user.IsAdmin == true)
+                        {
+                        <a><i class="fa-solid fa-crown" style="color: #ffbb00"></i> </a>
+                        }
+                        else if (Model.user.IsAdmin == false)
+                        {
+                        <a><i class="fa-solid fa-xmark" style="color: #f40101;"></i> </a>
+                        }
+                    <label class="mx-2" for="isone">Yes  </label>
+                    <input class="mx-2" type="radio" id="isone" name="is_admin" value="true">
+                        
+                        <label for="iszero">No  </label>
+                        <input class="mx-2" type="radio" id="iszero" name="is_admin" value="false">
+                    </div>
+                </td>
+
+                <td>
+                    <div class="form-control d-flex" style="width: 150px">
+                        @if (Model.user.IsBlocked == true)
+                        {
+                        <a><i class="fa-solid fa-lock" style="color: #d10000;"></i></a>
+                        }
+                        else if (Model.user.IsBlocked == false)
+                        {
+                        <a><i class="fa-solid fa-lock-open" style="color: #138630;"></i></a>
+                        }
+                        <br/>
+                        <label class="mx-2" for="isoneblock">Yes  </label>
+                        <input class="mx-2" type="radio" id="isoneblock" name="is_blocked" value="true">
+
+                        <label for="iszeroblock">No  </label>
+                        <input class="mx-2" type="radio" id="iszeroblock" name="is_blocked" value="false">
+                    </div>
+                </td>
+
+                <td>
+                    <button type="submit" class="btn btn-primary">Edit User <i class="fa-solid fa-arrow-right"></i></button>
+                </td>
+            </tr>
+        </form>
     </tbody>
 
 </table>
 
-<form method="post" class="d-group">
+@* <form method="post" class="d-group">
     <div class="d-flex">
-        <input type="hidden" id="id" name="id" class="form-control mx-2" style="width: 150px" value="@Model.user.Id" readonly>
+        <div>
+            <input id="id" name="id" class="form-control mx-2" style="width: 50px" value="@Model.user.Id" readonly>
+        </div>
 
         <div>
             <input name="name" class="form-control" style="width: 150px" placeholder="Name">
@@ -88,4 +152,4 @@
     </div>
     
 </form>
-
+ *@

@@ -6,9 +6,6 @@
 <h2>Users <i class="fa-solid fa-users"></i></h2>
 <br />
 
-@* <div class="form-group">
-    <a class="btn btn-primary" asp-page="/Users/CreateUser">Create new User <i class="fa-regular fa-user"></i></a>
-</div> *@
 <h3>Create new User <i class="fa-solid fa-user"></i></h3>
 <div class="d-flex">
     <form method="post" class="d-flex">
@@ -37,17 +34,15 @@
 </div>
 <br />
 
-
+<h3>List of Users <i class="fa-solid fa-users"></i></h3>
 <table class="table">
     <thead>
         <tr>
             <th scope="col">Name</th>
             <th scope="col">Username</th>
-            <th scope="col">Admin</th>
+            <th scope="col">Role</th>
             <th scope="col">Blocked</th>
             <th scope="col">Actions</th>
-            <th scope="col">True Actions</th>
-
         </tr>
     </thead>
 
@@ -57,19 +52,29 @@
             <tr>
                 <td>@user.Name</td>
                 <td>@user.UserName</td>
-                <td>@user.IsAdmin</td>
-                <td>@user.IsBlocked</td>
-                <td class="d-flex">
-                    <label>Block User</label>
-                    <input type="radio" id="iszeroblock" name="is_blocked" value="false">
-                    <label for="iszeroblock">No</label>
-
-                    <input type="radio" id="isoneblock" name="is_blocked" value="true">
-                    <label for="isoneblock">Yes</label>
+                <td>
+                    @if (user.IsAdmin == true)
+                    {
+                        <a><i class="fa-solid fa-crown" style="color: #ffbb00"></i></a>
+                    }
+                    else
+                    {
+                        <a><i class="fa-regular fa-user"></i></a>
+                    }
+                </td>
+                <td>
+                    @if (user.IsBlocked == true)
+                    {
+                        <a><i class="fa-solid fa-lock" style="color: #d10000;"></i></a>
+                    }
+                    else
+                    {
+                        <a><i class="fa-solid fa-lock-open" style="color: #138630;"></i></a>
+                    }
                 </td>
                 <td>
                     <a asp-page="/users/Delete" asp-route-id="@user.Id"><i class="fa-regular fa-trash-can"></i></a> /
-                    <a asp-page="/users/GetById" asp-route-id="@user.Id"><i class="fa-regular fa-eye"></i></a>
+                    <a asp-page="/users/GetById" asp-route-id="@user.Id"><i class="fa-solid fa-user-pen"></i></a>
                 </td>
             </tr>
         }

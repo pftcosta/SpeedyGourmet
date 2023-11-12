@@ -6,9 +6,9 @@
 <h2>All Recipes List <i class="fa-solid fa-bowl-food"></i></h2>
 <br />
 
-<div class="d-flex justify-content-between">
+<div class="d-flex">
     <a class="btn btn-danger" asp-area="" asp-page="/Recipee/CreateRecipe"> Create New Recipe <i class="bi bi-arrow-left"></i></a>
-    <a class="btn btn-danger" asp-area="" asp-page="/Recipee/GetById"><i class="bi bi-arrow-right"></i> Get All Recipes By User Id</a>
+    <a class="btn btn-danger mx-2" asp-area="" asp-page="/Recipee/GetAllByUserId"><i class="bi bi-arrow-right"></i> Get All Recipes By User Id</a>
 </div>
 <br />
 
@@ -30,11 +30,9 @@
                 <td>@recipe.Title</td>
                 <td>@recipe.Category.Name</td>
                 <td>
-                    <a asp-page="/Recipee/Delete" asp-route-id="@recipe.Id"><i class="fa-regular fa-trash-can"></i></a> /
+                    <a asp-page="/Recipee/DeleteRecipe" asp-route-id="@recipe.Id"><i class="fa-regular fa-trash-can"></i></a> /
                     <a asp-page="/Recipee/GetById" asp-route-id="@recipe.Id"><i class="fa-regular fa-eye"></i></a> /
-                    <a asp-page="/Recipee/Update" asp-route-id="@recipe.Id"><i class="fa-solid fa-pencil"></i>
-
-            </a>
+                    <a asp-page="/Recipee/Update" asp-route-id="@recipe.Id"><i class="fa-solid fa-pencil"></i></a>
                 </td>
             </tr>
         }

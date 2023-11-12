@@ -3,37 +3,10 @@
 @{
 }
 
-<h1>All Recipes List </h1>
-<br />
-
-<div class="d-flex">
-    <div class="form-group">
-        <a class="btn btn-danger" asp-page="/Recipee/GetAll" asp-route-id="@Model.Recipe.Id">Return <i class="fa-solid fa-arrow-up-from-bracket"></i></a>
-    </div>
-
-    <form method="post" class="d-flex">
-        <div class="form-group mx-2">
-            <select name="id_user" class="form-control" style="width: 150px;">
-                <label>Choose a user: </label>
-                @foreach (Model.User user in Model.Users)
-                {
-                    <option value="@user.Id">@user.UserName</option>
-                }
-            </select>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Select <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-    </form>
-</div>
-<br />
-
-<h1>@Model.Recipe.Title <a asp-page="/Recipee/AddIngredients" asp-route-id="@Model.Recipe.Id"><i class="fa-regular fa-pen-to-square"></i></a></h1>
-
-<h4> <p>@Model.Recipe.Category.Name</p></h4>
-<h6> <p>@Model.Recipe.PrepTime Minutes</p></h6>
-
-<br />
+<h1>Title: @Model.Recipe.Title</h1>
+<h4> <p>ID: @Model.Recipe.Id</p></h4>
+<h4> <p>Category: @Model.Recipe.Category.Name</p></h4>
+<h6> <p>Preparation Time: @Model.Recipe.PrepTime minutes</p></h6>
 
 <table class="table">
     <thead>
@@ -47,7 +20,6 @@
             <tr>
                 <td>@ingredients.Quantity @ingredients.Measure.Name de @ingredients.Ingredient.Name</td>
             </tr>
-
         }
     </tbody>
 </table>
@@ -59,11 +31,8 @@
         </tr>
     </thead>
     <tbody>
-         <tr>
+        <tr>
             <td>@Model.Recipe.PrepMethod</td>
         </tr>
     </tbody>
 </table>
-
-
-
