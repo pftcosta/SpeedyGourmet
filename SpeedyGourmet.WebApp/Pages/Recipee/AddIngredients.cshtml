@@ -16,12 +16,12 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var ingredients in Model.recipe.Ingredients)
+        @foreach (var ingredient in Model.recipe.Ingredients)
         {
             <tr>
-                <td>@ingredients.Quantity @ingredients.Measure.Name de @ingredients.Ingredient.Name</td>
+                <td>@ingredient.Quantity @ingredient.Measure.Name de @ingredient.Ingredient.Name</td>
                 <td>
-                    <a asp-page="/IngredientLines/Delete" asp-route-id="Model.Recipe.Id"><i class="fa-regular fa-trash-can"></i></a>
+                    <a asp-page="/Recipee/DeleteILine" asp-route-id="@ingredient.Id"><i class="fa-regular fa-trash-can"></i></a>
                 </td>
             </tr>
         }
@@ -41,33 +41,31 @@
     </tbody>
 </table>
 
-<form method="post form control">
-    <input hidden type="number" value="@Model.recipe.Id" name="id" />
-
-    <h3>Add Ingredients</h3>
+<form method="post" class="justify-content-center">
     <div class="d-flex">
-        <select name="id_ingredient" class="form-select" style="width: 250px" aria-label="Default select example">
+        <h3>Add Ingredients </h3>
+        <select name="id_ingredient" class="form-select mx-2" style="width: 250px" aria-label="Default select example">
             <option selected>Select an Ingredient</option>
             @foreach (Model.Ingredient ingredient in Model.Ingredients)
             {
-
                 <option value="@ingredient.Id">@ingredient.Name</option>
             }
-
         </select>
-
+        <br />
+        
         <input type="number" name="quantity" class="form-control mx-2" style="width: 250px" placeholder="Enter Quantity Number">
+        <br />
 
         <select name="id_measure" class="form-select mx-2" style="width: 250px" aria-label="Default select example">
             <option selected>Select a Measure Unit</option>
             @foreach (Model.Measure measure in Model.Measures)
-            {
 
+            {
                 <option value="@measure.Id">@measure.Name</option>
             }
         </select>
-
-        <button type="submit" class="btn btn-primary">Add Ingredient</button>
+        <br />
+        <button type="submit" class="btn btn-primary mx-2">Add Ingredient</button>
         <a class="btn btn-danger mx-2" asp-area="" asp-page="/Recipee/DeleteAllILines" asp-route-id="@Model.recipe.Id"> Delete all</a>
     </div>
 </form>

@@ -18,7 +18,7 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
         public IActionResult OnGet(int id)
         {
             _recipeService.Delete(id);
-            return Redirect("/Recipee/GetAll");
+            return Redirect("/Recipee/GetAllByUserId");
         }
     }
 }
