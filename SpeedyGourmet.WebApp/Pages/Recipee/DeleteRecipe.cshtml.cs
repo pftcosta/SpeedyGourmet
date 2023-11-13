@@ -8,9 +8,9 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
 {
     public class DeleteRecipeModel : PageModel
     {
-        private readonly IRecFavService<Recipe, int> _recipeService;
+        private readonly IRecipeService<Recipe, int> _recipeService;
 
-        public DeleteRecipeModel(IRecFavService<Recipe, int> recipeService)
+        public DeleteRecipeModel(IRecipeService<Recipe, int> recipeService)
         {
             _recipeService = recipeService;
         }

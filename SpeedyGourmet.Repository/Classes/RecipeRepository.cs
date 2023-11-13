@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 
 namespace SpeedyGourmet.Repository
 {
-    public class RecipeRepository : IRecFavRepository<Recipe, int>
+    public class RecipeRepository : IRecipeRepository
     {
         private readonly string _tableName = "recipes";
 
@@ -30,21 +30,23 @@ namespace SpeedyGourmet.Repository
             {
                 id = 1;
             }
-                string sql = $"SELECT * FROM {_tableName} WHERE id = {id};";
-                SqlDataReader reader = SQL.Execute(sql);
-                if (reader.Read())
-                {
-                    return Parse(reader);
-                }
+
+            string sql = $"SELECT * FROM {_tableName} WHERE id = {id};";
+            SqlDataReader reader = SQL.Execute(sql);
+
+            if (reader.Read())
+            {
+                return Parse(reader);
+            }
             throw new Exception($"{_tableName} Id: {id} not found.");
         }
-
 
         public List<Recipe> GetAll()
         {
             string sql = $"SELECT * FROM {_tableName} ORDER BY id ASC;";
             SqlDataReader reader = SQL.Execute(sql);
             List<Recipe> recipes = new List<Recipe>();
+
             while (reader.Read())
             {
                 recipes.Add(Parse(reader));
@@ -57,11 +59,42 @@ namespace SpeedyGourmet.Repository
             string sql = $"SELECT * FROM {_tableName} WHERE id_user = {userId};";
             SqlDataReader reader = SQL.Execute(sql);
             List<Recipe> recipes = new List<Recipe>();
+
             while (reader.Read())
             {
                 recipes.Add(Parse(reader));
             }
             return recipes;
+        }
+
+        public Recipe Update(Recipe recipe)
+        {
+            int isApproved = recipe.IsApproved ? 1 : 0;
+
+            string sql = $"UPDATE {_tableName} SET " +
+                $"title = '{recipe.Title}', " +
+                $"id_user = {recipe.Author.Id}," +
+                $"id_category = {recipe.Category.Id}, " +
+                $"prep_time = {recipe.PrepTime}, " +
+                $"prep_method = '{recipe.PrepMethod}', " +
+                $"id_difficulty = {recipe.Difficulty.Id} " +
+                $"WHERE id = {recipe.Id};";
+
+            SQL.ExecuteNonQuery(sql);
+
+            return GetById(recipe.Id);
+        }
+
+        public void Delete(int id)
+        {
+            string sql = $"DELETE FROM {_tableName} WHERE id = {id};";
+            SQL.ExecuteNonQuery(sql);
+        }
+
+        public void DeleteAllByUserId(int userId)
+        {
+            string sql = $"DELETE FROM {_tableName} WHERE id_user = {userId};";
+            SQL.ExecuteNonQuery(sql);
         }
 
         public Recipe Parse(SqlDataReader reader)
@@ -86,36 +119,6 @@ namespace SpeedyGourmet.Repository
             recipe.Difficulty = difficulty;
 
             return recipe;
-        }
-        
-        public void Delete(int id)
-        {
-            string sql = $"DELETE FROM {_tableName} WHERE id = {id};";
-            SQL.ExecuteNonQuery(sql);
-        }
-
-        public void DeleteAllByUserId(int userId)
-        {
-            string sql = $"DELETE FROM {_tableName} WHERE id_user = {userId};";
-            SQL.ExecuteNonQuery(sql);
-        }
-
-        public Recipe Update(Recipe recipe)
-        {
-            int isApproved = recipe.IsApproved ? 1 : 0;
-
-            string sql = $"UPDATE {_tableName} SET " +
-                $"title = '{recipe.Title}', " +
-                $"id_user = {recipe.Author.Id}," +
-                $"id_category = {recipe.Category.Id}, " +
-                $"prep_time = {recipe.PrepTime}, " +
-                $"prep_method = '{recipe.PrepMethod}', " +
-                $"id_difficulty = {recipe.Difficulty.Id} " +
-                $"WHERE id = {recipe.Id};";
-
-            SQL.ExecuteNonQuery(sql);
-
-            return GetById(recipe.Id);
         }
     }
 }

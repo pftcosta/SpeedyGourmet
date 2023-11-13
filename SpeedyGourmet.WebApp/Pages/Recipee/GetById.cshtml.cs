@@ -7,10 +7,10 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
 {
     public class GetByIdModel : PageModel
     {
-        private readonly IRecFavService<Recipe, int> _recipeService;
-        private readonly IILPostService<IngredientLine, int> _ingredientLineService;
+        private readonly IRecipeService<Recipe, int> _recipeService;
+        private readonly IIIngredientLineService<IngredientLine, int> _ingredientLineService;
 
-        public GetByIdModel(IRecFavService<Recipe, int> recipeService, IILPostService<IngredientLine, int> ingredientLineService)
+        public GetByIdModel(IRecipeService<Recipe, int> recipeService, IIIngredientLineService<IngredientLine, int> ingredientLineService)
         {
             _recipeService = recipeService;
             _ingredientLineService = ingredientLineService;

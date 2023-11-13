@@ -3,13 +3,13 @@ using SpeedyGourmet.Repository;
 
 namespace SpeedyGourmet.Service
 {
-    public class IngredientLineService : IILPostService<IngredientLine, int>
+    public class IngredientLineService : IIngredientLineService
     {
-        private readonly IILPostRepository<IngredientLine, int> _ingredientLineRepository;
+        private readonly IIngredientLineRepository _ingredientLineRepository;
         private readonly IService<Ingredient, int> _ingredientService;
         private readonly IService<Measure, int> _measureService;
 
-        public IngredientLineService(IILPostRepository<IngredientLine, int> ingredientLineRepository, IService<Ingredient, int> ingredientService, IService<Measure, int> measureService)
+        public IngredientLineService(IIngredientLineRepository ingredientLineRepository, IService<Ingredient, int> ingredientService, IService<Measure, int> measureService)
         {
             _ingredientLineRepository = ingredientLineRepository;
             _ingredientService = ingredientService;
@@ -21,9 +21,9 @@ namespace SpeedyGourmet.Service
             return _ingredientLineRepository.Create(ingredientLine);
         }
 
-        public IngredientLine GetById(int id)
+        public IngredientLine GetById(int ingredientLineId)
         {
-            IngredientLine ingredientLine = _ingredientLineRepository.GetById(id);
+            IngredientLine ingredientLine = _ingredientLineRepository.GetById(ingredientLineId);
             ingredientLine.Ingredient = _ingredientService.GetById(ingredientLine.Ingredient.Id);
             ingredientLine.Measure = _measureService.GetById(ingredientLine.Measure.Id);
             return ingredientLine;
@@ -50,31 +50,15 @@ namespace SpeedyGourmet.Service
             }
             return ingredientLines;
         }
-        public List<IngredientLine> GetAllByUserId(int userId)
+        
+        public void Delete(int ingredientLineId)
         {
-            List<IngredientLine> ingredientLines = _ingredientLineRepository.GetAllByUserId(userId);
-            foreach (IngredientLine ingredientLine in ingredientLines)
-            {
-                ingredientLine.Ingredient = _ingredientService.GetById(ingredientLine.Ingredient.Id);
-                ingredientLine.Measure = _measureService.GetById(ingredientLine.Measure.Id);
-            }
-            return ingredientLines;
-        }
-
-        public void Delete(int id)
-        {
-            _ingredientLineRepository.Delete(id);
+            _ingredientLineRepository.Delete(ingredientLineId);
         }
 
         public void DeleteAllByRecipeId(int recipeId)
         {
             _ingredientLineRepository.DeleteAllByRecipeId(recipeId);
-        }
-
-        
-        public void DeleteAllByUserId(int userId)
-        {
-            _ingredientLineRepository.DeleteAllByUserId(userId);
         }
     }
 }

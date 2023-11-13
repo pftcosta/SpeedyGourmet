@@ -3,9 +3,10 @@ using System.Data.SqlClient;
 
 namespace SpeedyGourmet.Repository
 {
-    public class UserRepository : IRepository<User, int>
+    public class UserRepository : IUserRepository
     {
         private readonly string _tableName = "users";
+
         public User Create(User user)
         {
             int isAdmin = user.IsAdmin ? 1 : 0;
@@ -46,20 +47,6 @@ namespace SpeedyGourmet.Repository
             return users;
         }
 
-        public User Parse(SqlDataReader reader)
-        {
-            User user = new User();
-            user.Id = Convert.ToInt32(reader["id"]);
-            user.UserName = Convert.ToString(reader["username"]);
-            user.Password = Convert.ToString(reader["password"]);
-            user.Name = Convert.ToString(reader["name"]);
-            user.Email = Convert.ToString(reader["email"]);
-            user.IsAdmin = Convert.ToBoolean(reader["is_admin"]);
-            user.IsBlocked = Convert.ToBoolean(reader["is_blocked"]);
-
-            return user;
-        }
-
         public User Update(User user)
         {
             int isAdmin = user.IsAdmin ? 1 : 0;
@@ -82,6 +69,32 @@ namespace SpeedyGourmet.Repository
             string sql = $"DELETE FROM {_tableName} WHERE id = {id};";
             SQL.ExecuteNonQuery(sql);
 
+        }
+
+        public User LogIn(string username, string password)
+        {
+            string sql = $"SELECT * FROM {_tableName} WHERE username = '{username}'" +
+                $" AND password = CONVERT(VARCHAR(32), HashBytes('MD5', '{password}'), 2);";
+            SqlDataReader reader = SQL.Execute(sql);
+            if (reader.Read())
+            {
+                return Parse(reader);
+            }
+            throw new Exception("User not found.");
+        }
+
+        public User Parse(SqlDataReader reader)
+        {
+            User user = new User();
+            user.Id = Convert.ToInt32(reader["id"]);
+            user.UserName = Convert.ToString(reader["username"]);
+            user.Password = Convert.ToString(reader["password"]);
+            user.Name = Convert.ToString(reader["name"]);
+            user.Email = Convert.ToString(reader["email"]);
+            user.IsAdmin = Convert.ToBoolean(reader["is_admin"]);
+            user.IsBlocked = Convert.ToBoolean(reader["is_blocked"]);
+
+            return user;
         }
     }
 }

@@ -7,13 +7,13 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
 {
     public class CreateRecipeModel : PageModel
     {
-        private readonly IRecFavService<Recipe, int> _recipeService;
+        private readonly IRecipeService<Recipe, int> _recipeService;
         private readonly IService<Category, int> _categoryService;
         private readonly IService<Difficulty, int> _difficultyService;
         private readonly IService<Measure, int> _measureService;
         private readonly IService<User, int> _userService;
 
-        public CreateRecipeModel(IRecFavService<Recipe, int> recipeService, IService<Category, int> categoryService, IService<Difficulty, int> difficultyService, IService<Measure, int> measureService, IService<User, int> userService)
+        public CreateRecipeModel(IRecipeService<Recipe, int> recipeService, IService<Category, int> categoryService, IService<Difficulty, int> difficultyService, IService<Measure, int> measureService, IService<User, int> userService)
         {
             _recipeService = recipeService;
             _categoryService = categoryService;

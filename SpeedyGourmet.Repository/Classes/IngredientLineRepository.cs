@@ -3,9 +3,10 @@ using System.Data.SqlClient;
 
 namespace SpeedyGourmet.Repository
 {
-    public class IngredientLineRepository : IILPostRepository<IngredientLine, int>
+    public class IngredientLineRepository : IIngredientLineRepository
     {
         private readonly string _tableName = "recipe_ingredients";
+
         public IngredientLine Create(IngredientLine ingredientLine)
         {
             string sql = $"INSERT INTO {_tableName} (id_recipe, id_ingredient, quantity, id_measure) VALUES " +
@@ -52,19 +53,20 @@ namespace SpeedyGourmet.Repository
             }
             return ingredientLines;
         }
-        public List<IngredientLine> GetAllByUserId(int userId)
+        
+        public void Delete(int id)
         {
-            string sql = $"SELECT * FROM {_tableName} WHERE id_user = {userId} ORDER BY id ASC;";
-            SqlDataReader reader = SQL.Execute(sql);
-            List<IngredientLine> ingredientLines = new List<IngredientLine>();
-            while (reader.Read())
-            {
-                ingredientLines.Add(Parse(reader));
-            }
-            return ingredientLines;
+            string sql = $"DELETE FROM {_tableName} WHERE id = {id};";
+            SQL.ExecuteNonQuery(sql);
         }
 
-        public IngredientLine Parse (SqlDataReader reader)
+        public void DeleteAllByRecipeId(int recipeId)
+        {
+            string sql = $"DELETE FROM {_tableName} WHERE id_recipe = {recipeId};";
+            SQL.ExecuteNonQuery(sql);
+        }
+        
+        public IngredientLine Parse(SqlDataReader reader)
         {
             IngredientLine ingredientLine = new IngredientLine();
             ingredientLine.Id = Convert.ToInt32(reader["id"]);
@@ -83,25 +85,6 @@ namespace SpeedyGourmet.Repository
             ingredientLine.Recipe = recipe;
 
             return ingredientLine;
-        }
-
-        public void Delete(int id)
-        {
-            string sql = $"DELETE FROM {_tableName} WHERE id = {id};";
-            SQL.ExecuteNonQuery(sql);
-        }
-
-        public void DeleteAllByRecipeId(int recipeId)
-        {
-            string sql = $"DELETE FROM {_tableName} WHERE id_recipe = {recipeId};";
-            SQL.ExecuteNonQuery(sql);
-        }
-
-        
-        public void DeleteAllByUserId(int userId)
-        {
-            string sql = $"DELETE FROM {_tableName} WHERE id_user = {userId};";
-            SQL.ExecuteNonQuery(sql);
         }
     }
 }

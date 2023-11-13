@@ -17,9 +17,9 @@ namespace SpeedyGourmet.Service
            return _difficultyRepository.Create(difficulty);
         }
 
-        public Difficulty GetById(int id)
+        public Difficulty GetById(int difficultyId)
         {
-            return _difficultyRepository.GetById(id);
+            return _difficultyRepository.GetById(difficultyId);
         }
 
         public List<Difficulty> GetAll()
@@ -32,9 +32,9 @@ namespace SpeedyGourmet.Service
             return _difficultyRepository.Update(difficulty);
         }
 
-        public void Delete(int id)
+        public void Delete(int difficultyId)
         {
-            _difficultyRepository.Delete(id);
+            _difficultyRepository.Delete(difficultyId);
         }
     }
 }

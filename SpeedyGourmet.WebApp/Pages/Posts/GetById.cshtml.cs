@@ -7,9 +7,9 @@ namespace SpeedyGourmet.WebApp.Pages.Posts
 {
     public class GetByIdModel : PageModel
     {
-        private readonly IILPostService<Post, int> _iLPostService;
+        private readonly IIIngredientLineService<Post, int> _iLPostService;
 
-        public GetByIdModel(IILPostService<Post, int> iLPostService)
+        public GetByIdModel(IIIngredientLineService<Post, int> iLPostService)
         {
             _iLPostService = iLPostService;
         }

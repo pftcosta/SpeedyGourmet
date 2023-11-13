@@ -17,9 +17,9 @@ namespace SpeedyGourmet.Service
             return _ingredientRepository.Create(ingredient);
         }
 
-        public Ingredient GetById(int id)
+        public Ingredient GetById(int ingredientId)
         {
-            return _ingredientRepository.GetById(id);
+            return _ingredientRepository.GetById(ingredientId);
         }
 
         public List<Ingredient> GetAll()
@@ -32,9 +32,9 @@ namespace SpeedyGourmet.Service
             return _ingredientRepository.Update(ingredient);
         }
 
-        public void Delete(int id)
+        public void Delete(int ingredientId)
         {
-            _ingredientRepository.Delete(id);
+            _ingredientRepository.Delete(ingredientId);
         }
     }
 }

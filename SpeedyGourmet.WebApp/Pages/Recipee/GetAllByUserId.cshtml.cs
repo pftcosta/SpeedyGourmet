@@ -8,10 +8,10 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
 {
     public class GetAllByUserIdModel : PageModel
     {
-        private readonly IRecFavService<Recipe, int> _recipeService;
+        private readonly IRecipeService<Recipe, int> _recipeService;
         private readonly IService<User, int> _userService;
 
-        public GetAllByUserIdModel(IRecFavService<Recipe, int> recipeService, IService<User, int> userService)
+        public GetAllByUserIdModel(IRecipeService<Recipe, int> recipeService, IService<User, int> userService)
         {
             _recipeService = recipeService;
             _userService = userService;

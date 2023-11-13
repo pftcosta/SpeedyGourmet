@@ -7,9 +7,9 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
 {
     public class GetByIdForUsersListModel : PageModel
     {
-        private readonly IRecFavService<Favourite, int> _favouriteService;
+        private readonly IRecipeService<Favourite, int> _favouriteService;
 
-        public GetByIdForUsersListModel(IRecFavService<Favourite, int> favouriteService)
+        public GetByIdForUsersListModel(IRecipeService<Favourite, int> favouriteService)
         {
             _favouriteService = favouriteService;
         }

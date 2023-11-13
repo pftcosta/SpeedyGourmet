@@ -7,12 +7,12 @@ namespace SpeedyGourmet.WebApp.Pages.IngredientLines
 {
     public class CreateByRecipeModel : PageModel
     {
-        private readonly IILPostService<IngredientLine, int> _iLService;
+        private readonly IIIngredientLineService<IngredientLine, int> _iLService;
         private readonly IService<Ingredient, int> _ingredientService;
         private readonly IService<Measure, int> _measureService;
-        private readonly IRecFavService<Recipe, int> _recipeService;
+        private readonly IRecipeService<Recipe, int> _recipeService;
 
-        public CreateByRecipeModel(IILPostService<IngredientLine, int> iLService, IService<Ingredient, int> ingredientService, IService<Measure, int> measureService, IRecFavService<Recipe, int> recipeService)
+        public CreateByRecipeModel(IIIngredientLineService<IngredientLine, int> iLService, IService<Ingredient, int> ingredientService, IService<Measure, int> measureService, IRecipeService<Recipe, int> recipeService)
         {
             _iLService = iLService;
             _ingredientService = ingredientService;

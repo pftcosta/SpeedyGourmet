@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 
 namespace SpeedyGourmet.Repository
 {
-    public class FavouriteRepository : IRecFavRepository<Favourite, int>
+    public class FavouriteRepository : IFavouriteRepository
     {
         private readonly string _tableName = "favourites";
 
@@ -52,6 +52,18 @@ namespace SpeedyGourmet.Repository
             return favourites;
         }
 
+        public void Delete(int id)
+        {
+            string sql = $"DELETE FROM {_tableName} WHERE id = {id};";
+            SQL.ExecuteNonQuery(sql);
+        }
+
+        public void DeleteAllByUserId(int userId)
+        {
+            string sql = $"DELETE FROM {_tableName} WHERE id_user = {userId};";
+            SQL.ExecuteNonQuery(sql);
+        }
+
         private Favourite Parse(SqlDataReader reader)
         {
             Favourite favourite = new Favourite();
@@ -66,23 +78,6 @@ namespace SpeedyGourmet.Repository
             favourite.Recipe = recipe;
 
             return favourite;
-        }
-
-        public void Delete(int id)
-        {
-            string sql = $"DELETE FROM {_tableName} WHERE id = {id};";
-            SQL.ExecuteNonQuery(sql);
-        }
-
-        public void DeleteAllByUserId(int userId)
-        {
-            string sql = $"DELETE FROM {_tableName} WHERE id_user = {userId};";
-            SQL.ExecuteNonQuery(sql);
-        }
-
-        public Favourite Update(Favourite Type)
-        {
-            throw new NotImplementedException();
         }
     }
 }

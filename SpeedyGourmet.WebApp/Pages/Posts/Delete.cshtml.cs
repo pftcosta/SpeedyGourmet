@@ -7,9 +7,9 @@ namespace SpeedyGourmet.WebApp.Pages.Posts
 {
     public class DeleteModel : PageModel
     {
-        private readonly IILPostService<Post, int> _iLPostService;
+        private readonly IIIngredientLineService<Post, int> _iLPostService;
 
-        public DeleteModel(IILPostService<Post, int> iLPostService)
+        public DeleteModel(IIIngredientLineService<Post, int> iLPostService)
         {
             _iLPostService = iLPostService;
         }

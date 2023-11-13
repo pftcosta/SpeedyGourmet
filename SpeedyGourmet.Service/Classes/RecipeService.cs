@@ -3,15 +3,15 @@ using SpeedyGourmet.Repository;
 
 namespace SpeedyGourmet.Service
 {
-    public class RecipeService : IRecFavService<Recipe, int>
+    public class RecipeService : IRecipeService
     {
-        private readonly IRecFavRepository<Recipe, int> _recipeRepository;
-        private readonly IService<User, int> _userService;
+        private readonly IRecipeRepository _recipeRepository;
+        private readonly IUserService _userService;
         private readonly IService<Category, int> _categoryService;
         private readonly IService<Difficulty, int> _difficultyService;
-        private readonly IILPostService<IngredientLine, int> _ingredientLineService;
+        private readonly IIngredientLineService _ingredientLineService;
 
-        public RecipeService(IRecFavRepository<Recipe, int> recipeRepository, IService<User, int> userService, IService<Category, int> categoryService, IService<Difficulty, int> difficultyService, IILPostService<IngredientLine, int> ingredientLineService)
+        public RecipeService(IRecipeRepository recipeRepository, IUserService userService, IService<Category, int> categoryService, IService<Difficulty, int> difficultyService, IIngredientLineService ingredientLineService)
         {
             _recipeRepository = recipeRepository;
             _userService = userService;
@@ -61,6 +61,11 @@ namespace SpeedyGourmet.Service
             return recipes;
         }
 
+        public Recipe Update(Recipe recipe)
+        {
+            return _recipeRepository.Update(recipe);
+        }
+
         public void Delete(int id)
         {
             _recipeRepository.Delete(id);
@@ -69,11 +74,6 @@ namespace SpeedyGourmet.Service
         public void DeleteAllByUserId(int userId)
         {
             _recipeRepository.DeleteAllByUserId(userId);
-        }
-
-        public Recipe Update(Recipe recipe)
-        {
-            return _recipeRepository.Update(recipe);
         }
     }
 }

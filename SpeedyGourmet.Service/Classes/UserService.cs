@@ -3,11 +3,11 @@ using SpeedyGourmet.Repository;
 
 namespace SpeedyGourmet.Service
 {
-    public class UserService : IService<User, int>
+    public class UserService : IUserService
     {
-        private readonly IRepository<User, int> _userRepository;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(IRepository<User, int> userRepository)
+        public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
@@ -36,5 +36,9 @@ namespace SpeedyGourmet.Service
             _userRepository.Delete(id);
         }
 
+        public User LogIn(string username, string password)
+        {
+            return _userRepository.LogIn(username, password);
+        }
     }
 }

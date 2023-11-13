@@ -6,6 +6,7 @@ namespace SpeedyGourmet.Repository
     public class IngredientRepository : IRepository<Ingredient, int>
     {
         private readonly string _tableName = "ingredients";
+
         public Ingredient Create(Ingredient ingredient)
         {
             string sql = $"INSERT INTO {_tableName} (name) VALUES ('{ingredient.Name}');";
@@ -37,14 +38,6 @@ namespace SpeedyGourmet.Repository
             return ingredients;
         }
 
-        private Ingredient Parse(SqlDataReader reader)
-        {
-            Ingredient ingredient = new Ingredient();
-            ingredient.Id = Convert.ToInt32(reader["id"]);
-            ingredient.Name = Convert.ToString(reader["name"]);
-            return ingredient;
-        }
-
         public Ingredient Update(Ingredient ingredient)
         {
             string sql = $"UPDATE {_tableName} SET name = '{ingredient.Name}' WHERE id = {ingredient.Id};";
@@ -56,5 +49,14 @@ namespace SpeedyGourmet.Repository
             string sql = $"DELETE FROM {_tableName} WHERE id = {id};";
             SQL.ExecuteNonQuery(sql);
         }
+
+        private Ingredient Parse(SqlDataReader reader)
+        {
+            Ingredient ingredient = new Ingredient();
+            ingredient.Id = Convert.ToInt32(reader["id"]);
+            ingredient.Name = Convert.ToString(reader["name"]);
+            return ingredient;
+        }
+
     }
 }

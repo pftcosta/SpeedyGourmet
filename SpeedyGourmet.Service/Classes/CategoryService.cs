@@ -22,9 +22,9 @@ namespace SpeedyGourmet.Service
             return _categoryRepository.GetAll();
         }
 
-        public Category GetById(int id)
+        public Category GetById(int categoryId)
         {
-            return _categoryRepository.GetById(id);
+            return _categoryRepository.GetById(categoryId);
         }
 
         public Category Update(Category category)
@@ -32,9 +32,9 @@ namespace SpeedyGourmet.Service
             return _categoryRepository.Update(category);
         }
 
-        public void Delete(int id)
+        public void Delete(int categoryId)
         {
-            _categoryRepository.Delete(id);
+            _categoryRepository.Delete(categoryId);
         }
     }
 }

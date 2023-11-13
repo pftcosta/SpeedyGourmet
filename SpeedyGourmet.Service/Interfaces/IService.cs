@@ -1,8 +1,6 @@
-﻿using SpeedyGourmet.Model;
-
-namespace SpeedyGourmet.Service
+﻿namespace SpeedyGourmet.Service
 {
-    // INTERFACE FOR CATEGORY, DIFFICULTY, INGREDIENT, MEASURE, RECIPE and USER
+    // INTERFACE FOR CATEGORY, DIFFICULTY, INGREDIENT, MEASURE and RECIPE
     public interface IService<T, PK> 
     {
         T Create(T type);
@@ -10,6 +8,5 @@ namespace SpeedyGourmet.Service
         List<T> GetAll();
         T Update(T type);
         void Delete(PK id);
-        User LogIn(string username, string password);
     }
 }

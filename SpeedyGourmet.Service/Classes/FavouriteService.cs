@@ -3,13 +3,13 @@ using SpeedyGourmet.Repository;
 
 namespace SpeedyGourmet.Service
 {
-    public class FavouriteService : IRecFavService<Favourite, int>
+    public class FavouriteService : IFavouriteService
     {
-        private readonly IRecFavRepository<Favourite, int> _favouriteRepository;
-        private readonly IService<User, int> _userService;
-        private readonly IRecFavService<Recipe, int> _recipeService;
+        private readonly IFavouriteRepository _favouriteRepository;
+        private readonly IUserService _userService;
+        private readonly IRecipeService _recipeService;
 
-        public FavouriteService(IRecFavRepository<Favourite, int> favouriteRepository, IService<User, int> userService, IRecFavService<Recipe, int> recipeService)
+        public FavouriteService(IFavouriteRepository favouriteRepository, IUserService userService, IRecipeService recipeService)
         {
             _favouriteRepository = favouriteRepository;
             _userService = userService;
@@ -21,9 +21,9 @@ namespace SpeedyGourmet.Service
             return _favouriteRepository.Create(favourite);
         }
 
-        public Favourite GetById(int id)
+        public Favourite GetById(int favouriteId)
         {
-            Favourite favourite = _favouriteRepository.GetById(id);
+            Favourite favourite = _favouriteRepository.GetById(favouriteId);
             favourite.User = _userService.GetById(favourite.User.Id);
             favourite.Recipe = _recipeService.GetById(favourite.Recipe.Id);
 
@@ -53,19 +53,14 @@ namespace SpeedyGourmet.Service
             return favourites;
         }
 
-        public void Delete(int id)
+        public void Delete(int favouriteId)
         {
-            _favouriteRepository.Delete(id);
+            _favouriteRepository.Delete(favouriteId);
         }
 
         public void DeleteAllByUserId(int userId)
         {
             _favouriteRepository.DeleteAllByUserId(userId);
-        }
-
-        public Favourite Update(Favourite Type)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -9,10 +9,10 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
     {
         private readonly IService<Ingredient, int> _ingredientService;
         private readonly IService<Measure, int> _measureService;
-        private readonly IRecFavService<Recipe, int> _recipeService;
-        private readonly IILPostService<IngredientLine, int> _ingredientLineService;
+        private readonly IRecipeService<Recipe, int> _recipeService;
+        private readonly IIIngredientLineService<IngredientLine, int> _ingredientLineService;
 
-        public AddIngredientsModel(IService<Ingredient, int> ingredientService, IService<Measure, int> measureService, IRecFavService<Recipe, int> recipeService, IILPostService<IngredientLine, int> ingredientLineService)
+        public AddIngredientsModel(IService<Ingredient, int> ingredientService, IService<Measure, int> measureService, IRecipeService<Recipe, int> recipeService, IIIngredientLineService<IngredientLine, int> ingredientLineService)
         {
             _ingredientService = ingredientService;
             _measureService = measureService;

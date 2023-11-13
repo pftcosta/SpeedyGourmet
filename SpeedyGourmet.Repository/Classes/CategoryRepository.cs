@@ -6,6 +6,7 @@ namespace SpeedyGourmet.Repository
     public class CategoryRepository : IRepository<Category, int>
     {
         private readonly string _tableName = "categories";
+
         public Category Create(Category category)
         {
             string sql =$"INSERT INTO {_tableName} (name) VALUES ('{category.Name}');";
@@ -36,15 +37,7 @@ namespace SpeedyGourmet.Repository
             }
             return categories;
         }
-
-        private Category Parse (SqlDataReader reader)
-        {
-            Category category = new Category();
-            category.Id = Convert.ToInt32(reader["id"]);
-            category.Name = Convert.ToString(reader["name"]);
-            return category;
-        }
-                        
+      
         public Category Update(Category category)
         {
             string sql = $"UPDATE {_tableName} SET name = '{category.Name}' WHERE id = {category.Id};";
@@ -56,6 +49,14 @@ namespace SpeedyGourmet.Repository
         {
             string sql = $"DELETE FROM {_tableName} WHERE id = {id};";
             SQL.ExecuteNonQuery(sql);
+        }
+
+        private Category Parse(SqlDataReader reader)
+        {
+            Category category = new Category();
+            category.Id = Convert.ToInt32(reader["id"]);
+            category.Name = Convert.ToString(reader["name"]);
+            return category;
         }
     }
 }

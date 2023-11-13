@@ -7,9 +7,9 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
 {
     public class DeleteModel : PageModel
     {
-        private readonly IRecFavService<Favourite, int> _favouriteService;
+        private readonly IRecipeService<Favourite, int> _favouriteService;
 
-        public DeleteModel(IRecFavService<Favourite, int> favouriteService)
+        public DeleteModel(IRecipeService<Favourite, int> favouriteService)
         {
             _favouriteService = favouriteService;
         }

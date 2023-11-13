@@ -7,9 +7,9 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
 {
     public class DeleteILineModel : PageModel
     {
-        private readonly IILPostService<IngredientLine, int> _iLService;
+        private readonly IIIngredientLineService<IngredientLine, int> _iLService;
 
-        public DeleteILineModel(IILPostService<IngredientLine, int> iLService)
+        public DeleteILineModel(IIIngredientLineService<IngredientLine, int> iLService)
         {
             _iLService = iLService;
         }

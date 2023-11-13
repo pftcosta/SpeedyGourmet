@@ -7,13 +7,13 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
 {
     public class GetAllModel : PageModel
     {
-        private readonly IRecFavService<Favourite, int> _favouriteService;
+        private readonly IRecipeService<Favourite, int> _favouriteService;
 
         private readonly IService<User, int> _userService;
 
-        private readonly IRecFavService<Recipe, int> _recipeService;
+        private readonly IRecipeService<Recipe, int> _recipeService;
 
-        public GetAllModel(IRecFavService<Favourite, int> favouriteService, IService<User, int> userService, IRecFavService<Recipe, int> recipeService)
+        public GetAllModel(IRecipeService<Favourite, int> favouriteService, IService<User, int> userService, IRecipeService<Recipe, int> recipeService)
         {
             _favouriteService = favouriteService;
             _userService = userService;

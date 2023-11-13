@@ -10,7 +10,7 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
 {
     public class GetAllModel : PageModel
     {
-        private readonly IRecFavService<Recipe, int> _recipeService;
+        private readonly IRecipeService<Recipe, int> _recipeService;
         private readonly IService<User, int> _userService;
 
         [BindProperty]
@@ -19,7 +19,7 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
         public List<Recipe> Recipes { get; set; }
         public List<User> Users { get; set; }
 
-        public GetAllModel(IRecFavService<Recipe, int> recipeService, IService<User, int> userService)
+        public GetAllModel(IRecipeService<Recipe, int> recipeService, IService<User, int> userService)
         {
             _recipeService = recipeService;
             _userService = userService;

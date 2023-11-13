@@ -6,6 +6,7 @@ namespace SpeedyGourmet.Repository
     public class DifficultyRepository : IRepository<Difficulty, int>
     {
         private readonly string _tableName = "difficulties";
+
         public Difficulty Create(Difficulty difficulty)
         {
             string sql = $"INSERT INTO {_tableName} (name) VALUES ('{difficulty.Name}');";
@@ -37,15 +38,6 @@ namespace SpeedyGourmet.Repository
             return difficulties;
         }
 
-        public Difficulty Parse(SqlDataReader reader)
-        {
-            Difficulty difficulty = new Difficulty();
-            difficulty.Id = Convert.ToInt32(reader["id"]);
-            difficulty.Name = Convert.ToString(reader["name"]);
-            return difficulty;
-        }
-
-
         public Difficulty Update(Difficulty difficulty)
         {
             string sql = $"UPDATE {_tableName} SET name = '{difficulty.Name}' WHERE id = {difficulty.Id};";
@@ -57,6 +49,14 @@ namespace SpeedyGourmet.Repository
         {
             string sql = $"DELETE FROM {_tableName} WHERE id = {id};";
             SQL.ExecuteNonQuery(sql);
+        }
+
+        public Difficulty Parse(SqlDataReader reader)
+        {
+            Difficulty difficulty = new Difficulty();
+            difficulty.Id = Convert.ToInt32(reader["id"]);
+            difficulty.Name = Convert.ToString(reader["name"]);
+            return difficulty;
         }
     }
 }

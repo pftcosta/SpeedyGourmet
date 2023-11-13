@@ -3,15 +3,15 @@ using SpeedyGourmet.Repository;
 
 namespace SpeedyGourmet.Service
 {
-    public class PostService : IILPostService<Post, int>
+    public class PostService : IPostService
     {
-        private readonly IILPostRepository<Post, int> _postRepository;
-        private readonly IService<User, int> _userService;
-        private readonly IRecFavService<Recipe, int> _recipeService;
+        private readonly IPostService _postRepository;
+        private readonly IUserService _userService;
+        private readonly IRecipeService _recipeService;
 
-        public PostService(IILPostRepository<Post, int> postRepositor, IService<User, int> userService, IRecFavService<Recipe, int> recipeService)
+        public PostService(IPostService postRepository, IUserService userService, IRecipeService recipeService)
         {
-            _postRepository = postRepositor;
+            _postRepository = postRepository;
             _userService = userService;
             _recipeService = recipeService;
         }
@@ -21,9 +21,9 @@ namespace SpeedyGourmet.Service
             return _postRepository.Create(post);
         }
 
-        public Post GetById(int id)
+        public Post GetById(int postId)
         {
-            Post post = _postRepository.GetById(id);
+            Post post = _postRepository.GetById(postId);
             post.User = _userService.GetById(post.User.Id);
             post.Recipe = _recipeService.GetById(post.Recipe.Id);
 
@@ -52,6 +52,7 @@ namespace SpeedyGourmet.Service
             }
             return posts;
         }
+
         public List<Post> GetAllByUserId(int userId)
         {
             List<Post> posts = _postRepository.GetAllByUserId(userId);
@@ -62,34 +63,14 @@ namespace SpeedyGourmet.Service
             }
             return posts;
         }
-
-        public double GetAverageRatingByRecipeId(int id)
+        public Post Update(Post post)
         {
-            List<Post> posts = _postRepository.GetAllByRecipeId(id);
-            double totalRating = 0.0;
-            foreach (Post post in posts)
-            {
-                totalRating += post.Rating;
-            }
-            double averageRating = totalRating / posts.Count;
-            return averageRating;
+            return _postRepository.Update(post);
         }
 
-        public double GetAverageRatingByUserId(int id)
+        public void Delete(int postId)
         {
-            List<Post> posts = _postRepository.GetAllByUserId(id);
-            double totalRating = 0.0;
-            foreach (Post post in posts)
-            {
-                totalRating += post.Rating;
-            }
-            double averageRating = totalRating / posts.Count;
-            return averageRating;
-        }
-
-        public void Delete(int id)
-        {
-            _postRepository.Delete(id);
+            _postRepository.Delete(postId);
         }
 
         public void DeleteAllByRecipeId(int recipeId)

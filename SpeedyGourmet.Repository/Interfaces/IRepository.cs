@@ -1,6 +1,7 @@
 ﻿namespace SpeedyGourmet.Repository
 {
-    public interface IRepository<T, PK> // interface for CATEGORY, DIFFICULTY, INGREDIENT, MEASURE, RECIPE and USER
+    // interface for CATEGORY, DIFFICULTY, INGREDIENT, MEASURE and RECIPE
+    public interface IRepository<T, PK> 
     {
         T Create(T type);
         T GetById(PK id);

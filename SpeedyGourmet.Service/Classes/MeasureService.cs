@@ -17,9 +17,9 @@ namespace SpeedyGourmet.Service
             return _measureRepository.Create(measure);
         }
 
-        public Measure GetById(int id)
+        public Measure GetById(int measureId)
         {
-            return _measureRepository.GetById(id);
+            return _measureRepository.GetById(measureId);
         }
 
         public List<Measure> GetAll()
@@ -32,9 +32,9 @@ namespace SpeedyGourmet.Service
             return _measureRepository.Update(measure);
         }
 
-        public void Delete(int id)
+        public void Delete(int measureId)
         {
-            _measureRepository.Delete(id);
+            _measureRepository.Delete(measureId);
         }
     }
 }

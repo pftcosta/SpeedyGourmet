@@ -7,11 +7,11 @@ namespace SpeedyGourmet.WebApp.Pages.Posts
 {
     public class GetAllModel : PageModel
     {
-        private readonly IILPostService<Post, int> _iLPostService;
+        private readonly IIIngredientLineService<Post, int> _iLPostService;
         private readonly IService<User, int> _userService;
-        private readonly IRecFavService<Recipe, int> _recipeService;
+        private readonly IRecipeService<Recipe, int> _recipeService;
 
-        public GetAllModel(IILPostService<Post, int> iLPostService, IService<User, int> userService, IRecFavService<Recipe, int> recipeService)
+        public GetAllModel(IIIngredientLineService<Post, int> iLPostService, IService<User, int> userService, IRecipeService<Recipe, int> recipeService)
         {
             _iLPostService = iLPostService;
             _userService = userService;
