@@ -10,5 +10,6 @@ namespace SpeedyGourmet.Service
         List<T> GetAll();
         T Update(T type);
         void Delete(PK id);
+        User LogIn(string username, string password);
     }
 }

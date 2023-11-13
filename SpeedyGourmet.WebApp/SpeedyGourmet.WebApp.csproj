@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Admins\" />
+    <Folder Include="Pages\Admin\" />
     <Folder Include="Pages\Visitors\" />
   </ItemGroup>
 </Project>

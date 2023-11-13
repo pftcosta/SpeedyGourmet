@@ -46,7 +46,7 @@
                 <td>@recipe.Title</td>
                 <td>@recipe.Category.Name</td>
                 <td>
-                    <a asp-page="/Recipee/DeleteRecipe" asp-route-id="@recipe.Id"><i class="fa-regular fa-trash-can"></i></a> /
+                    <a asp-page="/Recipee/DeleteRecipe" asp-route-id="@recipe.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
                     <a asp-page="/Recipee/GetById" asp-route-id="@recipe.Id"><i class="fa-regular fa-eye"></i></a> /
                     <a asp-page="/Recipee/AddIngredients" asp-route-id="@recipe.Id"><i class="fa-solid fa-pencil"></i></a>
                 </td>

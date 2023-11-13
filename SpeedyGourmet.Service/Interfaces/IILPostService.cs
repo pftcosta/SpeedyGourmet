@@ -1,7 +1,7 @@
 ﻿namespace SpeedyGourmet.Service
 {
     // INTERFACE FOR INGREDIENTLINE AND POST
-    public interface IILPostService<T, PK> // 
+    public interface IILPostService<T, PK> 
     {
         T Create(T type);
         T GetById(int id);
