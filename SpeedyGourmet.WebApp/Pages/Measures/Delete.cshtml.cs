@@ -5,16 +5,14 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Measures
 {
-    public class DeleteModel : PageModel
+    public class Delete : PageModel
     {
         private readonly IService<Measure, int> _measuretService;
 
-        public DeleteModel(IService<Measure, int> measuretService)
+        public Delete(IService<Measure, int> measuretService)
         {
             _measuretService = measuretService;
         }
-
-        public Measure measure = new();
 
         public IActionResult OnGet(int id)
         {

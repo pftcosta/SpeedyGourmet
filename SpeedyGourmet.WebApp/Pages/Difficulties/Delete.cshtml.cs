@@ -5,11 +5,11 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Difficulties
 {
-    public class DeleteModel : PageModel
+    public class Delete : PageModel
     {
         private readonly IService<Difficulty, int> _difficultyService;
 
-        public DeleteModel(IService<Difficulty, int> difficultyService)
+        public Delete (IService<Difficulty, int> difficultyService)
         {
             _difficultyService = difficultyService;
         }

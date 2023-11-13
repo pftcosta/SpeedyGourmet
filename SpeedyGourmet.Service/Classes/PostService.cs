@@ -5,11 +5,11 @@ namespace SpeedyGourmet.Service
 {
     public class PostService : IPostService
     {
-        private readonly IPostService _postRepository;
+        private readonly IPostRepository _postRepository;
         private readonly IUserService _userService;
         private readonly IRecipeService _recipeService;
 
-        public PostService(IPostService postRepository, IUserService userService, IRecipeService recipeService)
+        public PostService(IPostRepository postRepository, IUserService userService, IRecipeService recipeService)
         {
             _postRepository = postRepository;
             _userService = userService;

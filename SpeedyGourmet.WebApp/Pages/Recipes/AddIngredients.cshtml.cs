@@ -5,38 +5,41 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Recipee
 {
-    public class AddIngredientsModel : PageModel
+    public class AddIngredients : PageModel
     {
         private readonly IService<Ingredient, int> _ingredientService;
         private readonly IService<Measure, int> _measureService;
-        private readonly IRecipeService<Recipe, int> _recipeService;
-        private readonly IIIngredientLineService<IngredientLine, int> _ingredientLineService;
+        private readonly IRecipeService _recipeService;
+        private readonly IIngredientLineService _ingredientLineService;
 
-        public AddIngredientsModel(IService<Ingredient, int> ingredientService, IService<Measure, int> measureService, IRecipeService<Recipe, int> recipeService, IIIngredientLineService<IngredientLine, int> ingredientLineService)
+        public AddIngredients(IService<Ingredient, int> ingredientService, IService<Measure, int> measureService, IRecipeService recipeService, IIngredientLineService ingredientLineService, List<Ingredient> ingredients, List<Measure> measures, Recipe recipe)
         {
             _ingredientService = ingredientService;
             _measureService = measureService;
             _recipeService = recipeService;
             _ingredientLineService = ingredientLineService;
+            Ingredients = ingredients;
+            Measures = measures;
+            Recipe = recipe;
         }
 
         public List<Ingredient> Ingredients { get; set; }
         public List<Measure> Measures { get; set; }
-        public Recipe recipe = new();
+        public Recipe Recipe { get; set; }
 
         public void OnGet(int id)
         {
-            recipe = _recipeService.GetById(id);
+            Recipe = _recipeService.GetById(id);
             Ingredients = _ingredientService.GetAll();
             Measures = _measureService.GetAll();
         }
 
         public IActionResult OnPost(int id)
         {
-            recipe = _recipeService.GetById(id);
+            Recipe = _recipeService.GetById(id);
 
             IngredientLine ingredientLine = new IngredientLine();
-            ingredientLine.Recipe = recipe;
+            ingredientLine.Recipe = Recipe;
 
             ingredientLine.Quantity = Convert.ToInt32(Request.Form["quantity"]);
 
@@ -48,10 +51,10 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
 
             ingredientLine = _ingredientLineService.Create(ingredientLine);
 
-            recipe.Ingredients.Add(ingredientLine);
-            recipe = _recipeService.Update(recipe);
+            Recipe.Ingredients.Add(ingredientLine);
+            Recipe = _recipeService.Update(Recipe);
 
-            return RedirectToPage("/Recipee/AddIngredients", new { id = recipe.Id });
+            return RedirectToPage("/Recipes/AddIngredients", new { id = Recipe.Id });
         }
     }
 }

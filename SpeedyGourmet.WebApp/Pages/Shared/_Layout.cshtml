@@ -19,7 +19,7 @@
             <div class="container">
                 <a class="navbar-brand" href="#">Logo</a>
 
-                @if (Model.User is null)
+               @*  @if (Model.User is null)
                 {
                     <li class="nav-item">
                         <a class="btn btn-success nav-link text-white" asp-area="" asp-page="/LogIn/LogIn">Login</a>
@@ -37,7 +37,7 @@
                             <a class="btn btn-secondary nav-link text-white" style="margin-left:5px" asp-area="" asp-page="/Admin/Admin"><i class="fa-solid fa-gear"></i>  Admin</a>
                         </li>
                     }
-                }
+                } *@
 
         
                 <!-- Botões "Register" e "Log In" alinhados à esquerda -->
@@ -73,7 +73,7 @@
                         <a class="nav-link text-dark" asp-area="" asp-page="/Posts/GetAll">Comments <i class="fa-solid fa-comments"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Recipee/GetAllByUserId">Recipes <i class="fa-solid fa-bowl-food"></i></a>
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Recipes/GetAllByUserId">Recipes <i class="fa-solid fa-bowl-food"></i></a>
                     </li>
                 </ul>
                 

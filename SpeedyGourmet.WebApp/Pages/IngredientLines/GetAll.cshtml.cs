@@ -5,56 +5,42 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.IngredientLines
 {
-    public class GetAllModel : PageModel
+    public class GetAll : PageModel
     {
-        private readonly IIIngredientLineService<IngredientLine, int> _iLService;
-        private readonly IService<Ingredient, int> _ingredientService;
-        private readonly IService<Measure, int> _measureService;
-        private readonly IRecipeService<Recipe, int> _recipeService;
+        private readonly IIngredientLineService _ingredientLineService;
 
-        public GetAllModel(IIIngredientLineService<IngredientLine, int> iLService, IService<Ingredient, int> ingredientService, IService<Measure, int> measureService, IRecipeService<Recipe, int> recipeService)
+        public GetAll(IIngredientLineService ingredientLineService, List<IngredientLine> ingredientLines, IngredientLine ingredientLine)
         {
-            _iLService = iLService;
-            _ingredientService = ingredientService;
-            _measureService = measureService;
-            _recipeService = recipeService;
+            _ingredientLineService = ingredientLineService;
+            IngredientLines = ingredientLines;
+            IngredientLine = ingredientLine;
         }
 
-        public List<IngredientLine> ingredientLines = new();
-        public List<Ingredient> ingredients = new();
-        public List<Measure> measures = new();
-        public List<Recipe> recipes = new();
-
-        public IngredientLine ingredientLine = new();
-        public Recipe recipe = new();
+        public List<IngredientLine> IngredientLines { get; set; }
+        public IngredientLine IngredientLine { get; set; }
 
         public void OnGet()
         {
-            ingredientLines = _iLService.GetAll();
-            ingredients = _ingredientService.GetAll();
-            measures = _measureService.GetAll();
-            recipes = _recipeService.GetAll();
+            IngredientLines = _ingredientLineService.GetAll();
         }
 
         public IActionResult OnPost()
         {
-            ingredientLine.Quantity = Convert.ToInt32(Request.Form["quantity"]);
+            IngredientLine.Quantity = Convert.ToInt32(Request.Form["quantity"]);
 
             Ingredient ingredient = new();
-            ingredientLine.Ingredient = ingredient;
-            ingredientLine.Ingredient.Id = Convert.ToInt32(Request.Form["id_ingredient"]);
+            IngredientLine.Ingredient = ingredient;
+            IngredientLine.Ingredient.Id = Convert.ToInt32(Request.Form["id_ingredient"]);
 
             Measure measure = new();
-            ingredientLine.Measure = measure;
-            ingredientLine.Measure.Id = Convert.ToInt32(Request.Form["id_measure"]);
+            IngredientLine.Measure = measure;
+            IngredientLine.Measure.Id = Convert.ToInt32(Request.Form["id_measure"]);
 
             Recipe recipe = new();
-            ingredientLine.Recipe = recipe;
-            ingredientLine.Recipe.Id = Convert.ToInt32(Request.Form["id_recipe"]);
+            IngredientLine.Recipe = recipe;
+            IngredientLine.Recipe.Id = Convert.ToInt32(Request.Form["id_recipe"]);
 
-            _iLService.Create(ingredientLine);
-
-            //OnGet();
+            _ingredientLineService.Create(IngredientLine);
 
             return RedirectToPage("/IngredientLines/CreateRecipe", new { id = recipe.Id });
         }

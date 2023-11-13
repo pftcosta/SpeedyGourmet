@@ -6,20 +6,19 @@ using System.Text.Json;
 
 namespace SpeedyGourmet.WebApp.Pages.LogIn
 {
-    public class LoginModel : PageModel
+    public class Login : PageModel
     {
         public class LogInModel : PageModel
         {
-            private readonly IService<User, int>  _userService;
+            private readonly IUserService  _userService;
 
-            public LogInModel(IService<User, int> userService)
+            public LogInModel(IUserService userService, User user)
             {
                 _userService = userService;
+                User = user;
             }
 
             public User User { get; set; }
-            public List<User> Users { get; set; }
-
 
             public void OnGet()
             {
@@ -37,9 +36,9 @@ namespace SpeedyGourmet.WebApp.Pages.LogIn
                 string username = Convert.ToString(Request.Form["username"]);
                 string password = Convert.ToString(Request.Form["password"]);
 
-                User user = _userService.LogIn(username, password);
+                User = _userService.LogIn(username, password);
                 
-                string jsonString = JsonSerializer.Serialize(user);
+                string jsonString = JsonSerializer.Serialize(User);
 
                 HttpContext.Session.SetString("user", jsonString);
             }

@@ -1,5 +1,5 @@
 ﻿@page
-@model SpeedyGourmet.WebApp.Pages.Measures.GetAllModel
+@model SpeedyGourmet.WebApp.Pages.Measures.GetAll
 @{
 }
 
@@ -27,7 +27,7 @@
     </thead>
 
     <tbody>
-        @foreach (Model.Measure measure in Model.measures)
+        @foreach (Model.Measure measure in Model.Measures)
         {
             <tr>
                 <td>@measure.Name</td>

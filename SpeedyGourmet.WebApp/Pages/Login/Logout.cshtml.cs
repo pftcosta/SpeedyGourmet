@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace SpeedyGourmet.WebApp.Pages.Login
 {
-    public class LogoutModel : PageModel
+    public class Logout : PageModel
     {
         public void OnGet()
         {

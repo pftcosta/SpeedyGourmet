@@ -5,20 +5,21 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.IngredientLines
 {
-    public class DeleteModel : PageModel
+    public class Delete : PageModel
     {
-        private readonly IIIngredientLineService<IngredientLine, int> _ilService;
+        private readonly IIngredientLineService _ingredientLineService;
 
-        public DeleteModel(IIIngredientLineService<IngredientLine, int> ilService)
+        public Delete(IIngredientLineService ingredientLineService, IngredientLine ingredientLine)
         {
-            _ilService = ilService;
+            _ingredientLineService = ingredientLineService;
+            IngredientLine = ingredientLine;
         }
 
-        public IngredientLine ingredientLine = new();
+        public IngredientLine IngredientLine { get; set; }
 
         public IActionResult OnGet(int id)
         {
-            _ilService.Delete(id);
+            _ingredientLineService.Delete(id);
             return RedirectToPage("/IngredientLines/GetAllByRecipe", new { id = id });
         }
     }

@@ -7,18 +7,18 @@ namespace SpeedyGourmet.WebApp.Pages.Posts
 {
     public class GetByIdModel : PageModel
     {
-        private readonly IIIngredientLineService<Post, int> _iLPostService;
+        private readonly IPostService _postService;
 
-        public GetByIdModel(IIIngredientLineService<Post, int> iLPostService)
+        public GetByIdModel(IPostService postService)
         {
-            _iLPostService = iLPostService;
+            _postService = postService;
         }
 
         public Post post = new();
 
         public void OnGet(int id)
         {
-            post = _iLPostService.GetById(id);
+            post = _postService.GetById(id);
         }
     }
 }

@@ -5,15 +5,16 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Recipee
 {
-    public class GetByIdModel : PageModel
+    public class GetById : PageModel
     {
-        private readonly IRecipeService<Recipe, int> _recipeService;
-        private readonly IIIngredientLineService<IngredientLine, int> _ingredientLineService;
+        private readonly IRecipeService _recipeService;
+        private readonly IIngredientLineService _ingredientLineService;
 
-        public GetByIdModel(IRecipeService<Recipe, int> recipeService, IIIngredientLineService<IngredientLine, int> ingredientLineService)
+        public GetById(IRecipeService recipeService, IIngredientLineService ingredientLineService, Recipe recipe)
         {
             _recipeService = recipeService;
             _ingredientLineService = ingredientLineService;
+            Recipe = recipe;
         }
 
         public Recipe Recipe { get; set; }

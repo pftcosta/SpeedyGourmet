@@ -1,5 +1,5 @@
 ﻿@page
-@model SpeedyGourmet.WebApp.Pages.Posts.GetAllModel
+@model SpeedyGourmet.WebApp.Pages.Posts.GetAll
 @{
 }
 
@@ -28,7 +28,7 @@
     </thead>
 
     <tbody>
-        @foreach (Model.Post post in Model.posts)
+        @foreach (Model.Post post in Model.Posts)
         {
             <tr>
                 <td><i class="fa-solid fa-user"></i> @post.User.UserName Posted on @post.Recipe.Title by @post.Recipe.Author with @post.Rating <i class="fa-regular fa-star"></i>'s</td>
@@ -49,7 +49,7 @@
         <div class="form-group">
         <select name="id_user" class="form-control" style="width: 130px;">
                 <option selected>Select User</option>
-                @foreach (Model.User user in Model.users)
+                @foreach (Model.User user in Model.Users)
                 {
                     <option value="@user.Id">@user.UserName</option>
                 }
@@ -59,7 +59,7 @@
         <div class="form-group">
         <select name="id_recipe" class="form-control" style="width: 130px;">
                 <option selected>Select Recipe</option>
-                @foreach (Model.Recipe recipe in Model.recipes)
+                @foreach (Model.Recipe recipe in Model.Recipes)
                 {
                     <option value="@recipe.Id">@recipe.Title</option>
                 }

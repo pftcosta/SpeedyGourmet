@@ -9,16 +9,17 @@ namespace SpeedyGourmet.WebApp.Pages.Measures
     {
         private readonly IService<Measure, int> _measureService;
 
-        public GetByIdModel(IService<Measure, int> measureService)
+        public GetByIdModel(IService<Measure, int> measureService, Measure measure)
         {
             _measureService = measureService;
+            Measure = measure;
         }
 
-        public Measure measure = new();
+        public Measure Measure { get; set; }
 
         public void OnGet(int id)
         {
-            measure = _measureService.GetById(id);
+            Measure = _measureService.GetById(id);
         }
     }
 }

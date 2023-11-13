@@ -5,20 +5,20 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Difficulties
 {
-    public class GetByIdModel : PageModel
+    public class GetById : PageModel
     {
         private readonly IService<Difficulty, int> _difficultyService;
 
-        public GetByIdModel(IService<Difficulty, int> difficultyService)
+        public GetById(IService<Difficulty, int> difficultyService)
         {
             _difficultyService = difficultyService;
         }
 
-        public Difficulty difficulty = new();
+        public Difficulty Difficulty { get; set; }
 
         public void OnGet(int id)
         {
-            difficulty = _difficultyService.GetById(id);
+            Difficulty = _difficultyService.GetById(id);
         }
     }
 }

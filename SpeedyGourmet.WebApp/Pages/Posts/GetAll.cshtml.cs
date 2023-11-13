@@ -5,30 +5,33 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Posts
 {
-    public class GetAllModel : PageModel
+    public class GetAll : PageModel
     {
-        private readonly IIIngredientLineService<Post, int> _iLPostService;
-        private readonly IService<User, int> _userService;
-        private readonly IRecipeService<Recipe, int> _recipeService;
+        private readonly IPostService _postService;
+        private readonly IUserService _userService;
+        private readonly IRecipeService _recipeService;
 
-        public GetAllModel(IIIngredientLineService<Post, int> iLPostService, IService<User, int> userService, IRecipeService<Recipe, int> recipeService)
+        public GetAll (IPostService postService, IUserService userService, IRecipeService recipeService, List<Post> posts, List<User> users, List<Recipe> recipes, Recipe recipe)
         {
-            _iLPostService = iLPostService;
+            _postService = postService;
             _userService = userService;
             _recipeService = recipeService;
+            Posts = posts;
+            Users = users;
+            Recipes = recipes;
+            Recipe = recipe;
         }
 
-        public List<Post> posts = new();
-        public List<User> users = new();
-        public List<Recipe> recipes = new();
-
-        public Recipe recipe = new();
+        public List<Post> Posts { get; set; }
+        public List<User> Users { get; set; }
+        public List<Recipe> Recipes { get; set; }
+        public Recipe Recipe { get; set; }
 
         public void OnGet()
         {
-            posts = _iLPostService.GetAll();
-            users = _userService.GetAll();
-            recipes = _recipeService.GetAll();
+            Posts = _postService.GetAll();
+            Users = _userService.GetAll();
+            Recipes = _recipeService.GetAll();
         }
 
         public void OnPost()
@@ -41,10 +44,10 @@ namespace SpeedyGourmet.WebApp.Pages.Posts
             post.User = user;
             post.User.Id = Convert.ToInt32(Request.Form["id_user"]);
 
-            post.Recipe = recipe;
+            post.Recipe = Recipe;
             post.Recipe.Id = Convert.ToInt32(Request.Form["id_recipe"]);
 
-            _iLPostService.Create(post);
+            _postService.Create(post);
             OnGet();
         }
     }

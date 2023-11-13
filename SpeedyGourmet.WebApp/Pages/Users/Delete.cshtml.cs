@@ -5,11 +5,11 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Users
 {
-    public class DeleteModel : PageModel
+    public class Delete : PageModel
     {
-        private readonly IService<User, int> _userService;
+        private readonly IUserService _userService;
 
-        public DeleteModel(IService<User, int> userService)
+        public Delete(IUserService userService)
         {
             _userService = userService;
         }

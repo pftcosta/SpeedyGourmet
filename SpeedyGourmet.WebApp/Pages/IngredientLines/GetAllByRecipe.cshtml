@@ -1,5 +1,5 @@
 ﻿@page
-@model SpeedyGourmet.WebApp.Pages.IngredientLines.GetAllByRecipeModel
+@model SpeedyGourmet.WebApp.Pages.IngredientLines.GetAllByRecipe
 @{
 }
 
@@ -10,7 +10,7 @@
     <div class="d-flex">
         <select name="id_recipe" class="form-control" style="width: 150px;">
         <label>Choose a recipe: </label>
-        @foreach (Model.Recipe recipe in Model.recipes)
+        @foreach (Model.Recipe recipe in Model.Recipes)
         {
             <option value="@recipe.Id">@recipe.Title</option>
         }
@@ -25,7 +25,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Recipe: @Model.ingredientLine.Recipe.Title</th>
+            <th scope="col">Recipe: @Model.IngredientLine.Recipe.Title</th>
             <th></th>
         </tr>
         <tr>
@@ -35,7 +35,7 @@
     </thead>
 
     <tbody>
-        @foreach (Model.IngredientLine ingredientLine in Model.ingredientLines)
+        @foreach (Model.IngredientLine ingredientLine in Model.IngredientLines)
         {
             <tr>
                 <td><a>@ingredientLine.Quantity @ingredientLine.Measure.Name de @ingredientLine.Ingredient.Name</a></td>
@@ -49,5 +49,5 @@
 
 <div class="d-flex justify-content-between">
     <a class="btn btn-danger" asp-area="" asp-page="/IngredientLines/GetAll"> Return to all ingredient list <i class="fa-solid fa-arrow-up-from-bracket"></i></a>
-    <a class="btn btn-danger" asp-area="" asp-page="/IngredientLines/DeleteAllByRecipe" asp-route-id="@Model.ingredientLine.Recipe.Id"><i class="bi bi-arrow-right"></i> Delete all</a>
+    <a class="btn btn-danger" asp-area="" asp-page="/IngredientLines/DeleteAllByRecipe" asp-route-id="@Model.IngredientLine.Recipe.Id"><i class="bi bi-arrow-right"></i> Delete all</a>
 </div>

@@ -1,5 +1,5 @@
 ﻿@page
-@model SpeedyGourmet.WebApp.Pages.IngredientLines.GetAllModel
+@model SpeedyGourmet.WebApp.Pages.IngredientLines.GetAll
 @{
 }
 
@@ -20,7 +20,7 @@
     </thead>
 
     <tbody>
-        @foreach (Model.IngredientLine ingredientLine in Model.ingredientLines)
+        @foreach (Model.IngredientLine ingredientLine in Model.IngredientLines)
         {
             <tr>
                 <td><a>@ingredientLine.Quantity @ingredientLine.Measure.Name de @ingredientLine.Ingredient.Name</a></td>

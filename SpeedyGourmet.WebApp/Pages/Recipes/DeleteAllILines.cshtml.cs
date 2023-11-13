@@ -3,24 +3,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using SpeedyGourmet.Model;
 using SpeedyGourmet.Service;
 
-namespace SpeedyGourmet.WebApp.Pages.IngredientLines
+namespace SpeedyGourmet.WebApp.Pages.Recipee
 {
-    public class DeleteAllByRecipe : PageModel
+    public class DeleteAllILines : PageModel
     {
         private readonly IIngredientLineService _ingredientLineService;
 
-        public DeleteAllByRecipe(IIngredientLineService ingredientLineService, IngredientLine ingredientLine)
+        public DeleteAllILines(IIngredientLineService ingredientLineService)
         {
             _ingredientLineService = ingredientLineService;
-            this.ingredientLine = ingredientLine;
         }
-
-        public IngredientLine ingredientLine { get; set; }
 
         public IActionResult OnGet(int id)
         {
             _ingredientLineService.DeleteAllByRecipeId(id);
-            return Redirect("/IngredientLines/GetAllByRecipe");
+            return RedirectToPage("/Recipes/AddIngredients", new {id = id});
         }
     }
 }

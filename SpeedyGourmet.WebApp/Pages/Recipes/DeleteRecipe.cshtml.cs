@@ -6,11 +6,11 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Recipee
 {
-    public class DeleteRecipeModel : PageModel
+    public class DeleteRecipe : PageModel
     {
-        private readonly IRecipeService<Recipe, int> _recipeService;
+        private readonly IRecipeService _recipeService;
 
-        public DeleteRecipeModel(IRecipeService<Recipe, int> recipeService)
+        public DeleteRecipe(IRecipeService recipeService)
         {
             _recipeService = recipeService;
         }
@@ -18,7 +18,7 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
         public IActionResult OnGet(int id)
         {
             _recipeService.Delete(id);
-            return Redirect("/Recipee/GetAllByUserId");
+            return Redirect("/Recipes/GetAllByUserId");
         }
     }
 }

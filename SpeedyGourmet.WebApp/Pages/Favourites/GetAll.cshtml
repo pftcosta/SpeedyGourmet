@@ -1,5 +1,5 @@
 ﻿@page
-@model SpeedyGourmet.WebApp.Pages.Favourites.GetAllModel
+@model SpeedyGourmet.WebApp.Pages.Favourites.GetAll
 @{
 }
 
@@ -7,7 +7,7 @@
 <br />
 
 <div class="form-group">
-    <a class="btn btn-danger" asp-page="/Favourites/GetAllByUser" asp-route-id="@Model.user.Id">View <i class="fa-regular fa-heart"></i> by <i class="fa-regular fa-user"></i></a>
+    <a class="btn btn-danger" asp-page="/Favourites/GetAllByUser" asp-route-id="@Model.User.Id">View <i class="fa-regular fa-heart"></i> by <i class="fa-regular fa-user"></i></a>
 </div>
 <br />
 
@@ -17,7 +17,7 @@
         <div class="form-group">
             <select name="id_user" class="form-control" style="width: 120px;">
                 <option selected>Select User</option>
-                @foreach (Model.User user in Model.users)
+                @foreach (Model.User user in Model.Users)
                 {
                     <option value="@user.Id">@user.UserName</option>
                 }
@@ -26,7 +26,7 @@
         <div class="form-group">
             <select name="id_recipe" class="form-control mx-2" style="width: 120px;">
                 <option selected>Select Recipe</option>
-                @foreach (Model.Recipe recipe in Model.recipes)
+                @foreach (Model.Recipe recipe in Model.Recipes)
                 {
                     <option value="@recipe.Id">@recipe.Title</option>
                 }
@@ -48,7 +48,7 @@
     </thead>
 
     <tbody>
-        @foreach (Model.Favourite favourite in Model.favourites)
+        @foreach (Model.Favourite favourite in Model.Favourites)
         {
             <tr>
                 <td><a><i class="fa-solid fa-user"></i> @favourite.User.UserName <i class="fa-solid fa-heart"></i> @favourite.Recipe.Title</a></td>

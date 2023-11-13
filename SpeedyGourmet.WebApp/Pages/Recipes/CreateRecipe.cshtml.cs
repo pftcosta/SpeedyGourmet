@@ -5,21 +5,26 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Recipee
 {
-    public class CreateRecipeModel : PageModel
+    public class CreateRecipe : PageModel
     {
-        private readonly IRecipeService<Recipe, int> _recipeService;
+        private readonly IRecipeService _recipeService;
         private readonly IService<Category, int> _categoryService;
         private readonly IService<Difficulty, int> _difficultyService;
         private readonly IService<Measure, int> _measureService;
         private readonly IService<User, int> _userService;
 
-        public CreateRecipeModel(IRecipeService<Recipe, int> recipeService, IService<Category, int> categoryService, IService<Difficulty, int> difficultyService, IService<Measure, int> measureService, IService<User, int> userService)
+        public CreateRecipe(IRecipeService recipeService, IService<Category, int> categoryService, IService<Difficulty, int> difficultyService, IService<Measure, int> measureService, IService<User, int> userService, List<Category> categories, List<Difficulty> difficulties, List<Recipe> recipes, List<Measure> measures, List<User> users)
         {
             _recipeService = recipeService;
             _categoryService = categoryService;
             _difficultyService = difficultyService;
             _measureService = measureService;
             _userService = userService;
+            Categories = categories;
+            Difficulties = difficulties;
+            Recipes = recipes;
+            Measures = measures;
+            Users = users;
         }
 
         public List<Category> Categories { get; set; }
@@ -56,7 +61,7 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
 
             recipe = _recipeService.Create(recipe);
 
-            return RedirectToPage("/Recipee/AddIngredients", new { id = recipe.Id });
+            return RedirectToPage("/Recipes/AddIngredients", new { id = recipe.Id });
         }
     }
 }

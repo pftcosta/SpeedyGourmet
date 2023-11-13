@@ -5,27 +5,28 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Ingredients
 {
-    public class UpdateModel : PageModel
+    public class Update : PageModel
     {
         private readonly IService<Ingredient, int> _ingredientService;
 
-        public UpdateModel(IService<Ingredient, int> ingredientService)
+        public Update(IService<Ingredient, int> ingredientService, Ingredient ingredient)
         {
             _ingredientService = ingredientService;
+            Ingredient = ingredient;
         }
 
-        public Ingredient ingredient = new();
+        public Ingredient Ingredient { get; set; }
 
         public void OnGet(int id)
         {
-            ingredient = _ingredientService.GetById(id);
+            Ingredient = _ingredientService.GetById(id);
         }
 
         public IActionResult OnPost()
         {
-            ingredient.Id = Convert.ToInt32(Request.Form["id"]);
-            ingredient.Name = Convert.ToString(Request.Form["name"]);
-            _ingredientService.Update(ingredient);
+            Ingredient.Id = Convert.ToInt32(Request.Form["id"]);
+            Ingredient.Name = Convert.ToString(Request.Form["name"]);
+            _ingredientService.Update(Ingredient);
             return Redirect("/Ingredients/GetAll");
         }
     }

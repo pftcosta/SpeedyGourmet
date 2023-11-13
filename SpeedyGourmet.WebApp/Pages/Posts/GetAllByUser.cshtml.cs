@@ -5,24 +5,26 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Posts
 {
-    public class GetAllByUserModel : PageModel
+    public class GetAllByUser : PageModel
     {
-        private readonly IIIngredientLineService<Post, int> _iLPostService;
-        private readonly IService<User, int> _userService;
+        private readonly IPostService _postService;
+        private readonly IUserService _userService;
 
-        public GetAllByUserModel(IIIngredientLineService<Post, int> iLPostService, IService<User, int> userService)
+        public GetAllByUser(IPostService postService, IUserService userService, List<Post> posts, List<User> users)
         {
-            _iLPostService = iLPostService;
+            _postService = postService;
             _userService = userService;
+            Posts = posts;
+            Users = users;
         }
 
-        public List<Post> posts = new();
-        public List<User> users = new();
+        public List<Post> Posts { get; set; }
+        public List<User> Users { get; set; }
 
         public void OnGet(int id)
         {
-            posts = _iLPostService.GetAllByUserId(id);
-            users = _userService.GetAll();
+            Posts = _postService.GetAllByUserId(id);
+            Users = _userService.GetAll();
         }
 
         public void OnPost()

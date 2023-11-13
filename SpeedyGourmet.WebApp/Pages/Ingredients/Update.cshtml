@@ -1,5 +1,5 @@
 ﻿@page
-@model SpeedyGourmet.WebApp.Pages.Ingredients.UpdateModel
+@model SpeedyGourmet.WebApp.Pages.Ingredients.Update
 @{
 }
 
@@ -12,10 +12,10 @@
             <a class="btn btn-danger" asp-area="" asp-page="/Ingredients/GetAll"> Return <i class="fa-solid fa-arrow-up-from-bracket"></i></a>
         </div>
         <div class="form-group">
-            <input type="text" id="id" name="id" class="form-control mx-2" value="@Model.ingredient.Id" readonly>
+            <input type="text" id="id" name="id" class="form-control mx-2" value="@Model.Ingredient.Id" readonly>
         </div>
         <div class="form-group">
-            <input type="text" id="name" name="name" class="form-control mx-3" value="@Model.ingredient.Name">
+            <input type="text" id="name" name="name" class="form-control mx-3" value="@Model.Ingredient.Name">
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary mx-4"> Edit <i class="fa-solid fa-arrow-right"></i></button>

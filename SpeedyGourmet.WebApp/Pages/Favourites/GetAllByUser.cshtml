@@ -1,5 +1,5 @@
 ﻿@page
-@model SpeedyGourmet.WebApp.Pages.Favourites.GetAllByUserModel
+@model SpeedyGourmet.WebApp.Pages.Favourites.GetAllByUser
 @{
 }
 
@@ -15,7 +15,7 @@
         <div class="form-group mx-2">
             <select name="id_user" class="form-control">
                 <label selected>Select User</label>
-                @foreach (Model.User user in Model.users)
+                @foreach (Model.User user in Model.Users)
                 {
                     <option value="@user.Id">@user.UserName</option>
                 }
@@ -37,7 +37,7 @@
     </thead>
 
     <tbody>
-        @foreach (Model.Favourite favourite in Model.favourites)
+        @foreach (Model.Favourite favourite in Model.Favourites)
         {
             <tr>
                 <td><a><i class="fa-solid fa-user"></i> @favourite.User.UserName <i class="fa-solid fa-heart"></i> @favourite.Recipe.Title</a></td>

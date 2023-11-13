@@ -5,12 +5,12 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Difficulties
 {
-    public class UpdateModel : PageModel
+    public class Update : PageModel
     {
 
         private readonly IService<Difficulty, int> _difficultyService;
 
-        public UpdateModel(IService<Difficulty, int> difficultyService)
+        public Update (IService<Difficulty, int> difficultyService)
         {
             _difficultyService = difficultyService;
         }

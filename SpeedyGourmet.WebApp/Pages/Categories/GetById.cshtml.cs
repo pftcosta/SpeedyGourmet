@@ -1,15 +1,14 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SpeedyGourmet.Model;
 using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Categories
 {
-    public class GetByIdModel : PageModel
+    public class GetById : PageModel
     {
         private readonly IService<Category, int> _serviceCategory;
 
-        public GetByIdModel(IService<Category, int> serviceCategory)
+        public GetById (IService<Category, int> serviceCategory)
         {
             _serviceCategory = serviceCategory;
         }

@@ -5,11 +5,11 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Ingredients
 {
-    public class DeleteModel : PageModel
+    public class Delete : PageModel
     {
         private readonly IService<Ingredient, int> _ingredientService;
 
-        public DeleteModel(IService<Ingredient, int> ingredientService)
+        public Delete (IService<Ingredient, int> ingredientService)
         {
             _ingredientService = ingredientService;
         }

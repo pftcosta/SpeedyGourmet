@@ -5,27 +5,28 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Measures
 {
-    public class UpdateModel : PageModel
+    public class Update : PageModel
     {
         private readonly IService<Measure, int> _measureService;
 
-        public UpdateModel(IService<Measure, int> measureService)
+        public Update(IService<Measure, int> measureService, Measure measure)
         {
             _measureService = measureService;
+            Measure = measure;
         }
 
-        public Measure measure = new();
+        public Measure Measure { get; set; }
 
         public void OnGet(int id)
         {
-            measure = _measureService.GetById(id);
+            Measure = _measureService.GetById(id);
         }
 
         public IActionResult OnPost()
         {
-            measure.Id = Convert.ToInt32(Request.Form["id"]);
-            measure.Name = Convert.ToString(Request.Form["name"]);
-            _measureService.Update(measure);
+            Measure.Id = Convert.ToInt32(Request.Form["id"]);
+            Measure.Name = Convert.ToString(Request.Form["name"]);
+            _measureService.Update(Measure);
             return Redirect("/Measures/GetAll");
         }
     }

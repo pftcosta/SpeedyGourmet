@@ -5,11 +5,11 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Difficulties
 {
-    public class GetAllModel : PageModel
+    public class GetAll : PageModel
     {
         private readonly IService<Difficulty, int> _difficultyService;
 
-        public GetAllModel(IService<Difficulty, int> difficultyService)
+        public GetAll (IService<Difficulty, int> difficultyService)
         {
             _difficultyService = difficultyService;
         }

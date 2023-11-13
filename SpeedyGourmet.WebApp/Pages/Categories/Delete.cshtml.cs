@@ -5,11 +5,11 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Categories
 {
-    public class DeleteModel : PageModel
+    public class Delete : PageModel
     {
         private readonly IService<Category, int> _serviceCategory;
 
-        public DeleteModel(IService<Category, int> serviceCategory)
+        public Delete (IService<Category, int> serviceCategory)
         {
             _serviceCategory = serviceCategory;
         }

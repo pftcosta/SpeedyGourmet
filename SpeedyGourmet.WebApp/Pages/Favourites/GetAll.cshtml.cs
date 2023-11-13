@@ -5,40 +5,43 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Favourites
 {
-    public class GetAllModel : PageModel
+    public class GetAll : PageModel
     {
-        private readonly IRecipeService<Favourite, int> _favouriteService;
+        private readonly IFavouriteService _favouriteService;
+        private readonly IUserService _userService;
 
-        private readonly IService<User, int> _userService;
+        private readonly IRecipeService _recipeService;
 
-        private readonly IRecipeService<Recipe, int> _recipeService;
-
-        public GetAllModel(IRecipeService<Favourite, int> favouriteService, IService<User, int> userService, IRecipeService<Recipe, int> recipeService)
+        public GetAll(IFavouriteService favouriteService, IUserService userService, IRecipeService recipeService, List<Favourite> favourites, List<User> users, List<Recipe> recipes, User user)
         {
             _favouriteService = favouriteService;
             _userService = userService;
             _recipeService = recipeService;
+            Favourites = favourites;
+            Users = users;
+            Recipes = recipes;
+            User = user;
         }
 
-        public List<Favourite> favourites = new();
-        public List<User> users = new();
-        public List<Recipe> recipes = new();
-        public User user = new();
+        public List<Favourite> Favourites { get; set; }
+        public List<User> Users { get; set; }
+        public List<Recipe> Recipes { get; set; }
+        public User User { get; set; }
 
         public void OnGet()
         {
-            favourites = _favouriteService.GetAll();
-            favourites = favourites.OrderBy(p => p.User.Name).ToList();
+            Favourites = _favouriteService.GetAll();
+            Favourites = Favourites.OrderBy(p => p.User.Name).ToList();
 
-            users = _userService.GetAll();
-            recipes = _recipeService.GetAll();
+            Users = _userService.GetAll();
+            Recipes = _recipeService.GetAll();
         }
 
         public void OnPost()
         {
             Favourite favourite = new();
 
-            favourite.User = user;
+            favourite.User = User;
             favourite.User.Id = Convert.ToInt32(Request.Form["id_user"]);
 
             Recipe recipe = new();

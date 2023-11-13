@@ -5,11 +5,11 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Categories
 {
-    public class UpdateModel : PageModel
+    public class Update : PageModel
     {
         private readonly IService<Category, int> _categoryService;
 
-        public UpdateModel(IService<Category, int> categoryService)
+        public Update (IService<Category, int> categoryService)
         {
             _categoryService = categoryService;
         }

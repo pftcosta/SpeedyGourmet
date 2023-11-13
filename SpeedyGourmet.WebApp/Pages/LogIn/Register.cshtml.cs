@@ -6,13 +6,14 @@ using System.Text.Json;
 
 namespace SpeedyGourmet.WebApp.Pages.LogIn
 {
-    public class RegisterModel : PageModel
+    public class Register : PageModel
     {
-        private readonly IService<User, int> _userService;
+        private readonly IUserService _userService;
 
-        public RegisterModel(IService<User, int> userService)
+        public Register(IUserService userService, User user)
         {
             _userService = userService;
+            User = user;
         }
 
         public User User { get; set; }
@@ -24,15 +25,14 @@ namespace SpeedyGourmet.WebApp.Pages.LogIn
 
         public IActionResult OnPost()
         {
-            User user = new User();
-            user.Name = Convert.ToString(Request.Form["name"]);
-            user.UserName = Convert.ToString(Request.Form["username"]);
-            user.Email = Convert.ToString(Request.Form["email"]);
-            user.Password = Convert.ToString(Request.Form["password"]);
-            user.IsAdmin = false;
-            user.IsBlocked = false;
+            User.Name = Convert.ToString(Request.Form["name"]);
+            User.UserName = Convert.ToString(Request.Form["username"]);
+            User.Email = Convert.ToString(Request.Form["email"]);
+            User.Password = Convert.ToString(Request.Form["password"]);
+            User.IsAdmin = false;
+            User.IsBlocked = false;
 
-            _userService.Create(user);
+            _userService.Create(User);
             return RedirectToPage("/LogIn/LogIn");
         }
 

@@ -6,36 +6,36 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Posts
 {
-    public class GetAllByRecipeModel : PageModel
+    public class GetAllByRecipe : PageModel
     {
-        private readonly IIIngredientLineService<Post, int> _iLPostService;
-        private readonly IService<User, int> _userService;
-        private readonly IRecipeService<Recipe, int> _recipeService;
+        private readonly IPostService _postService;
+        private readonly IRecipeService _recipeService;
 
-        public GetAllByRecipeModel(IIIngredientLineService<Post, int> iLPostService, IService<User, int> userService, IRecipeService<Recipe, int> recipeService)
+        public GetAllByRecipe(IPostService postService, IRecipeService recipeService, List<Post> posts, List<Recipe> recipes, Recipe recipe, User user)
         {
-            _iLPostService = iLPostService;
-            _userService = userService;
+            _postService = postService;
             _recipeService = recipeService;
+            Posts = posts;
+            Recipes = recipes;
+            Recipe = recipe;
+            User = user;
         }
 
-        public List<Post> posts = new();
-        public List<Recipe> recipes = new();
-        public List<User> users = new();
-        public Recipe recipe = new();
-        public User user = new();
-        public Post post = new();
+        public List<Post> Posts { get; set; }
+        public List<Recipe> Recipes { get; set; }
+        public Recipe Recipe { get; set; }
+        public User User { get; set; }
 
         public void OnGet(int id)
         {
-            posts = _iLPostService.GetAllByRecipeId(id);
-            recipes = _recipeService.GetAll();
-            users = _userService.GetAll();
+            Posts = _postService.GetAllByRecipeId(id);
+            Recipes = _recipeService.GetAll();
         }
 
         public void OnPost()
         {
-            post.Recipe = recipe;
+            Post post = new Post();
+            post.Recipe = Recipe;
             post.Recipe.Id = Convert.ToInt32(Request.Form["id_recipe"]);
 
             OnGet(post.Recipe.Id);

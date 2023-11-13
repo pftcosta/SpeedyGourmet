@@ -5,18 +5,18 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Posts
 {
-    public class DeleteAllByUserModel : PageModel
+    public class DeleteAllByUser : PageModel
     {
-        private readonly IIIngredientLineService<Post, int> _iLPostService;
+        private readonly IPostService _postService;
 
-        public DeleteAllByUserModel(IIIngredientLineService<Post, int> iLPostService)
+        public DeleteAllByUser(IPostService postService)
         {
-            _iLPostService = iLPostService;
+            _postService = postService;
         }
 
         public IActionResult OnGet(int id)
         {
-            _iLPostService.DeleteAllByUserId(id);
+            _postService.DeleteAllByUserId(id);
             return Redirect("/Posts/GetAllByUser");
         }
     }

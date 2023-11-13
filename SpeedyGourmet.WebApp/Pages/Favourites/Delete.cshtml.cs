@@ -5,11 +5,11 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Favourites
 {
-    public class DeleteModel : PageModel
+    public class Delete : PageModel
     {
-        private readonly IRecipeService<Favourite, int> _favouriteService;
+        private readonly IRecipeService _favouriteService;
 
-        public DeleteModel(IRecipeService<Favourite, int> favouriteService)
+        public Delete (IRecipeService favouriteService)
         {
             _favouriteService = favouriteService;
         }

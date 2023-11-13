@@ -5,20 +5,21 @@ using SpeedyGourmet.Service;
 
 namespace SpeedyGourmet.WebApp.Pages.Favourites
 {
-    public class GetByIdForUsersListModel : PageModel
+    public class GetByIdForUsersList : PageModel
     {
-        private readonly IRecipeService<Favourite, int> _favouriteService;
+        private readonly IFavouriteService _favouriteService;
 
-        public GetByIdForUsersListModel(IRecipeService<Favourite, int> favouriteService)
+        public GetByIdForUsersList(IFavouriteService favouriteService, Favourite favourite)
         {
             _favouriteService = favouriteService;
+            Favourite = favourite;
         }
 
-        public Favourite favourite = new();
+        public Favourite Favourite { get; set; }
 
         public void OnGet(int id)
         {
-            favourite = _favouriteService.GetById(id);
+            Favourite = _favouriteService.GetById(id);
         }
         public IActionResult OnPost(int id)
         {
