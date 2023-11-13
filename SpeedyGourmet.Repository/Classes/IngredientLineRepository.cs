@@ -78,6 +78,10 @@ namespace SpeedyGourmet.Repository
             measure.Id = Convert.ToInt32(reader["id_measure"]);
             ingredientLine.Measure = measure;
 
+            Recipe recipe = new Recipe();
+            recipe.Id = Convert.ToInt32(reader["id_recipe"]);
+            ingredientLine.Recipe = recipe;
+
             return ingredientLine;
         }
 

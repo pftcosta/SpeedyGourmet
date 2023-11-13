@@ -21,7 +21,8 @@
             <tr>
                 <td>@ingredient.Quantity @ingredient.Measure.Name de @ingredient.Ingredient.Name</td>
                 <td>
-                    <a asp-page="/Recipee/DeleteILine" asp-route-id="@ingredient.Id"><i class="fa-regular fa-trash-can"></i></a>
+                   @*  <a asp-page="/Recipee/DeleteILine" asp-route-id="@ingredient.Id"><i class="fa-regular fa-trash-can"></i></a> *@
+                    <a asp-page="/Recipee/DeleteILine" asp-route-id="@ingredient.Id" asp-route-id_recipe="@Model.recipe.Id"><i class="fa-solid fa-trash-can"></i></a>
                 </td>
             </tr>
         }
