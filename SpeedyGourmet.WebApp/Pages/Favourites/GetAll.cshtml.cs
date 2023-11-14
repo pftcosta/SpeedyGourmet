@@ -9,44 +9,35 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
     {
         private readonly IFavouriteService _favouriteService;
         private readonly IUserService _userService;
-
         private readonly IRecipeService _recipeService;
 
-        public GetAll(IFavouriteService favouriteService, IUserService userService, IRecipeService recipeService, List<Favourite> favourites, List<User> users, List<Recipe> recipes, User user)
+        public GetAll(IFavouriteService favouriteService, IUserService userService, IRecipeService recipeService)
         {
             _favouriteService = favouriteService;
             _userService = userService;
             _recipeService = recipeService;
-            Favourites = favourites;
-            Users = users;
-            Recipes = recipes;
-            User = user;
         }
 
-        public List<Favourite> Favourites { get; set; }
-        public List<User> Users { get; set; }
-        public List<Recipe> Recipes { get; set; }
-        public User User { get; set; }
+        public List<Favourite> Favourites { get; private set; }
+        public List<User> Users { get; private set; }
+        public List<Recipe> Recipes { get; private set; }
+        public User User { get; private set; }
 
         public void OnGet()
         {
-            Favourites = _favouriteService.GetAll();
-            Favourites = Favourites.OrderBy(p => p.User.Name).ToList();
-
+            User = new User();
+            Favourites = _favouriteService.GetAll().OrderBy(p => p.User.Id).ToList(); ;
             Users = _userService.GetAll();
             Recipes = _recipeService.GetAll();
         }
 
         public void OnPost()
         {
-            Favourite favourite = new();
-
-            favourite.User = User;
-            favourite.User.Id = Convert.ToInt32(Request.Form["id_user"]);
-
-            Recipe recipe = new();
-            favourite.Recipe = recipe;
-            favourite.Recipe.Id = Convert.ToInt32(Request.Form["id_recipe"]);
+            Favourite favourite = new Favourite
+            {
+                User = new User { Id = Convert.ToInt32(Request.Form["id_user"]) },
+                Recipe = new Recipe { Id = Convert.ToInt32(Request.Form["id_recipe"]) }
+            };
 
             _favouriteService.Create(favourite);
             OnGet();

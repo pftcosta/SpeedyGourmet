@@ -9,17 +9,14 @@ namespace SpeedyGourmet.WebApp.Pages.IngredientLines
     {
         private readonly IIngredientLineService _ingredientLineService;
 
-        public DeleteAllByRecipe(IIngredientLineService ingredientLineService, IngredientLine ingredientLine)
+        public DeleteAllByRecipe(IIngredientLineService ingredientLineService)
         {
             _ingredientLineService = ingredientLineService;
-            this.ingredientLine = ingredientLine;
         }
 
-        public IngredientLine ingredientLine { get; set; }
-
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int recipeId)
         {
-            _ingredientLineService.DeleteAllByRecipeId(id);
+            _ingredientLineService.DeleteAllByRecipeId(recipeId);
             return Redirect("/IngredientLines/GetAllByRecipe");
         }
     }

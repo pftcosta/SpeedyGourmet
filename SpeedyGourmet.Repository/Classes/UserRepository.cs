@@ -24,15 +24,16 @@ namespace SpeedyGourmet.Repository
             return GetById(maxId);
         }
 
-        public User GetById(int id)
+        public User GetById(int userId)
         {
-            string sql = $"SELECT * FROM {_tableName} WHERE id = {id};";
+            string sql = $"SELECT * FROM {_tableName} WHERE id = {userId};";
             SqlDataReader reader = SQL.Execute(sql);
+
             if (reader.Read())
             {
                 return Parse(reader);
             }
-            throw new Exception($"{_tableName} Id: {id} not found.");
+            throw new Exception($"{_tableName} Id: {userId} not found.");
         }
 
         public List<User> GetAll()
@@ -40,6 +41,7 @@ namespace SpeedyGourmet.Repository
             string sql = $"SELECT * FROM {_tableName} ORDER BY id ASC;";
             SqlDataReader reader = SQL.Execute(sql);
             List<User> users = new List<User>();
+
             while (reader.Read())
             {
                 users.Add(Parse(reader));
@@ -64,9 +66,9 @@ namespace SpeedyGourmet.Repository
             return GetById(user.Id);
         }
 
-        public void Delete(int id)
+        public void Delete(int userId)
         {
-            string sql = $"DELETE FROM {_tableName} WHERE id = {id};";
+            string sql = $"DELETE FROM {_tableName} WHERE id = {userId};";
             SQL.ExecuteNonQuery(sql);
 
         }
@@ -76,6 +78,7 @@ namespace SpeedyGourmet.Repository
             string sql = $"SELECT * FROM {_tableName} WHERE username = '{username}'" +
                 $" AND password = CONVERT(VARCHAR(32), HashBytes('MD5', '{password}'), 2);";
             SqlDataReader reader = SQL.Execute(sql);
+
             if (reader.Read())
             {
                 return Parse(reader);

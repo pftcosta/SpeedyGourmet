@@ -19,15 +19,16 @@ namespace SpeedyGourmet.Repository
             return GetById(maxId);
         }
 
-        public IngredientLine GetById(int id)
+        public IngredientLine GetById(int ingredientId)
         {
-            string sql = $"SELECT * FROM {_tableName} WHERE id = {id};";
+            string sql = $"SELECT * FROM {_tableName} WHERE id = {ingredientId};";
             SqlDataReader reader = SQL.Execute(sql);
+
             if (reader.Read())
             {
                 return Parse(reader);
             }
-            throw new Exception($"{_tableName} Id: {id} not found.");
+            throw new Exception($"{_tableName} Id: {ingredientId} not found.");
         }
 
         public List<IngredientLine> GetAll()
@@ -35,6 +36,7 @@ namespace SpeedyGourmet.Repository
             string sql = $"SELECT * FROM {_tableName};";
             SqlDataReader reader = SQL.Execute(sql);
             List<IngredientLine> ingredientLines = new List<IngredientLine>();
+
             while (reader.Read())
             {
                 ingredientLines.Add(Parse(reader));
@@ -54,9 +56,9 @@ namespace SpeedyGourmet.Repository
             return ingredientLines;
         }
         
-        public void Delete(int id)
+        public void Delete(int ingredientId)
         {
-            string sql = $"DELETE FROM {_tableName} WHERE id = {id};";
+            string sql = $"DELETE FROM {_tableName} WHERE id = {ingredientId};";
             SQL.ExecuteNonQuery(sql);
         }
 

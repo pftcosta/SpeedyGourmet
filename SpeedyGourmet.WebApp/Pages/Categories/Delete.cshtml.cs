@@ -14,9 +14,9 @@ namespace SpeedyGourmet.WebApp.Pages.Categories
             _serviceCategory = serviceCategory;
         }
 
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int categoryId)
         {
-            _serviceCategory.Delete(id);
+            _serviceCategory.Delete(categoryId);
             return Redirect("/Categories/GetAll");
         }
     }

@@ -16,9 +16,9 @@ namespace SpeedyGourmet.Service
             return _userRepository.Create(user);
         }
 
-        public User GetById(int id)
+        public User GetById(int userId)
         {
-            return _userRepository.GetById(id);
+            return _userRepository.GetById(userId);
         }
 
         public List<User> GetAll()
@@ -31,9 +31,9 @@ namespace SpeedyGourmet.Service
             return _userRepository.Update(user);
         }
 
-        public void Delete(int id)
+        public void Delete(int userId)
         {
-            _userRepository.Delete(id);
+            _userRepository.Delete(userId);
         }
 
         public User LogIn(string username, string password)

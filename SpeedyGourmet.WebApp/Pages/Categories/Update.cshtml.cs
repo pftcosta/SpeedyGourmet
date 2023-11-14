@@ -14,19 +14,21 @@ namespace SpeedyGourmet.WebApp.Pages.Categories
             _categoryService = categoryService;
         }
 
-        public Category category = new Category();
+        public Category Category { get; private set; }
 
-        public void OnGet(int id)
+        public void OnGet(int categoryId)
         {
-            category = _categoryService.GetById(id);
+            Category = _categoryService.GetById(categoryId);
         }
 
         public IActionResult OnPost()
         {
-            Category category = new Category();
-            category.Id = Convert.ToInt32(Request.Form["id"]);
-            category.Name = Convert.ToString(Request.Form["name"]);
-            _categoryService.Update(category);
+            Category = new Category()
+            {
+                Id = Convert.ToInt32(Request.Form["id"]),
+                Name = Convert.ToString(Request.Form["name"])
+            };
+            _categoryService.Update(Category);
             return Redirect("/Categories/GetAll");
         }
     }

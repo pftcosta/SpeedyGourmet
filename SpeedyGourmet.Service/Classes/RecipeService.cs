@@ -25,9 +25,9 @@ namespace SpeedyGourmet.Service
             return _recipeRepository.Create(recipe);
         }
 
-        public Recipe GetById(int id)
+        public Recipe GetById(int recipeId)
         {
-            Recipe recipe = _recipeRepository.GetById(id);
+            Recipe recipe = _recipeRepository.GetById(recipeId);
             recipe.Author = _userService.GetById(recipe.Author.Id);
             recipe.Ingredients = _ingredientLineService.GetAllByRecipeId(recipe.Id);
             recipe.Category = _categoryService.GetById(recipe.Category.Id);
@@ -66,9 +66,9 @@ namespace SpeedyGourmet.Service
             return _recipeRepository.Update(recipe);
         }
 
-        public void Delete(int id)
+        public void Delete(int recipeId)
         {
-            _recipeRepository.Delete(id);
+            _recipeRepository.Delete(recipeId);
         }
 
         public void DeleteAllByUserId(int userId)

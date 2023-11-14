@@ -17,15 +17,16 @@ namespace SpeedyGourmet.Repository
             return GetById(id);
         }
 
-        public Favourite GetById(int id)
+        public Favourite GetById(int favouriteId)
         {
-            string sql = $"SELECT * FROM {_tableName} WHERE id = {id};";
+            string sql = $"SELECT * FROM {_tableName} WHERE id = {favouriteId};";
             SqlDataReader reader = SQL.Execute(sql);
+
             if (reader.Read())
             {
                 return Parse(reader);
             }
-            throw new Exception($"{_tableName} Id: {id} not found.");
+            throw new Exception($"{_tableName} Id: {favouriteId} not found.");
         }
 
         public List<Favourite> GetAll()
@@ -33,6 +34,7 @@ namespace SpeedyGourmet.Repository
             string sql = $"SELECT * FROM {_tableName};";
             SqlDataReader reader = SQL.Execute(sql);
             List<Favourite> favourites = new List<Favourite>();
+
             while (reader.Read())
             {
                 favourites.Add(Parse(reader));
@@ -52,9 +54,9 @@ namespace SpeedyGourmet.Repository
             return favourites;
         }
 
-        public void Delete(int id)
+        public void Delete(int favouriteId)
         {
-            string sql = $"DELETE FROM {_tableName} WHERE id = {id};";
+            string sql = $"DELETE FROM {_tableName} WHERE id = {favouriteId};";
             SQL.ExecuteNonQuery(sql);
         }
 
@@ -69,13 +71,11 @@ namespace SpeedyGourmet.Repository
             Favourite favourite = new Favourite();
             favourite.Id = Convert.ToInt32(reader["id"]);
 
-            User user = new User();
-            user.Id = Convert.ToInt32(reader["id_user"]);
-            favourite.User = user;
+            favourite.User = new User();
+            favourite.User.Id = Convert.ToInt32(reader["id_user"]);
 
-            Recipe recipe = new Recipe();
-            recipe.Id = Convert.ToInt32(reader["id_recipe"]);
-            favourite.Recipe = recipe;
+            favourite.Recipe = new Recipe();
+            favourite.Recipe.Id = Convert.ToInt32(reader["id_recipe"]);
 
             return favourite;
         }

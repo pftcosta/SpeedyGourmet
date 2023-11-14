@@ -9,15 +9,12 @@ namespace SpeedyGourmet.WebApp.Pages.IngredientLines
     {
         private readonly IIngredientLineService _ingredientLineService;
 
-        public GetAll(IIngredientLineService ingredientLineService, List<IngredientLine> ingredientLines, IngredientLine ingredientLine)
+        public GetAll(IIngredientLineService ingredientLineService)
         {
             _ingredientLineService = ingredientLineService;
-            IngredientLines = ingredientLines;
-            IngredientLine = ingredientLine;
         }
 
-        public List<IngredientLine> IngredientLines { get; set; }
-        public IngredientLine IngredientLine { get; set; }
+        public List<IngredientLine> IngredientLines { get; private set; }
 
         public void OnGet()
         {
@@ -26,23 +23,16 @@ namespace SpeedyGourmet.WebApp.Pages.IngredientLines
 
         public IActionResult OnPost()
         {
-            IngredientLine.Quantity = Convert.ToInt32(Request.Form["quantity"]);
+            IngredientLine ingredientLine = new IngredientLine
+            {
+                Quantity = Convert.ToInt32(Request.Form["quantity"]),
+                Ingredient = new Ingredient { Id = Convert.ToInt32(Request.Form["id_ingredient"]) },
+                Measure = new Measure { Id = Convert.ToInt32(Request.Form["id_measure"]) },
+                Recipe = new Recipe { Id = Convert.ToInt32(Request.Form["id_recipe"]) }
+            };
 
-            Ingredient ingredient = new();
-            IngredientLine.Ingredient = ingredient;
-            IngredientLine.Ingredient.Id = Convert.ToInt32(Request.Form["id_ingredient"]);
-
-            Measure measure = new();
-            IngredientLine.Measure = measure;
-            IngredientLine.Measure.Id = Convert.ToInt32(Request.Form["id_measure"]);
-
-            Recipe recipe = new();
-            IngredientLine.Recipe = recipe;
-            IngredientLine.Recipe.Id = Convert.ToInt32(Request.Form["id_recipe"]);
-
-            _ingredientLineService.Create(IngredientLine);
-
-            return RedirectToPage("/IngredientLines/CreateRecipe", new { id = recipe.Id });
+            _ingredientLineService.Create(ingredientLine);
+            return RedirectToPage("/IngredientLines/CreateRecipe", new { id = ingredientLine.Recipe.Id });
         }
     }
 }

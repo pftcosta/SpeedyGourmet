@@ -15,12 +15,13 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
             Favourite = favourite;
         }
 
-        public Favourite Favourite { get; set; }
+        public Favourite Favourite { get; private set; }
 
-        public void OnGet(int id)
+        public void OnGet(int favouriteId)
         {
-            Favourite = _favouriteService.GetById(id);
+            Favourite = _favouriteService.GetById(favouriteId);
         }
+
         public IActionResult OnPost(int id)
         {
             return RedirectToPage("/Favourites/GetAllByUser", new { id = id });

@@ -14,18 +14,17 @@ namespace SpeedyGourmet.WebApp.Pages.Categories
             _categoryService = categoryService;
         }
 
-        public List<Category> categories { get; set; }
+        public List<Category> Categories { get; private set; }
 
         public void OnGet()
         {
-            categories = _categoryService.GetAll();
+            Categories = _categoryService.GetAll();
         }
 
         public void OnPost()
         {
-            Category category = new Category();
-            category.Name = Convert.ToString(Request.Form["name"]);
-            _categoryService.Create(category);
+            string categoryName = Convert.ToString(Request.Form["name"]);
+            _categoryService.Create(new Category { Name = categoryName });
             OnGet();
         }
     }

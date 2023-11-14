@@ -12,55 +12,42 @@ namespace SpeedyGourmet.WebApp.Pages.IngredientLines
         private readonly IService<Measure, int> _measureService;
         private readonly IRecipeService _recipeService;
 
-        public CreateByRecipe(IIngredientLineService ingredientLineService, IService<Ingredient, int> ingredientService, IService<Measure, int> measureService, IRecipeService recipeService, List<IngredientLine> ingredientLines, List<Ingredient> ingredients, List<Measure> measures, List<Recipe> recipes, IngredientLine ingredientLine, Recipe recipe)
+        public CreateByRecipe(IIngredientLineService ingredientLineService, IService<Ingredient, int> ingredientService, IService<Measure, int> measureService, IRecipeService recipeService)
         {
             _ingredientLineService = ingredientLineService;
             _ingredientService = ingredientService;
             _measureService = measureService;
             _recipeService = recipeService;
-            IngredientLines = ingredientLines;
-            Ingredients = ingredients;
-            Measures = measures;
-            Recipes = recipes;
-            IngredientLine = ingredientLine;
-            Recipe = recipe;
         }
 
-        public List<IngredientLine> IngredientLines { get; set; }
-        public List<Ingredient> Ingredients { get; set; }
-        public List<Measure> Measures { get; set; }
-        public List<Recipe> Recipes { get; set; }
-        public IngredientLine IngredientLine { get; set; }
-        public Recipe Recipe { get; set; }
+        public List<IngredientLine> IngredientLines { get; private set; }
+        public List<Ingredient> Ingredients { get; private set; }
+        public List<Measure> Measures { get; private set; }
+        public List<Recipe> Recipes { get; private set; }
+        public IngredientLine IngredientLine { get; private set; }
+        public Recipe Recipe { get; private set; }
 
-        public void OnGet(int id)
+        public void OnGet(int recipeId)
         {
-            IngredientLine.Recipe = _recipeService.GetById(id);
-            IngredientLines = _ingredientLineService.GetAllByRecipeId(id);
+            IngredientLine.Recipe = _recipeService.GetById(recipeId);
+            IngredientLines = _ingredientLineService.GetAllByRecipeId(recipeId);
             Recipes = _recipeService.GetAll();
             Ingredients = _ingredientService.GetAll();
             Measures = _measureService.GetAll();
         }
 
-        public void OnPost(int id)
+        public void OnPost(int recipeId)
         {
-            IngredientLine.Quantity = Convert.ToInt32(Request.Form["quantity"]);
-
-            Ingredient ingredient = new();
-            IngredientLine.Ingredient = ingredient;
-            IngredientLine.Ingredient.Id = Convert.ToInt32(Request.Form["id_ingredient"]);
-
-            Measure measure = new();
-            IngredientLine.Measure = measure;
-            IngredientLine.Measure.Id = Convert.ToInt32(Request.Form["id_measure"]);
-
-            Recipe recipe = new();
-            IngredientLine.Recipe = recipe;
-            IngredientLine.Recipe.Id = Convert.ToInt32(Request.Form["id_recipe"]);
+            IngredientLine = new IngredientLine
+            {
+                Quantity = Convert.ToInt32(Request.Form["quantity"]),
+                Ingredient = new Ingredient { Id = Convert.ToInt32(Request.Form["id_ingredient"]) },
+                Measure = new Measure { Id = Convert.ToInt32(Request.Form["id_measure"]) },
+                Recipe = new Recipe { Id = Convert.ToInt32(Request.Form["id_recipe"]) }
+            };
 
             _ingredientLineService.Create(IngredientLine);
-
-            OnGet(id);
+            OnGet(recipeId);
         }
     }
 }

@@ -14,9 +14,9 @@ namespace SpeedyGourmet.WebApp.Pages.Difficulties
             _difficultyService = difficultyService;
         }
 
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int difficultyId)
         {
-            _difficultyService.Delete(id);
+            _difficultyService.Delete(difficultyId);
             return Redirect("/Difficulties/GetAll");
         }
     }

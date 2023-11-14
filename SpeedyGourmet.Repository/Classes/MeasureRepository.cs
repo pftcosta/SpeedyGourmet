@@ -19,6 +19,7 @@ namespace SpeedyGourmet.Repository
         {
             string sql = $"SELECT * FROM {_tableName} WHERE id = {id};";
             SqlDataReader reader = SQL.Execute(sql);
+
             if (reader.Read())
             {
                 return Parse(reader);
@@ -28,9 +29,10 @@ namespace SpeedyGourmet.Repository
 
         public List<Measure> GetAll()
         {
-            string sql = $"SELECT * FROM {_tableName} ORDER BY id ASC;";
+            string sql = $"SELECT * FROM {_tableName};";
             SqlDataReader reader = SQL.Execute(sql);
             List<Measure> measures = new List<Measure>();
+
             while (reader.Read())
             {
                 measures.Add(Parse(reader));

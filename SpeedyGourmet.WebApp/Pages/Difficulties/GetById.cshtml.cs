@@ -14,11 +14,11 @@ namespace SpeedyGourmet.WebApp.Pages.Difficulties
             _difficultyService = difficultyService;
         }
 
-        public Difficulty Difficulty { get; set; }
+        public Difficulty Difficulty { get; private set; }
 
-        public void OnGet(int id)
+        public void OnGet(int difficultyId)
         {
-            Difficulty = _difficultyService.GetById(id);
+            Difficulty = _difficultyService.GetById(difficultyId);
         }
     }
 }

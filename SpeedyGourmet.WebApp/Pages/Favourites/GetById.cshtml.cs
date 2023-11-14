@@ -9,17 +9,16 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
     {
         private readonly IFavouriteService _favouriteService;
 
-        public GetById(IFavouriteService favouriteService, Favourite favourite)
+        public GetById(IFavouriteService favouriteService)
         {
             _favouriteService = favouriteService;
-            Favourite = favourite;
         }
 
-        public Favourite Favourite { get; set; }
+        public Favourite Favourite { get; private set; }
 
-        public void OnGet(int id)
+        public void OnGet(int favouriteId)
         {
-            Favourite = _favouriteService.GetById(id);
+            Favourite = _favouriteService.GetById(favouriteId);
         }
 
         public void OnPost(int id)

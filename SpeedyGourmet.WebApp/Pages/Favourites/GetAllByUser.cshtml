@@ -14,7 +14,7 @@
         <form method="post" class="d-flex">
         <div class="form-group mx-2">
             <select name="id_user" class="form-control">
-                <label selected>Select User</label>
+                <option selected>Select User</option>
                 @foreach (Model.User user in Model.Users)
                 {
                     <option value="@user.Id">@user.UserName</option>

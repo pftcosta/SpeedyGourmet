@@ -15,18 +15,21 @@ namespace SpeedyGourmet.WebApp.Pages.Difficulties
             _difficultyService = difficultyService;
         }
 
-        public Difficulty difficulty = new();
+        public Difficulty Difficulty { get; private set; }
 
         public void OnGet(int id)
         {
-            difficulty = _difficultyService.GetById(id);
+            Difficulty = _difficultyService.GetById(id);
         }
 
         public IActionResult OnPost()
         {
-            difficulty.Id = Convert.ToInt32(Request.Form["id"]);
-            difficulty.Name = Request.Form["name"];
-            _difficultyService.Update(difficulty);
+            Difficulty = new Difficulty()
+            {
+                Id = Convert.ToInt32(Request.Form["id"]),
+                Name = Request.Form["name"]
+            };
+            _difficultyService.Update(Difficulty);
             return Redirect("/Difficulties/GetAll");
         }
     }

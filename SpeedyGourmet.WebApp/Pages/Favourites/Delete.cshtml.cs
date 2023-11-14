@@ -14,9 +14,9 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
             _favouriteService = favouriteService;
         }
 
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int favouriteId)
         {
-            _favouriteService.Delete(id);
+            _favouriteService.Delete(favouriteId);
             return Redirect("/Favourites/GetAll");
         }
     }

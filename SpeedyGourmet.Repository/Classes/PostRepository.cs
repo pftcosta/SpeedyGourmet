@@ -9,22 +9,26 @@ namespace SpeedyGourmet.Repository
 
         public Post Create(Post post)
         {
-            string sql = $"INSERT INTO {_tableName} (id_user, id_recipe, comment, rating) VALUES ({post.User.Id}, {post.Recipe.Id}, '{post.Comment}', {post.Rating});";
+            string sql = $"INSERT INTO {_tableName} (id_user, id_recipe, comment, rating) VALUES" +
+                $" ({post.User.Id}, " +
+                $"{post.Recipe.Id}, " +
+                $"'{post.Comment}', " +
+                $"{post.Rating});";
             SQL.ExecuteNonQuery(sql);
             int id = SQL.GetMax("id", _tableName);
             return GetById(id);
         }
 
-        public Post GetById(int id)
+        public Post GetById(int postId)
         {
-            string sql = $"SELECT * FROM {_tableName} WHERE id = {id};";
+            string sql = $"SELECT * FROM {_tableName} WHERE id = {postId};";
             SqlDataReader reader = SQL.Execute(sql);
 
             if (reader.Read())
             {
                 return Parse(reader);
             }
-            throw new Exception($"{_tableName} Id: {id} not found.");
+            throw new Exception($"{_tableName} Id: {postId} not found.");
         }
 
         public List<Post> GetAll()
@@ -77,9 +81,9 @@ namespace SpeedyGourmet.Repository
             return GetById(post.Id);
         }
 
-        public void Delete(int id)
+        public void Delete(int postId)
         {
-            string sql = $"DELETE FROM {_tableName} WHERE id = {id};";
+            string sql = $"DELETE FROM {_tableName} WHERE id = {postId};";
             SQL.ExecuteNonQuery(sql);
         }
 

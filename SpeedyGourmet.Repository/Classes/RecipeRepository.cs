@@ -11,8 +11,8 @@ namespace SpeedyGourmet.Repository
         {
             int isApproved = recipe.IsApproved ? 1 : 0;
 
-            string sql = $"INSERT INTO {_tableName} (title, id_user, id_category, prep_time, prep_method, id_difficulty, is_approved) " +
-                $"VALUES ('{recipe.Title}', " +
+            string sql = $"INSERT INTO {_tableName} (title, id_user, id_category, prep_time, prep_method, id_difficulty, is_approved) VALUES " +
+                $"('{recipe.Title}', " +
                 $"{recipe.Author.Id}, " +
                 $"{recipe.Category.Id}, " +
                 $"{recipe.PrepTime}, " +
@@ -24,21 +24,21 @@ namespace SpeedyGourmet.Repository
             return GetById(id);
         }
 
-        public Recipe GetById(int id)
+        public Recipe GetById(int recipeId)
         {
-            if (id == 0)
+            if (recipeId == 0)
             {
-                id = 1;
+                recipeId = 1;
             }
 
-            string sql = $"SELECT * FROM {_tableName} WHERE id = {id};";
+            string sql = $"SELECT * FROM {_tableName} WHERE id = {recipeId};";
             SqlDataReader reader = SQL.Execute(sql);
 
             if (reader.Read())
             {
                 return Parse(reader);
             }
-            throw new Exception($"{_tableName} Id: {id} not found.");
+            throw new Exception($"{_tableName} Id: {recipeId} not found.");
         }
 
         public List<Recipe> GetAll()
@@ -85,9 +85,9 @@ namespace SpeedyGourmet.Repository
             return GetById(recipe.Id);
         }
 
-        public void Delete(int id)
+        public void Delete(int recipeId)
         {
-            string sql = $"DELETE FROM {_tableName} WHERE id = {id};";
+            string sql = $"DELETE FROM {_tableName} WHERE id = {recipeId};";
             SQL.ExecuteNonQuery(sql);
         }
 
