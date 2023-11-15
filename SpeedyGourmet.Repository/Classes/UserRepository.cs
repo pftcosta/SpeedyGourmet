@@ -75,8 +75,9 @@ namespace SpeedyGourmet.Repository
 
         public User LogIn(string username, string password)
         {
-            string sql = $"SELECT * FROM {_tableName} WHERE username = '{username}'" +
-                $" AND password = CONVERT(VARCHAR(32), HashBytes('MD5', '{password}'), 2);";
+            //string sql = $"SELECT * FROM {_tableName} WHERE username = '{username}'" +
+            //    $" AND password = CONVERT(VARCHAR(32), HashBytes('MD5', '{password}'), 2);";
+            string sql = $"SELECT * FROM {_tableName} WHERE username = '{username}' AND password = '{password}';";
             SqlDataReader reader = SQL.Execute(sql);
 
             if (reader.Read())
