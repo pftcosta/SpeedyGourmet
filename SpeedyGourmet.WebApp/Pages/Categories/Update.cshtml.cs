@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SpeedyGourmet.Model;
 using SpeedyGourmet.Service;
+using SpeedyGourmet.WebApp.Pages.Favourites;
+using System.Text.Json;
 
 namespace SpeedyGourmet.WebApp.Pages.Categories
 {
@@ -15,9 +17,11 @@ namespace SpeedyGourmet.WebApp.Pages.Categories
         }
 
         public Category Category { get; private set; }
+        public User User { get; set; }
 
         public void OnGet(int categoryId)
         {
+            GetUser();
             Category = _categoryService.GetById(categoryId);
         }
 
@@ -31,6 +35,14 @@ namespace SpeedyGourmet.WebApp.Pages.Categories
 
             _categoryService.Update(Category);
             return Redirect("/Categories/GetAll");
+        }
+        private void GetUser()
+        {
+            string user = HttpContext.Session.GetString("user");
+            if (user != null)
+            {
+                User = JsonSerializer.Deserialize<User>(user);
+            }
         }
     }
 }

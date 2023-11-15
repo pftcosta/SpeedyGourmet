@@ -19,6 +19,7 @@ namespace SpeedyGourmet.WebApp.Pages.Login
 
         public void OnGet()
         {
+            GetUser();
         }
 
         public IActionResult OnPost()

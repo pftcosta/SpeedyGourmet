@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SpeedyGourmet.Model;
 using SpeedyGourmet.Service;
+using System.Text.Json;
 
 namespace SpeedyGourmet.WebApp.Pages.Users
 {
@@ -18,6 +19,7 @@ namespace SpeedyGourmet.WebApp.Pages.Users
 
         public void OnGet(int userId)
         {
+            GetUser();
             User = _userService.GetById(userId);
         }
 
@@ -89,6 +91,14 @@ namespace SpeedyGourmet.WebApp.Pages.Users
 
             _userService.Update(User);
             return Redirect("/Users/GetAll");
+        }
+        private void GetUser()
+        {
+            string user = HttpContext.Session.GetString("user");
+            if (user != null)
+            {
+                User = JsonSerializer.Deserialize<User>(user);
+            }
         }
     }
 }

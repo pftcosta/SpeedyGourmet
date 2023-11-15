@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SpeedyGourmet.Model;
 using SpeedyGourmet.Service;
+using System.Text.Json;
 
 namespace SpeedyGourmet.WebApp.Pages.Posts
 {
@@ -23,6 +24,7 @@ namespace SpeedyGourmet.WebApp.Pages.Posts
 
         public void OnGet(int userId)
         {
+            GetUser();
             Posts = _postService.GetAllByUserId(userId);
             Users = _userService.GetAll();
         }
@@ -31,6 +33,14 @@ namespace SpeedyGourmet.WebApp.Pages.Posts
         {
             int userId = Convert.ToInt32(Request.Form["id_user"]);
             OnGet(userId);
+        }
+        private void GetUser()
+        {
+            string user = HttpContext.Session.GetString("user");
+            if (user != null)
+            {
+                User = JsonSerializer.Deserialize<User>(user);
+            }
         }
     }
 }

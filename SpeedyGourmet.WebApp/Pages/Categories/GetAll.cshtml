@@ -3,41 +3,44 @@
 @{
 }
 
-<h2>Categories <i class="fa-solid fa-burger"></i></h2>
-<br />
+@if (Model.User.IsAdmin == true)
+{
+    <h2>Categories <i class="fa-solid fa-burger"></i></h2>
+    <br />
 
-<div class="d-flex">
-    <form method="post" class="d-flex">
-        <div class="form-group">
-            <input type="text" name="name" class="form-control" placeholder="Insert new Category">
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary mx-2">Create <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-    </form>
-</div>
-<br />
+    <div class="d-flex">
+        <form method="post" class="d-flex">
+            <div class="form-group">
+                <input type="text" name="name" class="form-control" placeholder="Insert new Category">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary mx-2">Create <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </form>
+    </div>
+    <br />
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach (Model.Category category in Model.Categories)
-        {
+    <table class="table">
+        <thead>
             <tr>
-                <td>@category.Name</td>
-                <td>
-                    <a asp-page="/Categories/Delete" asp-route-categoryId="@category.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
-                    <a asp-page="/Categories/GetById" asp-route-categoryId="@category.Id"><i class="fa-regular fa-eye"></i></a> /
-                    <a asp-page="/Categories/Update" asp-route-categoryId="@category.Id"><i class="fa-solid fa-pencil"></i></a>
-                </td>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
-        }
-    </tbody>
-    <script src="~/js/"></script>
-</table>
+        </thead>
+
+        <tbody>
+            @foreach (Model.Category category in Model.Categories)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td>
+                        <a asp-page="/Categories/Delete" asp-route-categoryId="@category.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
+                        <a asp-page="/Categories/GetById" asp-route-categoryId="@category.Id"><i class="fa-regular fa-eye"></i></a> /
+                        <a asp-page="/Categories/Update" asp-route-categoryId="@category.Id"><i class="fa-solid fa-pencil"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <script src="~/js/"></script>
+    </table>
+}

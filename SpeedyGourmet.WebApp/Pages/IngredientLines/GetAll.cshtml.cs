@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SpeedyGourmet.Model;
 using SpeedyGourmet.Service;
+using System.Text.Json;
 
 namespace SpeedyGourmet.WebApp.Pages.IngredientLines
 {
@@ -15,9 +16,11 @@ namespace SpeedyGourmet.WebApp.Pages.IngredientLines
         }
 
         public List<IngredientLine> IngredientLines { get; private set; }
+        public User User { get; set; }
 
         public void OnGet()
         {
+            GetUser();
             IngredientLines = _ingredientLineService.GetAll();
         }
 
@@ -33,6 +36,15 @@ namespace SpeedyGourmet.WebApp.Pages.IngredientLines
 
             _ingredientLineService.Create(ingredientLine);
             return RedirectToPage("/IngredientLines/CreateByRecipe", new { id = ingredientLine.Recipe.Id });
+        }
+
+        private void GetUser()
+        {
+            string user = HttpContext.Session.GetString("user");
+            if (user != null)
+            {
+                User = JsonSerializer.Deserialize<User>(user);
+            }
         }
     }
 }

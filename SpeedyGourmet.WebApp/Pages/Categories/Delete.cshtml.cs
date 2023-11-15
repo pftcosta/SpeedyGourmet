@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SpeedyGourmet.Model;
 using SpeedyGourmet.Service;
+using System.Text.Json;
 
 namespace SpeedyGourmet.WebApp.Pages.Categories
 {
@@ -13,11 +14,22 @@ namespace SpeedyGourmet.WebApp.Pages.Categories
         {
             _serviceCategory = serviceCategory;
         }
+        public User User { get; set; }
 
         public IActionResult OnGet(int categoryId)
         {
+            GetUser();
             _serviceCategory.Delete(categoryId);
             return Redirect("/Categories/GetAll");
+        }
+
+        private void GetUser()
+        {
+            string user = HttpContext.Session.GetString("user");
+            if (user != null)
+            {
+                User = JsonSerializer.Deserialize<User>(user);
+            }
         }
     }
 }

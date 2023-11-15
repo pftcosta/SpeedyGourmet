@@ -4,6 +4,13 @@ using SpeedyGourmet.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = "MahCoookie";
+    options.IdleTimeout = TimeSpan.FromHours(12);
+    options.Cookie.IsEssential = true;
+});
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 
@@ -30,6 +37,8 @@ builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
+
+app.UseSession();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

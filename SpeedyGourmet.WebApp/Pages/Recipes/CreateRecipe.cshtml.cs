@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SpeedyGourmet.Model;
 using SpeedyGourmet.Service;
+using System.Text.Json;
 
 namespace SpeedyGourmet.WebApp.Pages.Recipee
 {
@@ -26,9 +27,11 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
         public List<Difficulty> Difficulties { get; private set; }
         public List<Recipe> Recipes { get; private set; }
         public List<User> Users { get; private set; }
+        public User User { get; set; }
 
         public void OnGet()
         {
+            GetUser();
             Recipes = _recipeService.GetAll();
             Categories = _categoryService.GetAll();
             Difficulties = _difficultyService.GetAll();
@@ -49,6 +52,15 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
 
             recipe = _recipeService.Create(recipe);
             return RedirectToPage("/Recipes/AddIngredients", new { id = recipe.Id });
+        }
+
+        private void GetUser()
+        {
+            string user = HttpContext.Session.GetString("user");
+            if (user != null)
+            {
+                User = JsonSerializer.Deserialize<User>(user);
+            }
         }
     }
 }

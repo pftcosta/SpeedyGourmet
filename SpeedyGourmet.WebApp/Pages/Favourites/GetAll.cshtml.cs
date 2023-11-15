@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SpeedyGourmet.Model;
 using SpeedyGourmet.Service;
+using System.Text.Json;
 
 namespace SpeedyGourmet.WebApp.Pages.Favourites
 {
@@ -25,6 +26,7 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
 
         public void OnGet()
         {
+            GetUser();
             User = new User();
             Favourites = _favouriteService.GetAll().OrderBy(p => p.User.Id).ToList();
             Users = _userService.GetAll();
@@ -41,6 +43,14 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
 
             _favouriteService.Create(favourite);
             OnGet();
+        }
+        private void GetUser()
+        {
+            string user = HttpContext.Session.GetString("user");
+            if (user != null)
+            {
+                User = JsonSerializer.Deserialize<User>(user);
+            }
         }
     }
 }
