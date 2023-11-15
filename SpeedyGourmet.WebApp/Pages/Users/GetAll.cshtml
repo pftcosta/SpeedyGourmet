@@ -47,7 +47,7 @@
     </thead>
 
     <tbody>
-        @foreach (var user in Model.users)
+        @foreach (var user in Model.Users)
         {
             <tr>
                 <td>@user.Name</td>
@@ -73,8 +73,8 @@
                     }
                 </td>
                 <td>
-                    <a asp-page="/users/Delete" asp-route-id="@user.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
-                    <a asp-page="/users/GetById" asp-route-id="@user.Id"><i class="fa-solid fa-user-pen"></i></a>
+                    <a asp-page="/users/Delete" asp-route-userId="@user.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
+                    <a asp-page="/users/GetById" asp-route-userId="@user.Id"><i class="fa-solid fa-user-pen"></i></a>
                 </td>
             </tr>
         }

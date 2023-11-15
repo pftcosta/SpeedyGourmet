@@ -11,41 +11,33 @@ namespace SpeedyGourmet.WebApp.Pages.Posts
         private readonly IUserService _userService;
         private readonly IRecipeService _recipeService;
 
-        public GetAll (IPostService postService, IUserService userService, IRecipeService recipeService, List<Post> posts, List<User> users, List<Recipe> recipes, Recipe recipe)
+        public GetAll(IPostService postService, IUserService userService, IRecipeService recipeService)
         {
             _postService = postService;
             _userService = userService;
             _recipeService = recipeService;
-            Posts = posts;
-            Users = users;
-            Recipes = recipes;
-            Recipe = recipe;
         }
 
-        public List<Post> Posts { get; set; }
-        public List<User> Users { get; set; }
-        public List<Recipe> Recipes { get; set; }
-        public Recipe Recipe { get; set; }
+        public List<Post> Posts { get; private set; }
+        public List<User> Users { get; private set; }
+        public List<Recipe> Recipes { get; private set; }
 
         public void OnGet()
         {
-            Posts = _postService.GetAll();
+            Posts = _postService.GetAll().OrderBy(p => p.User.Id).ToList();
             Users = _userService.GetAll();
             Recipes = _recipeService.GetAll();
         }
 
         public void OnPost()
         {
-            Post post = new();
-            post.Comment = Convert.ToString(Request.Form["comment"]);
-            post.Rating = Convert.ToInt32(Request.Form["rating"]);
-
-            User user = new();
-            post.User = user;
-            post.User.Id = Convert.ToInt32(Request.Form["id_user"]);
-
-            post.Recipe = Recipe;
-            post.Recipe.Id = Convert.ToInt32(Request.Form["id_recipe"]);
+            Post post = new Post()
+            {
+                Comment = Convert.ToString(Request.Form["comment"]),
+                Rating = Convert.ToInt32(Request.Form["rating"]),
+                User = new User { Id = Convert.ToInt32(Request.Form["id_user"]) },
+                Recipe = new Recipe { Id = Convert.ToInt32(Request.Form["id_recipe"]) }
+            };
 
             _postService.Create(post);
             OnGet();

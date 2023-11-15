@@ -14,7 +14,7 @@
     <form method="post" class="d-flex">
         <div class="form-group mx-2">
             <select name="id_user" class="form-control" style="width: 150px;">
-                <label>Choose a user: </label>
+                <option>Choose a user</option>
                 @foreach (Model.User user in Model.Users)
                 {
                     <option value="@user.Id">@user.UserName</option>
@@ -46,9 +46,9 @@
                 <td>@recipe.Title</td>
                 <td>@recipe.Category.Name</td>
                 <td>
-                    <a asp-page="/Recipes/DeleteRecipe" asp-route-id="@recipe.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
-                    <a asp-page="/Recipes/GetById" asp-route-id="@recipe.Id"><i class="fa-regular fa-eye"></i></a> /
-                    <a asp-page="/Recipes/AddIngredients" asp-route-id="@recipe.Id"><i class="fa-solid fa-pencil"></i></a>
+                    <a asp-page="/Recipes/DeleteRecipe" asp-route-recipeId="@recipe.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
+                    <a asp-page="/Recipes/GetById" asp-route-recipeId="@recipe.Id"><i class="fa-regular fa-eye"></i></a> /
+                    <a asp-page="/Recipes/AddIngredients" asp-route-recipeId="@recipe.Id"><i class="fa-solid fa-pencil"></i></a>
                 </td>
             </tr>
         }

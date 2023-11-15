@@ -42,8 +42,8 @@
             <tr>
                 <td><a><i class="fa-solid fa-user"></i> @favourite.User.UserName <i class="fa-solid fa-heart"></i> @favourite.Recipe.Title</a></td>
                 <td>
-                    <a asp-page="/Favourites/Delete" asp-route-id="@favourite.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
-                    <a asp-page="/Favourites/GetByIdForUsersList" asp-route-id="@favourite.Id"><i class="fa-regular fa-eye"></i></a>
+                    <a asp-page="/Favourites/Delete" asp-route-favouriteId="@favourite.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
+                    <a asp-page="/Favourites/GetById" asp-route-favouriteId="@favourite.Id"><i class="fa-regular fa-eye"></i></a>
                 </td>
             </tr>
         }

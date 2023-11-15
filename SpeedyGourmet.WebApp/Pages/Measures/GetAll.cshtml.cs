@@ -14,8 +14,7 @@ namespace SpeedyGourmet.WebApp.Pages.Measures
             _measureService = measureService;
         }
 
-        public List<Measure> Measures { get; set; }
-        public Measure Measure { get; set; }
+        public List<Measure> Measures { get; private set; }
 
         public void OnGet()
         {
@@ -24,8 +23,8 @@ namespace SpeedyGourmet.WebApp.Pages.Measures
 
         public void OnPost()
         {
-            Measure.Name = Convert.ToString(Request.Form["name"]);
-            _measureService.Create(Measure);
+            string measureName = Convert.ToString(Request.Form["name"]);
+            _measureService.Create( new Measure { Name = measureName });
             OnGet();
         }
     }

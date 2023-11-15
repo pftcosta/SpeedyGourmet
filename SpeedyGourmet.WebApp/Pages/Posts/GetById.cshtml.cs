@@ -14,11 +14,11 @@ namespace SpeedyGourmet.WebApp.Pages.Posts
             _postService = postService;
         }
 
-        public Post post = new();
+        public Post Post { get; private set; }
 
-        public void OnGet(int id)
+        public void OnGet(int postId)
         {
-            post = _postService.GetById(id);
+            Post = _postService.GetById(postId);
         }
     }
 }

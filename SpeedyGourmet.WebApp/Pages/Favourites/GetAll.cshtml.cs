@@ -26,7 +26,7 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
         public void OnGet()
         {
             User = new User();
-            Favourites = _favouriteService.GetAll().OrderBy(p => p.User.Id).ToList(); ;
+            Favourites = _favouriteService.GetAll().OrderBy(p => p.User.Id).ToList();
             Users = _userService.GetAll();
             Recipes = _recipeService.GetAll();
         }

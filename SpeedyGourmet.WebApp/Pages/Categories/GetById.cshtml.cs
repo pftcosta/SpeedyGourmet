@@ -13,7 +13,7 @@ namespace SpeedyGourmet.WebApp.Pages.Categories
             _serviceCategory = serviceCategory;
         }
 
-        public Category Category { get; private set; }
+        public Category Category { get; set; }
 
         public void OnGet(int categoryId)
         {

@@ -14,11 +14,9 @@ namespace SpeedyGourmet.WebApp.Pages.Users
             _userService = userService;
         }
 
-        public User user = new();
-
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int userId)
         {
-            _userService.Delete(id);
+            _userService.Delete(userId);
             return Redirect("/Users/GetAll");
         }
     }

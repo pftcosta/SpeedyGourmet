@@ -14,7 +14,7 @@
     <form method="post" class="d-flex">
         <div class="form-group mx-2">
             <select name="id_user" class="form-control" style="width: 150px;">
-                <label>Choose a user: </label>
+                <option>Choose a user</option>
                 @foreach (Model.User user in Model.Users)
                 {
                     <option value="@user.Id">@user.UserName</option>
@@ -44,8 +44,8 @@
                 <td><i class="fa-solid fa-user"></i> @post.User.UserName Posted on @post.Recipe.Title with @post.Rating <i class="fa-regular fa-star"></i>'s</td>
                 <td></td>
                 <td>
-                    <a asp-page="/posts/Delete" asp-route-id="@post.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
-                    <a asp-page="/posts/GetById" asp-route-id="@post.Id"><i class="fa-regular fa-eye"></i></a>
+                    <a asp-page="/posts/Delete" asp-route-postId="@post.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
+                    <a asp-page="/posts/GetById" asp-route-postId="@post.Id"><i class="fa-regular fa-eye"></i></a>
                 </td>
             </tr>
         }

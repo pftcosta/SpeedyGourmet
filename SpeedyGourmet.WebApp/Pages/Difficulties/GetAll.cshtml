@@ -32,9 +32,9 @@
             <tr>
                 <td>@difficulty.Name</td>
                 <td>
-                    <a asp-page="/Difficulties/Delete" asp-route-id="@difficulty.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
-                    <a asp-page="/Difficulties/GetById" asp-route-id="@difficulty.Id"><i class="fa-regular fa-eye"></i></a> /
-                    <a asp-page="/Difficulties/Update" asp-route-id="@difficulty.Id"><i class="fa-solid fa-pencil"></i></a>
+                    <a asp-page="/Difficulties/Delete" asp-route-difficultyId="@difficulty.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
+                    <a asp-page="/Difficulties/GetById" asp-route-difficultyId="@difficulty.Id"><i class="fa-regular fa-eye"></i></a> /
+                    <a asp-page="/Difficulties/Update" asp-route-difficultyId="@difficulty.Id"><i class="fa-solid fa-pencil"></i></a>
                 </td>
             </tr>
         }

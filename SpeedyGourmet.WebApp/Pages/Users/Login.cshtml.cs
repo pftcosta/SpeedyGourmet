@@ -4,36 +4,38 @@ using SpeedyGourmet.Model;
 using SpeedyGourmet.Service;
 using System.Text.Json;
 
-namespace SpeedyGourmet.WebApp.Pages.LogIn
+namespace SpeedyGourmet.WebApp.Pages.Login
 {
-    public class Register : PageModel
+    public class Login : PageModel
     {
         private readonly IUserService _userService;
 
-        public Register(IUserService userService, User user)
+        public Login(IUserService userService)
         {
             _userService = userService;
-            User = user;
         }
 
         public User User { get; set; }
 
         public void OnGet()
         {
-            GetUser();
         }
 
         public IActionResult OnPost()
         {
-            User.Name = Convert.ToString(Request.Form["name"]);
-            User.UserName = Convert.ToString(Request.Form["username"]);
-            User.Email = Convert.ToString(Request.Form["email"]);
-            User.Password = Convert.ToString(Request.Form["password"]);
-            User.IsAdmin = false;
-            User.IsBlocked = false;
+            SetUser();
+            return Redirect("/Index");
+        }
 
-            _userService.Create(User);
-            return RedirectToPage("/LogIn/LogIn");
+        private void SetUser()
+        {
+            string username = Convert.ToString(Request.Form["username"]);
+            string password = Convert.ToString(Request.Form["password"]);
+            User u = _userService.LogIn(username, password);
+
+            string jsonString = JsonSerializer.Serialize(u);
+
+            HttpContext.Session.SetString("user", jsonString);
         }
 
         private void GetUser()

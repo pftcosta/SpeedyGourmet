@@ -34,8 +34,8 @@
                 <td><i class="fa-solid fa-user"></i> @post.User.UserName Posted on @post.Recipe.Title by @post.Recipe.Author with @post.Rating <i class="fa-regular fa-star"></i>'s</td>
                 <td></td>
                 <td>
-                    <a asp-page="/posts/Delete" asp-route-id="@post.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
-                    <a asp-page="/posts/GetById" asp-route-id="@post.Id"><i class="fa-regular fa-eye"></i></a>
+                    <a asp-page="/posts/Delete" asp-route-postId="@post.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
+                    <a asp-page="/posts/GetById" asp-route-postId="@post.Id"><i class="fa-regular fa-eye"></i></a>
                 </td>
             </tr>
         }
@@ -46,36 +46,35 @@
 
 <h2>Create a new Post</h2>
     <form method="post" class="d-grid">
-        <div class="form-group">
-        <select name="id_user" class="form-control" style="width: 130px;">
-                <option selected>Select User</option>
-                @foreach (Model.User user in Model.Users)
-                {
-                    <option value="@user.Id">@user.UserName</option>
-                }
-            </select>
-        </div>
+        <div class="d-flex">
+            <div class="form-group">
+                <select name="id_user" class="form-control" style="width: 200px;">
+                    <option selected>Select User</option>
+                    @foreach (Model.User user in Model.Users)
+                    {
+                        <option value="@user.Id">@user.UserName</option>
+                    }
+                </select>
+            </div>
 
-        <div class="form-group">
-        <select name="id_recipe" class="form-control" style="width: 130px;">
-                <option selected>Select Recipe</option>
-                @foreach (Model.Recipe recipe in Model.Recipes)
-                {
-                    <option value="@recipe.Id">@recipe.Title</option>
-                }
-            </select>
+            <div class="form-group mx-2">
+            <select name="id_recipe" class="form-control" style="width: 200px;">
+                    <option selected>Select Recipe</option>
+                    @foreach (Model.Recipe recipe in Model.Recipes)
+                    {
+                        <option value="@recipe.Id">@recipe.Title</option>
+                    }
+                </select>
+            </div>
+
+            <div>
+                <input type="number" name="rating" id="rating" min="1" max="10" class="form-control mx-2" style="width: 200px;"  placeholder="Enter Rating (1-10)">
+            </div>
         </div>
+        <br />
 
         <div>
-        <label class="form-group" style="width: 100px;" for="rating">Rating (1-10):</label>
-            <br />
-        <input type="number" name="rating" id="rating" min="1" max="10" class="form-control" style="width: 130px;"  placeholder="Enter Rating (1-10)">
-        </div>
-
-        <div>
-            <label for="comment">Post:</label>
-            <br />
-        <textarea type="text" name="comment" id="comment" class="form-control" placeholder="Enter Post" rows="10" cols="30"></textarea>
+            <textarea type="text" name="comment" id="comment" class="form-control" placeholder="Enter Post" rows="10" cols="30"></textarea>
         </div>
         <br />
 

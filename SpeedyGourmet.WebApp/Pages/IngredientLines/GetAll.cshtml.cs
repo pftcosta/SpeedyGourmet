@@ -32,7 +32,7 @@ namespace SpeedyGourmet.WebApp.Pages.IngredientLines
             };
 
             _ingredientLineService.Create(ingredientLine);
-            return RedirectToPage("/IngredientLines/CreateRecipe", new { id = ingredientLine.Recipe.Id });
+            return RedirectToPage("/IngredientLines/CreateByRecipe", new { id = ingredientLine.Recipe.Id });
         }
     }
 }

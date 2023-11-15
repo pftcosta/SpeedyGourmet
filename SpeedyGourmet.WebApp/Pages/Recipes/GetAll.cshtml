@@ -30,9 +30,9 @@
                 <td>@recipe.Title</td>
                 <td>@recipe.Category.Name</td>
                 <td>
-                    <a asp-page="/Recipes/DeleteRecipe" asp-route-id="@recipe.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
-                    <a asp-page="/Recipes/GetById" asp-route-id="@recipe.Id"><i class="fa-regular fa-eye"></i></a> /
-                    <a asp-page="/Recipes/Update" asp-route-id="@recipe.Id"><i class="fa-solid fa-pencil"></i></a>
+                    <a asp-page="/Recipes/DeleteRecipe" asp-route-recipeId="@recipe.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
+                    <a asp-page="/Recipes/GetById" asp-route-recipeId="@recipe.Id"><i class="fa-regular fa-eye"></i></a> /
+                    <a asp-page="/Recipes/Update" asp-route-recipeId="@recipe.Id"><i class="fa-solid fa-pencil"></i></a>
                 </td>
             </tr>
         }

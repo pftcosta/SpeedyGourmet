@@ -25,7 +25,7 @@
             <tr>
                 <td><a>@ingredientLine.Quantity @ingredientLine.Measure.Name de @ingredientLine.Ingredient.Name</a></td>
                 <td>
-                    <a asp-page="/IngredientLines/Delete" asp-route-id="@ingredientLine.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a>
+                    <a asp-page="/IngredientLines/Delete" asp-route-ingredientLineId="@ingredientLine.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a>
                 </td>
             </tr>
         }

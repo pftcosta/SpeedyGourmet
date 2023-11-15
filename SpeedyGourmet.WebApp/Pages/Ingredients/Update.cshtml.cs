@@ -9,23 +9,26 @@ namespace SpeedyGourmet.WebApp.Pages.Ingredients
     {
         private readonly IService<Ingredient, int> _ingredientService;
 
-        public Update(IService<Ingredient, int> ingredientService, Ingredient ingredient)
+        public Update(IService<Ingredient, int> ingredientService)
         {
             _ingredientService = ingredientService;
-            Ingredient = ingredient;
         }
 
-        public Ingredient Ingredient { get; set; }
+        public Ingredient Ingredient { get; private set; }
 
-        public void OnGet(int id)
+        public void OnGet(int ingredientId)
         {
-            Ingredient = _ingredientService.GetById(id);
+            Ingredient = _ingredientService.GetById(ingredientId);
         }
 
         public IActionResult OnPost()
         {
-            Ingredient.Id = Convert.ToInt32(Request.Form["id"]);
-            Ingredient.Name = Convert.ToString(Request.Form["name"]);
+            Ingredient = new Ingredient()
+            {
+                Id = Convert.ToInt32(Request.Form["id"]),
+                Name = Convert.ToString(Request.Form["name"])
+            };
+            
             _ingredientService.Update(Ingredient);
             return Redirect("/Ingredients/GetAll");
         }

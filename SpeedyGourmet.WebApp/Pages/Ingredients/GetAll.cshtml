@@ -28,14 +28,14 @@
     </thead>
 
     <tbody>
-        @foreach (var ingredient in Model.Ingredients)
+        @foreach (Model.Ingredient ingredient in Model.Ingredients)
         {
             <tr>
                 <td>@ingredient.Name</td>
                 <td>
-                    <a asp-page="/ingredients/Delete" asp-route-id="@ingredient.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
-                    <a asp-page="/ingredients/GetById" asp-route-id="@ingredient.Id"><i class="fa-regular fa-eye"></i></a> /
-                    <a asp-page="/ingredients/Update" asp-route-id="@ingredient.Id"><i class="fa-solid fa-pencil"></i></a>
+                    <a asp-page="/ingredients/Delete" asp-route-ingredientId="@ingredient.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
+                    <a asp-page="/ingredients/GetById" asp-route-ingredientId="@ingredient.Id"><i class="fa-regular fa-eye"></i></a> /
+                    <a asp-page="/ingredients/Update" asp-route-ingredientId="@ingredient.Id"><i class="fa-solid fa-pencil"></i></a>
                 </td>
             </tr>
         }

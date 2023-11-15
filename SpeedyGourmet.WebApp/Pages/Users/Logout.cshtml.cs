@@ -5,8 +5,10 @@ namespace SpeedyGourmet.WebApp.Pages.Login
 {
     public class Logout : PageModel
     {
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            HttpContext.Session.Clear();
+            return Redirect("/Index");
         }
     }
 }

@@ -7,7 +7,7 @@
 <br />
 
 <div class="form-group">
-    <a class="btn btn-danger" asp-page="/Favourites/GetAllByUser" asp-route-id="@Model.User.Id">View <i class="fa-regular fa-heart"></i> by <i class="fa-regular fa-user"></i></a>
+    <a class="btn btn-danger" asp-page="/Favourites/GetAllByUser" asp-route-userId="@Model.User.Id">View <i class="fa-regular fa-heart"></i> by <i class="fa-regular fa-user"></i></a>
 </div>
 <br />
 
@@ -53,8 +53,8 @@
             <tr>
                 <td><a><i class="fa-solid fa-user"></i> @favourite.User.UserName <i class="fa-solid fa-heart"></i> @favourite.Recipe.Title</a></td>
                 <td>
-                    <a asp-page="/Favourites/Delete" asp-route-id="@favourite.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
-                    <a asp-page="/Favourites/GetById" asp-route-id="@favourite.Id"><i class="fa-regular fa-eye"></i></a>
+                    <a asp-page="/Favourites/Delete" asp-route-favouriteId="@favourite.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
+                    <a asp-page="/Favourites/GetById" asp-route-favouriteId="@favourite.Id"><i class="fa-regular fa-eye"></i></a>
                 </td>
             </tr>
         }

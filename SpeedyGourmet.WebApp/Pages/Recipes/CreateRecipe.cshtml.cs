@@ -13,54 +13,41 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
         private readonly IService<Measure, int> _measureService;
         private readonly IService<User, int> _userService;
 
-        public CreateRecipe(IRecipeService recipeService, IService<Category, int> categoryService, IService<Difficulty, int> difficultyService, IService<Measure, int> measureService, IService<User, int> userService, List<Category> categories, List<Difficulty> difficulties, List<Recipe> recipes, List<Measure> measures, List<User> users)
+        public CreateRecipe(IRecipeService recipeService, IService<Category, int> categoryService, IService<Difficulty, int> difficultyService, IService<Measure, int> measureService, IService<User, int> userService)
         {
             _recipeService = recipeService;
             _categoryService = categoryService;
             _difficultyService = difficultyService;
             _measureService = measureService;
             _userService = userService;
-            Categories = categories;
-            Difficulties = difficulties;
-            Recipes = recipes;
-            Measures = measures;
-            Users = users;
         }
 
-        public List<Category> Categories { get; set; }
-        public List<Difficulty> Difficulties { get; set; }
-        public List<Recipe> Recipes { get; set; }
-        public List<Measure> Measures { get; set; }
-        public List<User> Users { get; set; }
+        public List<Category> Categories { get; private set; }
+        public List<Difficulty> Difficulties { get; private set; }
+        public List<Recipe> Recipes { get; private set; }
+        public List<User> Users { get; private set; }
 
-    public void OnGet()
+        public void OnGet()
         {
             Recipes = _recipeService.GetAll();
             Categories = _categoryService.GetAll();
             Difficulties = _difficultyService.GetAll();
-            Measures = _measureService.GetAll();
             Users = _userService.GetAll();
         }
 
         public IActionResult OnPost()
         {
-            Recipe recipe = new();
-
-            recipe.Title = Convert.ToString(Request.Form["title"]);
-            recipe.PrepTime = Convert.ToInt32(Request.Form["prep_time"]);
-            recipe.PrepMethod = Convert.ToString(Request.Form["prep_method"]);
-
-            recipe.Author = new User();
-            recipe.Author.Id = Convert.ToInt32(Request.Form["id_user"]);
-
-            recipe.Category = new Category();
-            recipe.Category.Id = Convert.ToInt32(Request.Form["id_category"]);
-
-            recipe.Difficulty = new Difficulty();
-            recipe.Difficulty.Id = Convert.ToInt32(Request.Form["id_difficulty"]);
+            Recipe recipe = new Recipe()
+            {
+                Title = Convert.ToString(Request.Form["title"]),
+                PrepTime = Convert.ToInt32(Request.Form["prep_time"]),
+                PrepMethod = Convert.ToString(Request.Form["prep_method"]),
+                Author = new User { Id = Convert.ToInt32(Request.Form["id_user"]) },
+                Category = new Category { Id = Convert.ToInt32(Request.Form["id_category"]) },
+                Difficulty = new Difficulty { Id = Convert.ToInt32(Request.Form["id_difficulty"]) }
+            };
 
             recipe = _recipeService.Create(recipe);
-
             return RedirectToPage("/Recipes/AddIngredients", new { id = recipe.Id });
         }
     }

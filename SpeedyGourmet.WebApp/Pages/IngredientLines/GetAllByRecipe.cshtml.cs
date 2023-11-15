@@ -23,8 +23,8 @@ namespace SpeedyGourmet.WebApp.Pages.IngredientLines
 
         public void OnGet(int recipeId)
         {
+            IngredientLine.Recipe = _recipeService.GetById(recipeId);
             IngredientLines = _ingredientLineService.GetAllByRecipeId(recipeId);
-            Recipe = _recipeService.GetById(recipeId);
         }
 
         public void OnPost()

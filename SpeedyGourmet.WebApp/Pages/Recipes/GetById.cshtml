@@ -3,7 +3,11 @@
 @{
 }
 
-<h1>Title: @Model.Recipe.Title</h1>
+<div class="form-group">
+    <a class="btn btn-danger" asp-page="/Recipes/GetAllByUserId" asp-route-userId="@Model.Recipe.Author.Id">>Return <i class="fa-solid fa-arrow-up-from-bracket"></i></a>
+</div>
+
+<h1>Title: @Model.Recipe.Title by: @Model.Recipe.Author.UserName</h1>
 <h4> <p>ID: @Model.Recipe.Id</p></h4>
 <h4> <p>Category: @Model.Recipe.Category.Name</p></h4>
 <h6> <p>Preparation Time: @Model.Recipe.PrepTime minutes</p></h6>

@@ -14,26 +14,25 @@ namespace SpeedyGourmet.WebApp.Pages.Users
             _userService = userService;
         }
 
-        public User user = new();
+        public User User { get; set; }
 
-        public void OnGet(int id)
+        public void OnGet(int userId)
         {
-            user = _userService.GetById(id);
+            User = _userService.GetById(userId);
         }
 
         public IActionResult OnPost()
         {
-            user.Id = Convert.ToInt32(Request.Form["id"]);
-            user = _userService.GetById(user.Id);
+            User = _userService.GetById(Convert.ToInt32(Request.Form["id"]));
 
             string newUserName = Convert.ToString(Request.Form["username"]);
             if (string.IsNullOrWhiteSpace(newUserName))
             {
                 newUserName = "USER NAME NOT SET";
             }
-            else if (newUserName != user.UserName)
+            else if (newUserName != User.UserName)
             {
-                user.UserName = newUserName;
+                User.UserName = newUserName;
             }
 
             string newPassword = Convert.ToString(Request.Form["password"]);
@@ -41,9 +40,9 @@ namespace SpeedyGourmet.WebApp.Pages.Users
             {
                 newPassword = "1234";
             }
-            else if (newPassword != user.Password)
+            else if (newPassword != User.Password)
             {
-                user.Password = newPassword;
+                User.Password = newPassword;
             }
 
             string newName = Convert.ToString(Request.Form["name"]);
@@ -51,9 +50,9 @@ namespace SpeedyGourmet.WebApp.Pages.Users
             {
                 newName = "NAME NOT SET";
             }
-            else if (newName != user.Name)
+            else if (newName != User.Name)
             {
-                user.Name = newName;
+                User.Name = newName;
             }
 
             string newEmail = Convert.ToString(Request.Form["email"]);
@@ -61,34 +60,34 @@ namespace SpeedyGourmet.WebApp.Pages.Users
             {
                 newEmail = "EMAIL NOT SET";
             }
-            else if (newEmail != user.Email)
+            else if (newEmail != User.Email)
             {
-                user.Email = newEmail;
+                User.Email = newEmail;
             }
 
             bool? newIsAdmin = null;
-            if (bool.TryParse(Request.Form["is_admin"], out var isAdminValue))
+            if (bool.TryParse(Request.Form["is_admin"], out bool isAdminValue))
             {
                 newIsAdmin = isAdminValue;
             }
 
             if (newIsAdmin.HasValue)
             {
-                user.IsAdmin = newIsAdmin.Value;
+                User.IsAdmin = newIsAdmin.Value;
             }
 
             bool? newIsBlocked = null;
-            if (bool.TryParse(Request.Form["is_blocked"], out var isBlockedValue))
+            if (bool.TryParse(Request.Form["is_blocked"], out bool isBlockedValue))
             {
                 newIsBlocked = isBlockedValue;
             }
 
             if (newIsBlocked.HasValue)
             {
-                user.IsBlocked = newIsBlocked.Value;
+                User.IsBlocked = newIsBlocked.Value;
             }
 
-            _userService.Update(user);
+            _userService.Update(User);
             return Redirect("/Users/GetAll");
         }
     }

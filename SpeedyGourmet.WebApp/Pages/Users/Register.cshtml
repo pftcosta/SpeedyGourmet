@@ -1,14 +1,10 @@
 ﻿@page
-@model SpeedyGourmet.WebApp.Pages.Users.CreateUser
+@model SpeedyGourmet.WebApp.Pages.LogIn.Register
 @{
 }
 
-<h2>Register User <i class="fa-regular fa-user"></i></h2>
-<br />
-
 <form method="post form-control">
     <div class="d-flex">
-
         <div>
             <input name="name" class="form-control mr-2" style="width: 150px" placeholder="Name">
         </div>
@@ -33,6 +29,5 @@
 
     <div class="d-flex justify-content-between">
         <button type="submit" class="btn btn-primary">Create User <i class="fa-solid fa-arrow-right"></i></button>
-        <a class="btn btn-danger" asp-area="" asp-page="/Users/GetAll">Return <i class="fas fa-arrow-up-from-bracket"></i></a>
     </div>
 </form>

@@ -27,14 +27,14 @@
     </thead>
 
     <tbody>
-        @foreach (var category in Model.Categories)
+        @foreach (Model.Category category in Model.Categories)
         {
             <tr>
                 <td>@category.Name</td>
                 <td>
-                    <a asp-page="/Categories/Delete" asp-route-id="@category.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
-                    <a asp-page="/Categories/GetById" asp-route-id="@category.Id"><i class="fa-regular fa-eye"></i></a> /
-                    <a asp-page="/Categories/Update" asp-route-id="@category.Id"><i class="fa-solid fa-pencil"></i></a>
+                    <a asp-page="/Categories/Delete" asp-route-categoryId="@category.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
+                    <a asp-page="/Categories/GetById" asp-route-categoryId="@category.Id"><i class="fa-regular fa-eye"></i></a> /
+                    <a asp-page="/Categories/Update" asp-route-categoryId="@category.Id"><i class="fa-solid fa-pencil"></i></a>
                 </td>
             </tr>
         }

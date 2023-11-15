@@ -26,26 +26,26 @@
         <form method="post" class="align-middle text-center">
             <tr>
             <td>
-                <a asp-page="/users/Delete" asp-route-id="@Model.user.Id"><i class="fa-solid fa-user-xmark"></i></a>
+                <a asp-page="/users/Delete" asp-route-userId="@Model.User.Id"><i class="fa-solid fa-user-xmark"></i></a>
             </td>
                 <td>
                     <div>
-                        <input id="id" name="id" class="form-control" style="width: 50px" value="@Model.user.Id" readonly>
+                        <input id="id" name="id" class="form-control" style="width: 50px" value="@Model.User.Id" readonly>
                     </div>
                 </td>
                 <td>
                     <div>
-                        <input type="text" name="name" class="form-control" style="width: 150px" value="@Model.user.Name">
+                        <input type="text" name="name" class="form-control" style="width: 150px" value="@Model.User.Name">
                     </div>
                 </td>
                 <td>
                     <div>
-                        <input name="username" class="form-control" style="width: 150px" value="@Model.user.UserName">
+                        <input name="username" class="form-control" style="width: 150px" value="@Model.User.UserName">
                     </div>
                 </td>
                 <td>
                     <div>
-                        <input name="email" class="form-control" style="width: 150px" placeholder="@Model.user.Email">
+                        <input name="email" class="form-control" style="width: 150px" placeholder="@Model.User.Email">
                     </div>
                 </td>
                 <td>
@@ -56,15 +56,15 @@
 
                 <td>
                     <div class="form-control d-flex" style="width: 150px">
-                        @if (Model.user.IsAdmin == true)
+                        @if (Model.User.IsAdmin == true)
                         {
-                        <a><i class="fa-solid fa-crown" style="color: #ffbb00"></i> </a>
+                        <a><i class="fa-solid fa-crown" style="color: #ffbb00"></i></a>
                         }
-                        else if (Model.user.IsAdmin == false)
+                        else if (Model.User.IsAdmin == false)
                         {
                         <a><i class="fa-solid fa-xmark" style="color: #f40101;"></i> </a>
                         }
-                    <label class="mx-2" for="isone">Yes  </label>
+                    <label class="mx-2" for="isone">|  Yes </label>
                     <input class="mx-2" type="radio" id="isone" name="is_admin" value="true">
                         
                         <label for="iszero">No  </label>
@@ -74,16 +74,17 @@
 
                 <td>
                     <div class="form-control d-flex" style="width: 150px">
-                        @if (Model.user.IsBlocked == true)
+                        @if (Model.User.IsBlocked == true)
                         {
                         <a><i class="fa-solid fa-lock" style="color: #d10000;"></i></a>
                         }
-                        else if (Model.user.IsBlocked == false)
+                        else if (Model.User.IsBlocked == false)
                         {
                         <a><i class="fa-solid fa-lock-open" style="color: #138630;"></i></a>
                         }
                         <br/>
-                        <label class="mx-2" for="isoneblock">Yes  </label>
+
+                        <label class="mx-2" for="isoneblock">|  Yes </label>
                         <input class="mx-2" type="radio" id="isoneblock" name="is_blocked" value="true">
 
                         <label for="iszeroblock">No  </label>

@@ -10,19 +10,18 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
         private readonly IRecipeService _recipeService;
         private readonly IIngredientLineService _ingredientLineService;
 
-        public GetById(IRecipeService recipeService, IIngredientLineService ingredientLineService, Recipe recipe)
+        public GetById(IRecipeService recipeService, IIngredientLineService ingredientLineService)
         {
             _recipeService = recipeService;
             _ingredientLineService = ingredientLineService;
-            Recipe = recipe;
         }
 
-        public Recipe Recipe { get; set; }
+        public Recipe Recipe { get; private set; }
 
-        public void OnGet(int id)
+        public void OnGet(int recipeId)
         {
-            Recipe = _recipeService.GetById(id);
-            Recipe.Ingredients = _ingredientLineService.GetAllByRecipeId(id);
+            Recipe = _recipeService.GetById(recipeId);
+            Recipe.Ingredients.AddRange(_ingredientLineService.GetAllByRecipeId(recipeId));
         }
     }
 }

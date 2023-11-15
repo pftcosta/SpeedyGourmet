@@ -21,8 +21,7 @@
             <tr>
                 <td>@ingredient.Quantity @ingredient.Measure.Name de @ingredient.Ingredient.Name</td>
                 <td>
-                   @*  <a asp-page="/Recipee/DeleteILine" asp-route-id="@ingredient.Id"><i class="fa-regular fa-trash-can"></i></a> *@
-                    <a asp-page="/Recipes/DeleteILine" asp-route-id="@ingredient.Id" asp-route-id_recipe="@Model.Recipe.Id"><i class="fa-solid fa-trash-can"></i></a>
+                    <a asp-page="/Recipes/DeleteILine" asp-route-ingredientId="@ingredient.Id" asp-route-id_recipe="@Model.Recipe.Id"><i class="fa-solid fa-trash-can"></i></a>
                 </td>
             </tr>
         }
@@ -67,6 +66,6 @@
         </select>
         <br />
         <button type="submit" class="btn btn-primary mx-2">Add Ingredient</button>
-        <a class="btn btn-danger mx-2" asp-area="" asp-page="/Recipee/DeleteAllILines" asp-route-id="@Model.Recipe.Id"> Delete all</a>
+        <a class="btn btn-danger mx-2" asp-area="" asp-page="/Recipes/DeleteAllILines" asp-route-recipeId="@Model.Recipe.Id"> Delete all</a>
     </div>
 </form>

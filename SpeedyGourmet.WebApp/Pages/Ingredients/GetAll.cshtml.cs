@@ -14,9 +14,7 @@ namespace SpeedyGourmet.WebApp.Pages.Ingredients
             _ingredientService = ingredientService;
         }
 
-        public List<Ingredient> Ingredients { get; set; }
-
-        public Ingredient Ingredient { get; set; }
+        public List<Ingredient> Ingredients { get; private set; }
 
         public void OnGet()
         {
@@ -25,8 +23,8 @@ namespace SpeedyGourmet.WebApp.Pages.Ingredients
 
         public void OnPost()
         {
-            Ingredient.Name = Convert.ToString(Request.Form["name"]);
-            _ingredientService.Create(Ingredient);
+            string ingredientName = Convert.ToString(Request.Form["name"]);
+            _ingredientService.Create( new Ingredient { Name = ingredientName });
             OnGet();
         }
     }

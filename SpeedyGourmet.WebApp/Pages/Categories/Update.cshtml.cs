@@ -28,6 +28,7 @@ namespace SpeedyGourmet.WebApp.Pages.Categories
                 Id = Convert.ToInt32(Request.Form["id"]),
                 Name = Convert.ToString(Request.Form["name"])
             };
+
             _categoryService.Update(Category);
             return Redirect("/Categories/GetAll");
         }

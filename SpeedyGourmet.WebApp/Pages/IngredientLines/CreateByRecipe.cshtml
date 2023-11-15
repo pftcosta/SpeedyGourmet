@@ -54,7 +54,7 @@
             <tr>
                 <td><a>@ingredientLine.Quantity @ingredientLine.Measure.Name de @ingredientLine.Ingredient.Name</a></td>
                 <td>
-                    <a asp-page="/IngredientLines/Delete" asp-route-id="@ingredientLine.Id">Delete</a>
+                    <a asp-page="/IngredientLines/Delete" asp-route-ingredientLineId="@ingredientLine.Id">Delete</a>
                 </td>
             </tr>
         }
@@ -63,8 +63,9 @@
 
 <div class="d-flex justify-content-between">
     <a class="btn btn-danger" asp-area="" asp-page="/IngredientLines/GetAll"> Return to all ingredient list <i class="bi bi-arrow-left"></i></a>
-    <a class="btn btn-danger" asp-area="" asp-page="/IngredientLines/DeleteAllByRecipe" asp-route-id="@Model.IngredientLine.Recipe.Id">
+    <a class="btn btn-danger" asp-area="" asp-page="/IngredientLines/DeleteAllByRecipe" asp-route-recipeId="@Model.IngredientLine.Recipe.Id">
         <i class="bi bi-arrow-right"></i> Delete all
     </a>
 </div>
-<a asp-page="/Recipes/GetAll" asp-route-id="@Model.IngredientLine.Recipe.Id"><button type="button" class="btn btn-primary btn-sm">Finish</button></a>
+<a asp-page="/Recipes/GetAll" asp-route-recipeId="@Model.IngredientLine.Recipe.Id">
+    <button type="button" class="btn btn-primary btn-sm">Finish</button></a>

@@ -9,28 +9,17 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
     {
         private readonly IIngredientLineService _ingredientLineService;
 
-        public DeleteILine(IIngredientLineService ingredientLineService, int ingredientId, int recipeId)
+        public DeleteILine(IIngredientLineService ingredientLineService)
         {
             _ingredientLineService = ingredientLineService;
-            IngredientId = ingredientId;
-            RecipeId = recipeId;
         }
 
-        //[BindProperty(SupportsGet = true)]
-        public int IngredientId { get; set; }
-
-        //[BindProperty(SupportsGet = true)]
-        public int RecipeId { get; set; }
-
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int ingredientId)
         {
-            IngredientLine ingredientLine = _ingredientLineService.GetById(id);
+            IngredientLine ingredientLine = _ingredientLineService.GetById(ingredientId);
 
-            Recipe recipe = new();
-            recipe.Id = ingredientLine.Recipe.Id;
-
-            _ingredientLineService.Delete(id);
-            return RedirectToPage("/Recipes/AddIngredients", new { id = recipe.Id });
+            _ingredientLineService.Delete(ingredientId);
+            return RedirectToPage("/Recipes/AddIngredients", new { id = ingredientLine.Recipe.Id });
         }
     }
 }

@@ -11,34 +11,39 @@ namespace SpeedyGourmet.WebApp.Pages.Posts
         private readonly IPostService _postService;
         private readonly IRecipeService _recipeService;
 
-        public GetAllByRecipe(IPostService postService, IRecipeService recipeService, List<Post> posts, List<Recipe> recipes, Recipe recipe, User user)
+        public GetAllByRecipe(IPostService postService, IRecipeService recipeService)
         {
             _postService = postService;
             _recipeService = recipeService;
-            Posts = posts;
-            Recipes = recipes;
-            Recipe = recipe;
-            User = user;
         }
 
-        public List<Post> Posts { get; set; }
-        public List<Recipe> Recipes { get; set; }
-        public Recipe Recipe { get; set; }
-        public User User { get; set; }
+        public List<Post> Posts { get; private set; }
+        public List<Recipe> Recipes { get; private set; }
+        public Recipe Recipe { get; private set; }
+        public User User { get; private set; }
 
-        public void OnGet(int id)
+        public void OnGet(int recipeId)
         {
-            Posts = _postService.GetAllByRecipeId(id);
+            Posts = _postService.GetAllByRecipeId(recipeId);
             Recipes = _recipeService.GetAll();
+            MathRound();
         }
 
         public void OnPost()
         {
-            Post post = new Post();
-            post.Recipe = Recipe;
-            post.Recipe.Id = Convert.ToInt32(Request.Form["id_recipe"]);
+            int recipeId = Convert.ToInt32(Request.Form["id_recipe"]);
+            OnGet(recipeId);
+        }
 
-            OnGet(post.Recipe.Id);
+        public double MathRound()
+        {
+            double totalRating = 0.0;
+            foreach (Post post in Posts)
+            {
+                totalRating += post.Rating;
+            }
+            double averageRating = totalRating / Posts.Count;
+            return Math.Round(averageRating, 2);
         }
     }
 }

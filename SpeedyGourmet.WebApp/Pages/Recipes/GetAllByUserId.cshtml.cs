@@ -11,30 +11,25 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
         private readonly IRecipeService _recipeService;
         private readonly IUserService _userService;
 
-        public GetAllByUserId(IRecipeService recipeService, IUserService userService, List<Recipe> recipes, List<User> users)
+        public GetAllByUserId(IRecipeService recipeService, IUserService userService)
         {
             _recipeService = recipeService;
             _userService = userService;
-            Recipes = recipes;
-            Users = users;
         }
 
-        public List<Recipe> Recipes { get; set; }
-        public List<User> Users { get; set; }
+        public List<Recipe> Recipes { get; private set; }
+        public List<User> Users { get; private set; }
 
-        public void OnGet(int id)
+        public void OnGet(int recipeId)
         {
-            Recipes = _recipeService.GetAllByUserId(id);
+            Recipes = _recipeService.GetAllByUserId(recipeId);
             Users = _userService.GetAll();
         }
 
         public void OnPost()
         {
-            Recipe recipe = new();
-            recipe.User = new User();
-            recipe.User.Id = Convert.ToInt32(Request.Form["id_user"]);
-
-            OnGet(recipe.User.Id);
+            int userId = Convert.ToInt32(Request.Form["id_user"]);
+            OnGet(userId);
         }
     }
 }

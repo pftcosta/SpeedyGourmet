@@ -14,25 +14,27 @@ namespace SpeedyGourmet.WebApp.Pages.Users
             _userService = userService;
         }
 
-        public List<User> users = new();
+        public List<User> Users { get; set; }
 
         public void OnGet()
         {
-            users = _userService.GetAll();
+            Users = _userService.GetAll();
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
-            User user = new User();
-            user.UserName = Convert.ToString(Request.Form["username"]);
-            user.Password = Convert.ToString(Request.Form["password"]);
-            user.Name = Convert.ToString(Request.Form["name"]);
-            user.Email = Convert.ToString(Request.Form["email"]);
-            user.IsAdmin = false;
-            user.IsBlocked = false;
+            User user = new User()
+            {
+                UserName = Convert.ToString(Request.Form["username"]),
+                Password = Convert.ToString(Request.Form["password"]),
+                Name = Convert.ToString(Request.Form["name"]),
+                Email = Convert.ToString(Request.Form["email"]),
+                IsAdmin = false,
+                IsBlocked = false
+            };
 
             _userService.Create(user);
-            OnGet();
+            return RedirectToPage("/Users/GetAll");
         }
     }
 }

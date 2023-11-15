@@ -14,9 +14,9 @@ namespace SpeedyGourmet.WebApp.Pages.Measures
             _measuretService = measuretService;
         }
 
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int measureId)
         {
-            _measuretService.Delete(id);
+            _measuretService.Delete(measureId);
             return Redirect("/Measures/GetAll");
         }
     }

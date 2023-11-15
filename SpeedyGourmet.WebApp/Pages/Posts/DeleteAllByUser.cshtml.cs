@@ -14,9 +14,9 @@ namespace SpeedyGourmet.WebApp.Pages.Posts
             _postService = postService;
         }
 
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int userId)
         {
-            _postService.DeleteAllByUserId(id);
+            _postService.DeleteAllByUserId(userId);
             return Redirect("/Posts/GetAllByUser");
         }
     }

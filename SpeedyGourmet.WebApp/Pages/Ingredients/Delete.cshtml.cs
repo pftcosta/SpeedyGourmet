@@ -14,9 +14,9 @@ namespace SpeedyGourmet.WebApp.Pages.Ingredients
             _ingredientService = ingredientService;
         }
 
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int ingredientId)
         {
-            _ingredientService.Delete(id);
+            _ingredientService.Delete(ingredientId);
             return Redirect("/Ingredients/GetAll");
         }
     }

@@ -17,9 +17,9 @@ namespace SpeedyGourmet.WebApp.Pages.Difficulties
 
         public Difficulty Difficulty { get; private set; }
 
-        public void OnGet(int id)
+        public void OnGet(int difficultyId)
         {
-            Difficulty = _difficultyService.GetById(id);
+            Difficulty = _difficultyService.GetById(difficultyId);
         }
 
         public IActionResult OnPost()
@@ -29,6 +29,7 @@ namespace SpeedyGourmet.WebApp.Pages.Difficulties
                 Id = Convert.ToInt32(Request.Form["id"]),
                 Name = Request.Form["name"]
             };
+
             _difficultyService.Update(Difficulty);
             return Redirect("/Difficulties/GetAll");
         }

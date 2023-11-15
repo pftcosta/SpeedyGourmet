@@ -10,30 +10,27 @@ namespace SpeedyGourmet.WebApp.Pages.Posts
         private readonly IPostService _postService;
         private readonly IUserService _userService;
 
-        public GetAllByUser(IPostService postService, IUserService userService, List<Post> posts, List<User> users)
+        public GetAllByUser(IPostService postService, IUserService userService)
         {
             _postService = postService;
             _userService = userService;
-            Posts = posts;
-            Users = users;
         }
 
-        public List<Post> Posts { get; set; }
-        public List<User> Users { get; set; }
+        public List<Post> Posts { get; private set; }
+        public List<User> Users { get; private set; }
+        public Recipe Recipe { get; private set; }
+        public User User { get; private set; }
 
-        public void OnGet(int id)
+        public void OnGet(int userId)
         {
-            Posts = _postService.GetAllByUserId(id);
+            Posts = _postService.GetAllByUserId(userId);
             Users = _userService.GetAll();
         }
 
         public void OnPost()
         {
-            Post post = new Post();
-            post.User = new User();
-            post.User.Id = Convert.ToInt32(Request.Form["id_user"]);
-
-            OnGet(post.User.Id);
+            int userId = Convert.ToInt32(Request.Form["id_user"]);
+            OnGet(userId);
         }
     }
 }

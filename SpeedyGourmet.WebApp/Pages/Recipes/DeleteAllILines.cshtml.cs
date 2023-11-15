@@ -14,10 +14,10 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
             _ingredientLineService = ingredientLineService;
         }
 
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int recipeId)
         {
-            _ingredientLineService.DeleteAllByRecipeId(id);
-            return RedirectToPage("/Recipes/AddIngredients", new {id = id});
+            _ingredientLineService.DeleteAllByRecipeId(recipeId);
+            return RedirectToPage("/Recipes/AddIngredients", new {id = recipeId });
         }
     }
 }

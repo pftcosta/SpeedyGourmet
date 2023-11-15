@@ -22,9 +22,9 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
         public List<User> Users { get; private set; }
         public List<Recipe> Recipes { get; private set; }
 
-        public void OnGet(int id)
+        public void OnGet(int userId)
         {
-            Favourites = _favouriteService.GetAllByUserId(id);
+            Favourites = _favouriteService.GetAllByUserId(userId);
             Users = _userService.GetAll();
             Recipes = _recipeService.GetAll();
         }
