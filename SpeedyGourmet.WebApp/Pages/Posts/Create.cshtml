@@ -3,7 +3,7 @@
 @{
 }
 
-@if(Model.User is not null)
+@if(Model.User is not null && Model.User.Id != Model.Post.User.Id)
 {
     <form method="post" class="d-grid">
         <input hidden type="number" name="id_user" />

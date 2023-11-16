@@ -16,6 +16,7 @@ namespace SpeedyGourmet.WebApp.Pages.Posts
         }
 
         public User User { get; private set; }
+        public Post Post { get; private set; }
 
         public void OnGet()
         {
