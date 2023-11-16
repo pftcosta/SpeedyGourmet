@@ -10,16 +10,21 @@ namespace SpeedyGourmet.WebApp.Pages
 
         private readonly ILogger<IndexModel> _logger;
 
+        
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
         }
 
+        public List<Recipe> Recipes { get; private set; }
+        public Recipe Recipe { get; set; }
         public User User { get; set; }
 
         public void OnGet()
         {
             GetUser();
+            Recipe = new Recipe();
+            Recipes = new List<Recipe>();
         }
 
         private void GetUser()

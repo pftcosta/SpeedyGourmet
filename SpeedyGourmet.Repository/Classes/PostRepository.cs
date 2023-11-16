@@ -6,6 +6,7 @@ namespace SpeedyGourmet.Repository
     public class PostRepository : IPostRepository
     {
         private readonly string _tableName = "posts";
+        private readonly string _tableNameRecipes = "recipes";
 
         public Post Create(Post post)
         {
@@ -75,7 +76,7 @@ namespace SpeedyGourmet.Repository
                 $"id_user = {post.User.Id}, " +
                 $"id_recipe = {post.Recipe.Id}," +
                 $"comment = '{post.Comment}', " +
-                $"rating = {post.Rating}, " +
+                $"rating = {post.Rating} " +
                 $"WHERE id = {post.Id};";
             SQL.ExecuteNonQuery(sql);
             return GetById(post.Id);
@@ -101,20 +102,36 @@ namespace SpeedyGourmet.Repository
 
         private Post Parse(SqlDataReader reader)
         {
-            Post post = new Post();
-            post.Id = Convert.ToInt32(reader["id"]);
-            post.Comment = Convert.ToString(reader["comment"]);
-            post.Rating = Convert.ToInt32(reader["rating"]);
-
-            User user = new User();
-            user.Id = Convert.ToInt32(reader["id_user"]);
-            post.User = user;
-
-            Recipe recipe = new Recipe();
-            recipe.Id = Convert.ToInt32(reader["id_recipe"]);
-            post.Recipe = recipe;
-
+            Post post = new Post()
+            {
+                Id = Convert.ToInt32(reader["id"]),
+                Comment = Convert.ToString(reader["comment"]),
+                Rating = Convert.ToInt32(reader["rating"]),
+                User = new User { Id = Convert.ToInt32(reader["id_user"]) },
+                Recipe = new Recipe { Id = Convert.ToInt32(reader["id_recipe"]) }
+            };
             return post;
         }
+
+        public List<Post> Search(string query)
+        {
+            string sqlQuery = $@"SELECT *
+                                FROM {_tableName}
+                                WHERE id LIKE '%query%'
+                                OR id_user LIKE '%query%'
+                                OR id_recipe LIKE '%query%'
+                                OR comment LIKE '%query%'
+                                OR rating LIKE '%query%';";
+
+            SqlDataReader reader = SQL.Execute(sqlQuery);
+            List<Post> results = new List<Post>();
+
+            while (reader.Read())
+            {
+                results.Add(Parse(reader));
+            }
+            return results;
+        }
+
     }
 }

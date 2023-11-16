@@ -22,10 +22,10 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
         public List<User> Users { get; private set; }
         public User User { get; set; }
 
-        public void OnGet(int recipeId)
+        public void OnGet(int userId)
         {
             GetUser();
-            Recipes = _recipeService.GetAllByUserId(recipeId);
+            Recipes = _recipeService.GetAllByUserId(userId);
             Users = _userService.GetAll();
         }
 

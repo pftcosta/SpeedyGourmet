@@ -13,5 +13,6 @@ namespace SpeedyGourmet.Repository
         void Delete(int postId);
         void DeleteAllByRecipeId(int recipeId);
         void DeleteAllByUserId(int userId);
+        List<Post> Search(string query);
     }
 }

@@ -6,46 +6,133 @@
 <h2>Edit User <i class="fa-solid fa-user"></i></h2>
 <br />
 
-<table class="table">
+@if (Model.User.IsAdmin == true && Model.User.Id != Model.UserEdit.Id)
+{
+    <table class="table">
 
-    <thead>
-        <tr>
-            <th scope="col">Delete</th>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Username</th>
-            <th scope="col">Email</th>
-            <th scope="col">Password</th>
-            <th scope="col">Admin</th>
-            <th scope="col">Block</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <form method="post" class="align-middle text-center">
+        <thead>
             <tr>
-            <td>
-                <a asp-page="/users/Delete" asp-route-userId="@Model.User.Id"><i class="fa-solid fa-user-xmark"></i></a>
-            </td>
+                <th scope="col">Delete</th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Password</th>
+                <th scope="col">Admin</th>
+                <th scope="col">Block</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <form method="post" class="align-middle text-center">
+                <tr>
+                    <td>
+                    <a asp-page="/users/Delete" asp-route-userId="@Model.UserEdit.Id"><i class="fa-solid fa-user-xmark" style="color: #f40101;"></i></a>
+                    </td>
+                    <td>
+                        <div>
+                        <input id="id" name="id" class="form-control" style="width: 50px" value="@Model.UserEdit.Id" readonly>
+                        </div>
+                    </td>
+                    <td>
+                        @if (User.Identity.Name == Model.UserEdit.UserName)
+                        {
+                            <div>
+                            <input type="text" name="name" class="form-control" style="width: 150px" value="@Model.UserEdit.Name" readonly">
+                            </div>
+                        }
+                    </td>
+                    <td>
+                        <div>
+                        <input name="username" class="form-control" style="width: 150px" value="@Model.UserEdit.UserName" readonly=>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                        <input name="email" class="form-control" style="width: 150px" placeholder="@Model.UserEdit.Email" readonly=>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                        <input name="password" class="form-control" style="width: 100px" placeholder="*****" readonly=>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-control d-flex" style="width: 170px">
+                            <label class="mx-2" for="isone">Yes</label>
+                            <input class="mx-2" type="radio" id="isone" name="is_admin" value="true">
+                        
+                            <label for="iszero">No</label>
+                            <input class="mx-2" type="radio" id="iszero" name="is_admin" value="false">
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="form-control d-flex" style="width: 170px">
+                            <label class="mx-2" for="isoneblock">Yes</label>
+                            <input class="mx-2" type="radio" id="isoneblock" name="is_blocked" value="true">
+
+                            <label for="iszeroblock">No</label>
+                            <input class="mx-2" type="radio" id="iszeroblock" name="is_blocked" value="false">
+                        </div>
+                    </td>
+
+                    <td>
+                        <button type="submit" class="btn btn-primary">Edit User <i class="fa-solid fa-arrow-right"></i></button>
+                    </td>
+                </tr>
+            </form>
+        </tbody>
+
+    </table>
+}
+else if (Model.User.IsAdmin == true && Model.User.Id == Model.UserEdit.Id)
+{
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th scope="col">Delete</th>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Password</th>
+                <th scope="col">Admin</th>
+                <th scope="col">Block</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <form method="post" class="align-middle text-center">
+            <tr>
+                <td>
+                    <a asp-page="/users/Delete" asp-route-userId="@Model.UserEdit.Id"><i class="fa-solid fa-user-xmark" style="color: #f40101;"></i></a>
+                </td>
                 <td>
                     <div>
-                        <input id="id" name="id" class="form-control" style="width: 50px" value="@Model.User.Id" readonly>
+                        <input id="id" name="id" class="form-control" style="width: 50px" value="@Model.UserEdit.Id" readonly>
+                    </div>
+                </td>
+                <td>
+                        @if (User.Identity.Name == Model.UserEdit.UserName)
+                        {
+                        <div>
+                            <input type="text" name="name" class="form-control" style="width: 150px" value="@Model.UserEdit.Name">
+                        </div>
+                        }
+                </td>
+                <td>
+                    <div>
+                        <input name="username" class="form-control" style="width: 150px" value="@Model.UserEdit.UserName">
                     </div>
                 </td>
                 <td>
                     <div>
-                        <input type="text" name="name" class="form-control" style="width: 150px" value="@Model.User.Name">
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        <input name="username" class="form-control" style="width: 150px" value="@Model.User.UserName">
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        <input name="email" class="form-control" style="width: 150px" placeholder="@Model.User.Email">
+                        <input name="email" class="form-control" style="width: 150px" placeholder="@Model.UserEdit.Email">
                     </div>
                 </td>
                 <td>
@@ -56,38 +143,20 @@
 
                 <td>
                     <div class="form-control d-flex" style="width: 170px">
-                        @if (Model.User.IsAdmin == true)
-                        {
-                        <a><i class="fa-solid fa-crown" style="color: #ffbb00"></i></a>
-                        }
-                        else if (Model.User.IsAdmin == false)
-                        {
-                        <a><i class="fa-solid fa-xmark" style="color: #f40101;"></i> </a>
-                        }
-                    <label class="mx-2" for="isone">|  Yes </label>
-                    <input class="mx-2" type="radio" id="isone" name="is_admin" value="true">
-                        
-                        <label for="iszero">No  </label>
+                        <label class="mx-2" for="isone">Yes</label>
+                        <input class="mx-2" type="radio" id="isone" name="is_admin" value="true">
+
+                        <label for="iszero">No</label>
                         <input class="mx-2" type="radio" id="iszero" name="is_admin" value="false">
                     </div>
                 </td>
 
                 <td>
                     <div class="form-control d-flex" style="width: 170px">
-                        @if (Model.User.IsBlocked == true)
-                        {
-                        <a><i class="fa-solid fa-lock" style="color: #d10000;"></i></a>
-                        }
-                        else if (Model.User.IsBlocked == false)
-                        {
-                        <a><i class="fa-solid fa-lock-open" style="color: #138630;"></i></a>
-                        }
-                        <br/>
-
-                        <label class="mx-2" for="isoneblock">|  Yes </label>
+                        <label class="mx-2" for="isoneblock">Yes</label>
                         <input class="mx-2" type="radio" id="isoneblock" name="is_blocked" value="true">
 
-                        <label for="iszeroblock">No  </label>
+                        <label for="iszeroblock">No</label>
                         <input class="mx-2" type="radio" id="iszeroblock" name="is_blocked" value="false">
                     </div>
                 </td>
@@ -96,61 +165,93 @@
                     <button type="submit" class="btn btn-primary">Edit User <i class="fa-solid fa-arrow-right"></i></button>
                 </td>
             </tr>
-        </form>
-    </tbody>
+            </form>
+        </tbody>
 
-</table>
+    </table>
+}
+else
+{
+    <table class="table">
 
-@* <form method="post" class="d-group">
-    <div class="d-flex">
-        <div>
-            <input id="id" name="id" class="form-control mx-2" style="width: 50px" value="@Model.user.Id" readonly>
-        </div>
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Password</th>
+                <th scope="col">Admin</th>
+                <th scope="col">Blocked</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
 
-        <div>
-            <input name="name" class="form-control" style="width: 150px" placeholder="Name">
-        </div>
-        <br />
+        <tbody>
+            <form method="post" class="align-middle text-center">
+            <tr>
+                <td>
+                    <div>
+                        <input id="id" name="id" class="form-control" style="width: 50px" value="@Model.UserEdit.Id" readonly>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input type="text" name="name" class="form-control" style="width: 150px" value="@Model.UserEdit.Name">
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input name="username" class="form-control" style="width: 150px" value="@Model.UserEdit.UserName">
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input name="email" class="form-control" style="width: 150px" placeholder="@Model.UserEdit.Email">
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <input name="password" class="form-control" style="width: 100px" placeholder="*****">
+                    </div>
+                </td>
 
-        <div>
-            <input name="username" class="form-control mx-2" style="width: 150px" placeholder="User name">
-        </div>
-        <br />
+                <td>
+                        @if (Model.UserEdit.IsAdmin == true)
+                    {
+                        <div>
+                        <input name="is_admin" class="form-control" style="width: 100px" placeholder=ADMIN readonly>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <input name="is_admin" class="form-control" style="width: 100px" placeholder=CHEF readonly>
+                        </div>
+                    }
+                </td>
 
-        <div>
-            <input name="email" class="form-control mx-1" style="width: 150px" placeholder="Email">
-        </div>
-        <br />
+                <td>
+                        @if (Model.UserEdit.IsBlocked == true)
+                    {
+                        <div>
+                        <input name="is_blocked" class="form-control" style="width: 100px" placeholder=YES readonly>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <input name="is_blocked" class="form-control" style="width: 100px" placeholder=NO readonly>
+                        </div>
+                    }
+                </td>
 
-        <div>
-            <input name="password" class="form-control mx-1" style="width: 150px" placeholder="Password">
-        </div>
-    </div>
-    <br />
+                <td>
+                    <button type="submit" class="btn btn-primary">Edit User <i class="fa-solid fa-arrow-right"></i></button>
+                </td>
+            </tr>
+            </form>
+        </tbody>
 
-    <div class="d-flex">
-        <fieldset class="form-control" style="width: 200px">
-            <label>Admin</label>
-            <input class="align-content-center" type="radio" id="iszero" name="is_admin" value="false">
-            <label class="align-content-bottom" for="iszero">No</label>
-
-            <input class="centre" type="radio" id="isone" name="is_admin" value="true">
-            <label class="centre" for="isone">Yes</label>
-        </fieldset>
-    
-        <fieldset class="form-control mx-2" style="width: 200px">
-            <label>Block User</label>
-            <input type="radio" id="iszeroblock" name="is_blocked" value="false">
-            <label for="iszeroblock">No</label>
-
-            <input type="radio" id="isoneblock" name="is_blocked" value="true">
-            <label for="isoneblock">Yes</label>
-        </fieldset>
-    <div class="d-flex justify-content-between">
-        <button type="submit" class="btn btn-primary">Edit User <i class="fa-solid fa-arrow-right"></i></button>
-        <a class="btn btn-danger" asp-area="" asp-page="/Users/GetAll">Return <i class="fas fa-arrow-up-from-bracket"></i></a>
-    </div>
-    </div>
-    
-</form>
- *@
+    </table>
+}

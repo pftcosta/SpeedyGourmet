@@ -51,7 +51,7 @@
             <tr>
             <td><i class="fa-solid fa-user"></i> @post.User.UserName Posted on @post.Recipe.Title with @post.Rating <i class="fa-regular fa-star"></i>'s</td>
             <td>
-                    <a asp-page="/posts/Delete" asp-route-postId="@post.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
+                <a asp-page="/posts/Delete" asp-route-postId="@post.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
                 <a asp-page="/posts/GetById" asp-route-postId="@post.Id"><i class="fa-regular fa-eye"></i></a>
             </td>
             </tr>

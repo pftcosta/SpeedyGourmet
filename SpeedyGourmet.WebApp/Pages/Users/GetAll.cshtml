@@ -6,77 +6,82 @@
 <h2>Users <i class="fa-solid fa-users"></i></h2>
 <br />
 
-<h3>Create new User <i class="fa-solid fa-user"></i></h3>
-<div class="d-flex">
-    <form method="post" class="d-flex">
-        <div>
-            <input name="name" class="form-control" style="width: 150px" placeholder="Name">
-        </div>
-        <br />
+@if (Model.User.IsAdmin == false)
+{
+    <h3>Create new User <i class="fa-solid fa-user"></i></h3>
+    <div class="d-flex">
+        <form method="post" class="d-flex">
+            <div>
+                <input name="name" class="form-control" style="width: 150px" placeholder="Name">
+            </div>
+            <br />
 
-        <div>
-            <input name="username" class="form-control mx-2" style="width: 150px" placeholder="User name">
-        </div>
-        <br />
+            <div>
+                <input name="username" class="form-control mx-2" style="width: 150px" placeholder="User name">
+            </div>
+            <br />
 
-        <div>
-            <input name="email" class="form-control mx-2" style="width: 150px" placeholder="Email">
-        </div>
-        <br />
+            <div>
+                <input name="email" class="form-control mx-2" style="width: 150px" placeholder="Email">
+            </div>
+            <br />
 
-        <div>
-            <input name="password" class="form-control mx-2" style="width: 150px" placeholder="Password">
-        </div>
-        <div class="d-flex justify-content-between">
-            <button type="submit" class="btn btn-primary mx-2">Create User <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-    </form>
-</div>
-<br />
-
-<h3>List of Users <i class="fa-solid fa-users"></i></h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Username</th>
-            <th scope="col">Role</th>
-            <th scope="col">Blocked</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach (var user in Model.Users)
-        {
+            <div>
+                <input name="password" class="form-control mx-2" style="width: 150px" placeholder="Password">
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary mx-2">Create User <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </form>
+    </div>
+    <br />
+}
+else
+{
+    <h3>List of Users <i class="fa-solid fa-users"></i></h3>
+    <table class="table">
+        <thead>
             <tr>
-                <td>@user.Name</td>
-                <td>@user.UserName</td>
-                <td>
-                    @if (user.IsAdmin == true)
-                    {
-                        <a><i class="fa-solid fa-crown" style="color: #ffbb00"></i></a>
-                    }
-                    else
-                    {
-                        <a><i class="fa-regular fa-user"></i></a>
-                    }
-                </td>
-                <td>
-                    @if (user.IsBlocked == true)
-                    {
-                        <a><i class="fa-solid fa-lock" style="color: #d10000;"></i></a>
-                    }
-                    else
-                    {
-                        <a><i class="fa-solid fa-lock-open" style="color: #138630;"></i></a>
-                    }
-                </td>
-                <td>
-                    <a asp-page="/users/Delete" asp-route-userId="@user.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
-                    <a asp-page="/users/GetById" asp-route-userId="@user.Id"><i class="fa-solid fa-user-pen"></i></a>
-                </td>
+                <th scope="col">Name</th>
+                <th scope="col">Username</th>
+                <th scope="col">Role</th>
+                <th scope="col">Blocked</th>
+                <th scope="col">Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.UserName</td>
+                    <td>
+                        @if (user.IsAdmin == true)
+                        {
+                            <a><i class="fa-solid fa-crown" style="color: #ffbb00"></i></a>
+                        }
+                        else
+                        {
+                            <a><i class="fa-regular fa-user"></i></a>
+                        }
+                    </td>
+                    <td>
+                        @if (user.IsBlocked == true)
+                        {
+                            <a><i class="fa-solid fa-lock" style="color: #d10000;"></i></a>
+                        }
+                        else
+                        {
+                            <a><i class="fa-solid fa-lock-open" style="color: #138630;"></i></a>
+                        }
+                    </td>
+                    <td>
+                        <a asp-page="/users/Delete" asp-route-userId="@user.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
+                        <a asp-page="/users/GetById" asp-route-userId="@user.Id"><i class="fa-solid fa-user-pen"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

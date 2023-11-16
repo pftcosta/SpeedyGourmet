@@ -82,5 +82,10 @@ namespace SpeedyGourmet.Service
         {
             _postRepository.DeleteAllByUserId(userId);
         }
+
+        public List<Post> Search(string query)
+        {
+            return _postRepository.Search(query);
+        }
     }
 }

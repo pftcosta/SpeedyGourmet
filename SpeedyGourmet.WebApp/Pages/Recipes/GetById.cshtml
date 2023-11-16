@@ -4,7 +4,10 @@
 }
 
 <div class="form-group">
-    <a class="btn btn-danger" asp-page="/Recipes/GetAllByUserId" asp-route-userId="@Model.Recipe.Author.Id">Return <i class="fa-solid fa-arrow-up-from-bracket"></i></a>
+    <a class="btn btn-danger" asp-page="/Recipes/GetAll">Return to home <i class="fa-solid fa-arrow-up-from-bracket"></i></a>
+    <a class="btn btn-primary" asp-page="/Recipes/GetAllByUserId" asp-route-userId="@Model.Recipe.Author.Id">Return to User's List</a>
+    <a class="btn btn-dark" asp-page="/Posts/Create" asp-route-userId="@Model.Recipe.Author.Id">Comment <i class="fa-solid fa-comments"></i></a>
+    <a class="btn btn-primary" asp-page="/Favourites/Create" asp-route-userId="@Model.Recipe.Author.Id" asp-route-recipeId="@Model.Recipe.Id">Add to Favourites <i class="fa-solid fa-heart"></i></a>
 </div>
 
 <h1>Title: @Model.Recipe.Title by: @Model.Recipe.Author.UserName</h1>

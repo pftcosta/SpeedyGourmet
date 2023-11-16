@@ -6,35 +6,77 @@
 <h2>All Recipes List <i class="fa-solid fa-bowl-food"></i></h2>
 <br />
 
-<div class="d-flex">
-    <a class="btn btn-danger" asp-area="" asp-page="/Recipes/CreateRecipe"> Create New Recipe <i class="bi bi-arrow-left"></i></a>
-    <a class="btn btn-danger mx-2" asp-area="" asp-page="/Recipes/GetAllByUserId"><i class="bi bi-arrow-right"></i> Get All Recipes By User Id</a>
-</div>
-<br />
-
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">User</th>
-            <th scope="col">Recipe</th>
-            <th scope="col">Category</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach (Model.Recipe recipe in Model.Recipes)
-        {
+@if (Model.User is null)
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>@recipe.Author.UserName</td>
-                <td>@recipe.Title</td>
-                <td>@recipe.Category.Name</td>
-                <td>
-                    <a asp-page="/Recipes/DeleteRecipe" asp-route-recipeId="@recipe.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
-                    <a asp-page="/Recipes/GetById" asp-route-recipeId="@recipe.Id"><i class="fa-regular fa-eye"></i></a> /
-                    <a asp-page="/Recipes/Update" asp-route-recipeId="@recipe.Id"><i class="fa-solid fa-pencil"></i></a>
-                </td>
+                <th scope="col">User</th>
+                <th scope="col">Recipe</th>
+                <th scope="col">Category</th>
+                <th scope="col">Approved</th>
+                <th scope="col">Actions</th>
             </tr>
+        </thead>
+
+        <tbody>
+            @foreach (Model.Recipe recipe in Model.Recipes)
+            {
+                <tr>
+                    <td>@recipe.Author.UserName</td>
+                    <td>@recipe.Title</td>
+                    <td>@recipe.Category.Name</td>
+                    <td>@recipe.IsApproved</td>
+                    <td>
+                        <a asp-page="/Recipes/GetById" asp-route-recipeId="@recipe.Id"><i class="fa-regular fa-eye"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="d-flex">
+        @if (Model.User.IsAdmin == true)
+        {
+            <a class="btn btn-danger" asp-area="" asp-page="/Recipes/CreateRecipe"> Create New Recipe <i class="bi bi-arrow-left"></i></a>
+            <a class="btn btn-danger mx-2" asp-area="" asp-page="/Recipes/GetAllByUserId"><i class="bi bi-arrow-right"></i> Get All Recipes By User Id</a>
         }
-    </tbody>
-</table>
+        else
+        {
+            <a class="btn btn-danger mx-2" asp-area="" asp-page="/Recipes/GetAllByUserId" asp-route-userId="@Model.User.Id"><i class="bi bi-arrow-right"></i> Your Recipe's List'</a>
+        }
+    </div>
+    <br />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">User</th>
+                <th scope="col">Recipe</th>
+                <th scope="col">Category</th>
+                <th scope="col">Approved</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (Model.Recipe recipe in Model.Recipes)
+            {
+                <tr>
+                    <td>@recipe.Author.UserName</td>
+                    <td>@recipe.Title</td>
+                    <td>@recipe.Category.Name</td>
+                    <td>@recipe.IsApproved</td>
+                    <td>
+                        <a asp-page="/Recipes/DeleteRecipe" asp-route-recipeId="@recipe.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a>
+                        <a asp-page="/Recipes/GetById" asp-route-recipeId="@recipe.Id"><i class="fa-regular fa-eye"></i></a>
+                        <a asp-page="/Recipes/Update" asp-route-recipeId="@recipe.Id"><i class="fa-solid fa-pencil"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

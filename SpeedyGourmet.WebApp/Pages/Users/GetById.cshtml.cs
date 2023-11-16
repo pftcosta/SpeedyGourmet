@@ -16,11 +16,12 @@ namespace SpeedyGourmet.WebApp.Pages.Users
         }
 
         public User User { get; set; }
+        public User UserEdit { get; private set; }
 
         public void OnGet(int userId)
         {
             GetUser();
-            User = _userService.GetById(userId);
+            UserEdit = _userService.GetById(userId);
         }
 
         public IActionResult OnPost()

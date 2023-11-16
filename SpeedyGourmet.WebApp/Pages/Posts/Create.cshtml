@@ -1,0 +1,26 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.Posts.CreateModel
+@{
+}
+
+@if(Model.User is not null)
+{
+    <form method="post" class="d-grid">
+        <input hidden type="number" name="id_user" />
+        <input hidden type="number" name="id_recipe" />
+
+        <div>
+            <input type="number" name="rating" id="rating" min="1" max="10" class="form-control mx-2" style="width: 200px;" placeholder="Enter Rating (1-10)">
+        </div>
+        <br />
+
+        <div>
+            <textarea type="text" name="comment" id="comment" class="form-control" placeholder="Enter Post" rows="5" cols="30"></textarea>
+        </div>
+        <br />
+
+        <div>
+            <button type="submit" class="btn btn-primary">Create Post <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </form>
+}

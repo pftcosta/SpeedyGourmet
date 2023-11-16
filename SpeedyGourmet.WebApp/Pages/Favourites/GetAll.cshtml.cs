@@ -23,6 +23,7 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
         public List<User> Users { get; private set; }
         public List<Recipe> Recipes { get; private set; }
         public User User { get; private set; }
+        public Recipe Recipe { get; private set; }
 
         public void OnGet()
         {
@@ -33,7 +34,7 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
             Recipes = _recipeService.GetAll();
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
             Favourite favourite = new Favourite
             {
@@ -42,7 +43,8 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
             };
 
             _favouriteService.Create(favourite);
-            OnGet();
+            //OnGet();
+            return RedirectToPage("/Recipes/GetById", new {id = favourite.Recipe.Id});
         }
         private void GetUser()
         {

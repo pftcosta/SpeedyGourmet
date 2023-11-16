@@ -42,6 +42,7 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
         {
             Recipe recipe = new Recipe()
             {
+                IsApproved = false,
                 Title = Convert.ToString(Request.Form["title"]),
                 PrepTime = Convert.ToInt32(Request.Form["prep_time"]),
                 PrepMethod = Convert.ToString(Request.Form["prep_method"]),
