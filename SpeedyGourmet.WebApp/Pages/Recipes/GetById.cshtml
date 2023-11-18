@@ -1,28 +1,22 @@
 ﻿@page
 @model SpeedyGourmet.WebApp.Pages.Recipee.GetById
 @{
-    Layout = "_Layout";
-    bool userHasCommented = Model.Posts.Any(p => p.User.Id == Model.User.Id);
 }
 
-<div class="form-group">
-    <button id="btnGoBack" class="btn btn-danger">Return to Previous Page <i class="fa-solid fa-arrow-up-from-bracket"></i></button>
-    @* <a class="btn btn-danger" asp-page="/Recipes/GetAll">Return to home <i class="fa-solid fa-arrow-up-from-bracket"></i></a> *@
-    
-    @if (Model.User != null)
+@* @if (Model.User != null)
+{
+    @* <a class="btn btn-primary" asp-page="/Favourites/Create" asp-route-userId="@Model.Recipe.Author.Id" asp-route-recipeId="@Model.Recipe.Id">Add to Favourites <i class="fa-solid fa-heart"></i></a> *@
+
+    @* @if (Model.User == null || (Model.User.Id != Model.Recipe.Author.Id && !Model.User.IsAdmin))
     {
-        <a class="btn btn-danger" asp-page="/Recipes/GetAll">Return to home <i class="fa-solid fa-arrow-up-from-bracket"></i></a>
+        <a class="btn btn-primary" asp-page="/Posts/Create" asp-route-recipeId="@Model.Recipe.Id">Add Comment</a>
+    }
 
-        @if (!Model.User.IsAdmin)
-        {
-            <a class="btn btn-primary" asp-page="/Favourites/Create" asp-route-userId="@Model.Recipe.Author.Id" asp-route-recipeId="@Model.Recipe.Id">Add to Favourites <i class="fa-solid fa-heart"></i></a>
-            <a class="btn btn-primary" asp-page="/Recipes/GetAllByUserId" asp-route-userId="@Model.Recipe.Author.Id">Return to User's List</a>
-        }
-
+    @if (Model.User != null && (Model.User.IsAdmin || Model.User.Id == Model.Recipe.Author.Id))
+    {
         <a class="btn btn-primary" asp-page="/Recipes/AddIngredients" asp-route-recipeId="@Model.Recipe.Id">Edit Recipe</a>
     }
-</div>
-
+} *@
 <h1>Title: @Model.Recipe.Title by: @Model.Recipe.Author.UserName</h1>
 <h4><p>ID: @Model.Recipe.Id</p></h4>
 <h4><p>Category: @Model.Recipe.Category.Name</p></h4>
@@ -35,10 +29,10 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var ingredients in Model.Recipe.Ingredients)
+        @foreach (Model.IngredientLine ingredientLine in Model.Recipe.Ingredients)
         {
             <tr>
-                <td>@ingredients.Quantity @ingredients.Measure.Name de @ingredients.Ingredient.Name</td>
+                <td>@ingredientLine.Quantity @ingredientLine.Measure.Name de @ingredientLine.Ingredient.Name</td>
             </tr>
         }
     </tbody>
@@ -89,35 +83,34 @@
     </tbody>
 </table>
 
-@if (Model.User != null && userHasCommented)
+@if (Model.User != null && Model.Recipe.IsApproved == true)
 {
-<!-- Links para visualizar e excluir o comentário existente -->
-<a asp-page="/posts/GetById" asp-route-postId="@Model.Posts.First(p => p.User.Id == Model.User.Id).Id"><i class="fa-regular fa-eye"></i> View My Comment</a>
-<a asp-page="/posts/Delete" asp-route-postId="@Model.Posts.First(p => p.User.Id == Model.User.Id).Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i> Delete My Comment</a>
-}
-else if (Model.User != null && (!Model.User.IsAdmin == true || Model.User.Id != Model.Recipe.Author.Id))
-{
-    <form method="post" class="d-grid">
-        <input hidden type="number" name="id_user" value="@Model.User.Id" />
-        <input hidden type="number" name="id_recipe" value="@Model.Recipe.Id" />
+    if (Model.User.Id == Model.Recipe.Author.Id)
+    {
+        
+    }
+    else
+    {
+        <form method="post" class="d-grid">
+            <input hidden type="number" name="id_user" value="@Model.User.Id" />
+            <input hidden type="number" name="id_recipe" value="@Model.Recipe.Id" />
 
-        <div>
-            <input type="number" name="rating" id="rating" min="1" max="10" class="form-control" style="width: 200px;" placeholder="Enter Rating (1-10)">
-        </div>
-        <br />
+            <div>
+                <input type="number" name="rating" id="rating" min="1" max="10" class="form-control" style="width: 200px;" placeholder="Enter Rating (1-10)">
+            </div>
+            <br />
 
-        <div>
-            <textarea type="text" name="comment" id="comment" class="form-control" placeholder="Enter Post" rows="5" cols="30"></textarea>
-        </div>
-        <br />
+            <div>
+                <textarea type="text" name="comment" id="comment" class="form-control" placeholder="Enter Post" rows="5" cols="30"></textarea>
+            </div>
+            <br />
 
-        <div>
-            <button type="submit" class="btn btn-primary">Create Post <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Create Post <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
     </form>
+    }
 }
-
-
 @section Scripts
 {
     <script>

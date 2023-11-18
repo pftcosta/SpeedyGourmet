@@ -1,7 +1,5 @@
 ﻿@page
-@model SpeedyGourmet.WebApp.Pages.Recipee.GetAll
-@{
-}
+@model SpeedyGourmet.WebApp.Pages.Recipes.GetAll
 
 <h2>All Recipes List <i class="fa-solid fa-bowl-food"></i></h2>
 <br />
@@ -20,19 +18,40 @@
         @foreach (Model.Recipe recipe in Model.Recipes.Where(r => r.IsApproved))
         {
             <tr>
-                <td>@recipe.Author.UserName</td>
-                <td>@recipe.Title</td>
-                <td>@recipe.Category.Name</td>
+                <input type="hidden" name="id" value="@recipe.Id" />
+                <td style="font-weight: bold;">@recipe.Author.UserName</td>
+                <td style="font-weight: bold;">@recipe.Title</td>
+                <td style="font-weight: bold;">@recipe.Category.Name</td>
                 <td>
                     <a asp-page="/Recipes/GetById" asp-route-recipeId="@recipe.Id"><i class="fa-regular fa-eye"></i></a>
-
                     @if (Model.User != null && Model.User.IsAdmin)
                     {
                         <a asp-page="/Recipes/DeleteRecipe" asp-route-recipeId="@recipe.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a>
-                        <a asp-page="/Recipes/Update" asp-route-recipeId="@recipe.Id"><i class="fa-solid fa-pencil"></i></a>
+                        <a asp-page="/Recipes/AddIngredients" asp-route-recipeId="@recipe.Id"><i class="fa-solid fa-pencil"></i></a>
+                        <a asp-page="/Recipes/ChangeApproval" asp-route-id="@recipe.Id"><i class="fa-regular fa-circle-xmark" style="color: #ff0000;"></i></a>
                     }
                 </td>
             </tr>
         }
     </tbody>
+
+    @if (Model.User != null && Model.User.IsAdmin)
+    {
+        <tbody>
+            @foreach (Model.Recipe recipe in Model.Recipes.Where(r => !r.IsApproved))
+            {
+                <tr>
+                    <input type="hidden" name="id" value="@recipe.Id" />
+                    <td style="color: #a9a9a9;">@recipe.Author.UserName</td>
+                    <td style="color: #a9a9a9;">@recipe.Title</td>
+                    <td style="color: #a9a9a9;">@recipe.Category.Name</td>
+                    <td>
+                        <a asp-page="/Recipes/GetById" asp-route-recipeId="@recipe.Id"><i class="fa-regular fa-eye"></i></a>
+                        <a asp-page="/Recipes/Update" asp-route-recipeId="@recipe.Id"><i class="fa-solid fa-pencil"></i></a>
+                        <a asp-page="/Recipes/ChangeApproval" asp-route-id="@recipe.Id"><i class="fa-regular fa-circle-check" style="color: #1cb070;"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    }
 </table>

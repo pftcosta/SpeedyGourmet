@@ -17,11 +17,12 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
 
         public User User { get; set; }
 
-        public IActionResult OnGet(int favouriteId)
+        public void OnGet(int favouriteId, int userId)
         {
             GetUser();
+            int id = userId;
             _favouriteService.Delete(favouriteId);
-            return Redirect("/Favourites/GetAll");
+            RedirectToPage("/Favourites/GetAllByUser", new { userId = User.Id });
         }
 
         private void GetUser()

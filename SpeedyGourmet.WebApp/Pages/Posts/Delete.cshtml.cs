@@ -16,11 +16,13 @@ namespace SpeedyGourmet.WebApp.Pages.Posts
         }
         public User User { get; set; }
 
-        public IActionResult OnGet(int postId)
+        public IActionResult OnGet(int postId, int userId)
         {
             GetUser();
+            int id = userId;
+            
             _postService.Delete(postId);
-            return Redirect("/Posts/GetAll");
+            return RedirectToPage("/Posts/GetAllByUser", new {userId = id});
         }
         private void GetUser()
         {

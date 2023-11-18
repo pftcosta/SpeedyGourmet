@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SpeedyGourmet.Model;
 using SpeedyGourmet.Service;
@@ -17,7 +16,7 @@ namespace SpeedyGourmet.WebApp.Pages.Categories
 
         public List<Category> Categories { get; private set; }
 
-        public User User { get; set; }
+        public User User { get; private set; }
 
         public void OnGet()
         {
@@ -31,6 +30,7 @@ namespace SpeedyGourmet.WebApp.Pages.Categories
             _categoryService.Create(new Category { Name = categoryName });
             OnGet();
         }
+
         private void GetUser()
         {
             string user = HttpContext.Session.GetString("user");

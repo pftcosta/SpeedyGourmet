@@ -41,6 +41,7 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
 
             OnGet(favourite.User.Id);
         }
+
         private void GetUser()
         {
             string user = HttpContext.Session.GetString("user");

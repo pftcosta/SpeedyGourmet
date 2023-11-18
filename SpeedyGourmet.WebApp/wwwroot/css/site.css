@@ -16,3 +16,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.custom-btn {
+    width: 50px;
+    padding: 5px;
+    font-size: 10;
+    font-weight: bold;
+    color: black;
+}

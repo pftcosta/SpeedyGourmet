@@ -5,7 +5,7 @@
 
 <h2>List of Comments <i class="fa-regular fa-comments"></i></h2>
 <br />
-@if (Model.User.IsAdmin == true)
+@* @if (Model.User.IsAdmin == true)
 {
     <div class="d-flex">
         <div class="form-group">
@@ -28,7 +28,7 @@
         </form>
     </div>
     <br />
-}
+} *@
 
 <table class="table">
     <thead>
@@ -46,7 +46,7 @@
                 <td><i class="fa-solid fa-user"></i> @post.User.UserName Posted on @post.Recipe.Title with @post.Rating <i class="fa-regular fa-star"></i>'s</td>
                 <td></td>
                 <td>
-                    <a asp-page="/posts/Delete" asp-route-postId="@post.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
+                    <a asp-page="/posts/Delete" asp-route-postId="@post.Id" asp-route-userId="@post.User.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
                     <a asp-page="/posts/GetById" asp-route-postId="@post.Id"><i class="fa-regular fa-eye"></i></a>
                 </td>
             </tr>

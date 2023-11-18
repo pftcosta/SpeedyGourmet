@@ -34,17 +34,18 @@ namespace SpeedyGourmet.WebApp.Pages.Favourites
             Recipes = _recipeService.GetAll();
         }
 
-        public IActionResult OnPost()
+        public void OnPost()
         {
-            Favourite favourite = new Favourite
-            {
-                User = new User { Id = Convert.ToInt32(Request.Form["id_user"]) },
-                Recipe = new Recipe { Id = Convert.ToInt32(Request.Form["id_recipe"]) }
-            };
+            Favourite favourite = new();
+            User user = new User();
+            favourite.User = user;
+            favourite.User.Id = Convert.ToInt32(Request.Form["id_user"]);
 
+            Recipe recipe = new();
+            favourite.Recipe = recipe;
+            favourite.Recipe.Id = Convert.ToInt32(Request.Form["id_recipe"]);
             _favouriteService.Create(favourite);
-            //OnGet();
-            return RedirectToPage("/Recipes/GetById", new {id = favourite.Recipe.Id});
+            OnGet();
         }
         private void GetUser()
         {

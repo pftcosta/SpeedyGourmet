@@ -59,25 +59,25 @@ else
                     <td>
                         @if (user.IsAdmin == true)
                         {
-                            <a><i class="fa-solid fa-crown" style="color: #ffbb00"></i></a>
+                            <a asp-page="/Users/ChangeRole" asp-route-id="@user.Id"><i class="fa-solid fa-crown" style="color: #ffbb00"></i></a>
                         }
                         else
                         {
-                            <a><i class="fa-regular fa-user"></i></a>
+                            <a asp-page="/Users/ChangeRole" asp-route-id="@user.Id"><i class="fa-regular fa-user"></i></a>
                         }
                     </td>
                     <td>
                         @if (user.IsBlocked == true)
                         {
-                            <a><i class="fa-solid fa-lock" style="color: #d10000;"></i></a>
+                            <a asp-page="/Users/ChangeAcess" asp-route-id="@user.Id"><i class="fa-solid fa-lock" style="color: #d10000;"></i></a>
                         }
                         else
                         {
-                            <a><i class="fa-solid fa-lock-open" style="color: #138630;"></i></a>
+                            <a asp-page="/Users/ChangeAcess" asp-route-id="@user.Id"><i class="fa-solid fa-lock-open" style="color: #138630;"></i></a>
                         }
                     </td>
                     <td>
-                        <a asp-page="/users/Delete" asp-route-userId="@user.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
+                        <a asp-page="/users/Delete" asp-route-userId="@user.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> / 
                         <a asp-page="/users/GetById" asp-route-userId="@user.Id"><i class="fa-solid fa-user-pen"></i></a>
                     </td>
                 </tr>

@@ -36,26 +36,23 @@
                         </div>
                     </td>
                     <td>
-                        @if (User.Identity.Name == Model.UserEdit.UserName)
-                        {
-                            <div>
-                            <input type="text" name="name" class="form-control" style="width: 150px" value="@Model.UserEdit.Name" readonly">
-                            </div>
-                        }
-                    </td>
-                    <td>
                         <div>
-                        <input name="username" class="form-control" style="width: 150px" value="@Model.UserEdit.UserName" readonly=>
+                        <input type="text" name="name" class="form-control" style="width: 150px" value="@Model.UserEdit.Name" readonly>
                         </div>
                     </td>
                     <td>
                         <div>
-                        <input name="email" class="form-control" style="width: 150px" placeholder="@Model.UserEdit.Email" readonly=>
+                        <input name="username" class="form-control" style="width: 150px" value="@Model.UserEdit.UserName" readonly>
                         </div>
                     </td>
                     <td>
                         <div>
-                        <input name="password" class="form-control" style="width: 100px" placeholder="*****" readonly=>
+                        <input name="email" class="form-control" style="width: 150px" placeholder="@Model.UserEdit.Email" readonly>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                        <input name="password" class="form-control" style="width: 100px" placeholder="*****" readonly>
                         </div>
                     </td>
 
@@ -118,12 +115,9 @@ else if (Model.User.IsAdmin == true && Model.User.Id == Model.UserEdit.Id)
                     </div>
                 </td>
                 <td>
-                        @if (User.Identity.Name == Model.UserEdit.UserName)
-                        {
-                        <div>
-                            <input type="text" name="name" class="form-control" style="width: 150px" value="@Model.UserEdit.Name">
-                        </div>
-                        }
+                    <div>
+                        <input type="text" name="name" class="form-control" style="width: 150px" value="@Model.UserEdit.Name">
+                    </div>
                 </td>
                 <td>
                     <div>

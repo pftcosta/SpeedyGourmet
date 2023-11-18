@@ -22,7 +22,7 @@ namespace SpeedyGourmet.WebApp.Pages.Posts
         public List<Post> Posts { get; private set; }
         public List<User> Users { get; private set; }
         public List<Recipe> Recipes { get; private set; }
-        public User User { get; set; }
+        public User User { get; private set; }
 
         public void OnGet()
         {

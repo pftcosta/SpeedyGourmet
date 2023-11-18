@@ -3,7 +3,7 @@
 @{
 }
 
-<h2>Favourites <i class="fa-solid fa-heart"></i></h2>
+<h2>Favourites GET BY ID<i class="fa-solid fa-heart"></i></h2>
 <br />
 
 <table class="table">
@@ -23,8 +23,8 @@
     </tbody>
 </table>
 
-<form method="post">
+@* <form method="post">
     <div class="d-flex justify-content-between">
-        <a class="btn btn-danger" asp-area="" asp-page="/Favourites/GetAll"> Return <i class="fa-solid fa-arrow-up-from-bracket"></i></a>
+        <a class="btn btn-danger" asp-area="" asp-page="/Favourites/GetAllByUser" asp-route-userId="@Model.User.Id"> Return <i class="fa-solid fa-arrow-up-from-bracket"></i></a>
     </div>
-</form>
+</form> *@

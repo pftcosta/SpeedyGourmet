@@ -35,7 +35,7 @@ namespace SpeedyGourmet.WebApp.Pages.LogIn
             };
 
             _userService.Create(user);
-            return RedirectToPage("/Users/GetAll");
+            return RedirectToPage("/Index");
         }
 
         private void GetUser()

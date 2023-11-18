@@ -4,7 +4,7 @@ using SpeedyGourmet.Model;
 using SpeedyGourmet.Service;
 using System.Text.Json;
 
-namespace SpeedyGourmet.WebApp.Pages.Recipee
+namespace SpeedyGourmet.WebApp.Pages.Recipes
 {
     public class CreateRecipe : PageModel
     {

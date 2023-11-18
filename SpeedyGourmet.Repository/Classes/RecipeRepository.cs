@@ -26,10 +26,10 @@ namespace SpeedyGourmet.Repository
 
         public Recipe GetById(int recipeId)
         {
-            //if (recipeId == 0)
-            //{
-            //    recipeId = 1;
-            //}
+            if (recipeId == 0)
+            {
+                recipeId = 1;
+            }
 
             string sql = $"SELECT * FROM {_tableName} WHERE id = {recipeId};";
             SqlDataReader reader = SQL.Execute(sql);
@@ -77,7 +77,8 @@ namespace SpeedyGourmet.Repository
                 $"id_category = {recipe.Category.Id}, " +
                 $"prep_time = {recipe.PrepTime}, " +
                 $"prep_method = '{recipe.PrepMethod}', " +
-                $"id_difficulty = {recipe.Difficulty.Id} " +
+                $"id_difficulty = {recipe.Difficulty.Id}, " +
+                $"is_approved = '{recipe.IsApproved}' " +
                 $"WHERE id = {recipe.Id};";
 
             SQL.ExecuteNonQuery(sql);

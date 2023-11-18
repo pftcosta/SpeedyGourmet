@@ -3,9 +3,9 @@
 @{
 }
 
-<h2>Favourites <i class="fa-solid fa-heart"></i></h2>
+<h2>Favourites GET ALL BY USER <i class="fa-solid fa-heart"></i></h2>
 <br />
-@if (Model.User.IsAdmin == true)
+@* @if (Model.User.IsAdmin == true)
 {
     <div class="d-flex">
         <div class="form-group">
@@ -14,6 +14,8 @@
 
         <form method="post" class="d-flex">
             <div class="form-group mx-2">
+                @* <input name="name" asp-route-id_user="@Model.User.Id" class="form-control" placeholder="@Model.User.UserName" readonly>
+
                 <select name="id_user" class="form-control">
                     <option selected>Select User</option>
                     @foreach (Model.User user in Model.Users)
@@ -28,7 +30,7 @@
         </form>
     </div>
     <br />
-}
+} *@
 
 <table class="table">
     <thead>
@@ -44,8 +46,8 @@
             <tr>
                 <td><a><i class="fa-solid fa-user"></i> @favourite.User.UserName <i class="fa-solid fa-heart"></i> @favourite.Recipe.Title</a></td>
                 <td>
-                    <a asp-page="/Favourites/Delete" asp-route-favouriteId="@favourite.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
-                    <a asp-page="/Favourites/GetById" asp-route-favouriteId="@favourite.Id"><i class="fa-regular fa-eye"></i></a>
+                    <a asp-page="/Favourites/Delete" asp-route-favouriteId="@favourite.Id" asp-route-userId="@favourite.User.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a>
+                    @* <a asp-page="/Favourites/GetById" asp-route-favouriteId="@favourite.Id"><i class="fa-regular fa-eye"></i></a> *@
                 </td>
             </tr>
         }

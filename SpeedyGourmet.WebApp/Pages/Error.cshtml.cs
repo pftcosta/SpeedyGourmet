@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SpeedyGourmet.Model;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace SpeedyGourmet.WebApp.Pages
 {
@@ -19,9 +21,21 @@ namespace SpeedyGourmet.WebApp.Pages
             _logger = logger;
         }
 
+        public User User { get; private set; }
+
         public void OnGet()
         {
+            GetUser();
             RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+        }
+
+        private void GetUser()
+        {
+            string user = HttpContext.Session.GetString("user");
+            if (user != null)
+            {
+                User = JsonSerializer.Deserialize<User>(user);
+            }
         }
     }
 }

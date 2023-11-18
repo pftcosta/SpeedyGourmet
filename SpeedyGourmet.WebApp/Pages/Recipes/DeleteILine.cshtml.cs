@@ -17,13 +17,14 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
 
         public User User { get; set; }
 
-        public IActionResult OnGet(int ingredientId)
+        public IActionResult OnGet(int ingredientId, int recipeId)
         {
             GetUser();
             IngredientLine ingredientLine = _ingredientLineService.GetById(ingredientId);
+            int id = recipeId;
 
             _ingredientLineService.Delete(ingredientId);
-            return RedirectToPage("/Recipes/AddIngredients", new { id = ingredientLine.Recipe.Id });
+            return RedirectToPage("/Recipes/AddIngredients", new { recipeId = id });
         }
         private void GetUser()
         {

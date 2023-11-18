@@ -93,6 +93,7 @@ namespace SpeedyGourmet.WebApp.Pages.Users
             _userService.Update(User);
             return Redirect("/Users/GetAll");
         }
+
         private void GetUser()
         {
             string user = HttpContext.Session.GetString("user");

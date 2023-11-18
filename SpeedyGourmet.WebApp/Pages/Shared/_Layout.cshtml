@@ -17,42 +17,40 @@
     <header>
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <div class="container">
-                <a class="navbar-brand" href="/Index">Logo</a>
-        
-                <ul class="navbar-nav">
+                <a class="navbar-brand" href="/Index"><i class="fa-solid fa-utensils" style="color: #ff00f7;"> Speedy</i> <i i class="fa-solid fa-bowl-food" style="color: #d40c0c;"> Gourmet</i></a>
 
+                <div class="navbar-nav">
                     @if (Model.User is null)
                     {
                         <li class="nav-item ml-1">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Users/Login">Login</a>
+                            <a class="nav-link text-dark custom-btn" asp-area="" asp-page="/Users/Login"><i class="fa-solid fa-person-walking-arrow-right" style="color: #00ff40;"></i></a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Users/Register">Register</a>
+                            <a class="nav-link text-dark custom-btn" asp-area="" asp-page="/Users/Register"><i class="fa-solid fa-door-open" style="color: #005eff;"></i></a>
                         </li>
 
-                        <form method="get" class="d-flex" asp-page="/Shared/Search">
+                        @* <form method="get" class="d-flex" asp-page="/Shared/Search">
                             <input type="text" class="form-control align-content-center" name="query" placeholder="Search Box" />
                             <button type="submit" class="btn btn-primary mx-2">Search</button>
-                        </form>
+                        </form> *@
                     }
                     else
                     {
                         <li class="nav-item ml-1">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Users/Login">Login</a>
+                            <a class="nav-link custom-btn" asp-area="" asp-page="/Recipes/CreateRecipe"><i class="fa-solid fa-kitchen-set" style="color: #b3d40c;"></i></a>
                         </li>
-
                         <li class="nav-item ml-1">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Users/Logout">Logout</a>
+                            <a class="nav-link text-dark custom-btn" asp-area="" asp-page="/Users/Logout"><i class="fa-solid fa-person-walking-arrow-right" style="color: #e00000;"></i></a>
                         </li>
 
                         <ul class="nav-item">
                             <li class="nav-item dropdown">
-                                <a class="nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown" href="#">User Menu</a>
+                                <a class="nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown" href="#">User Menu <i class="fa-solid fa-user-tie" style="color: #0056eb;"></i></a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-route-userId="@Model.User.Id" asp-page="/Users/GetById"><i class="fa-solid fa-users"></i> User Definitions</a></li>
                                     <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-route-userId="@Model.User.Id" asp-page="/Favourites/GetAllByUser"><i class="fa-solid fa-heart"></i> My Favourites</a></li>
-                                    <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-route-userId="@Model.User.Id" asp-page="/Posts/GetAllByUser"><i class="fa-solid fa-comments"></i>My Comments</a></li>
+                                    <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-route-userId="@Model.User.Id" asp-page="/Posts/GetAllByUser"><i class="fa-solid fa-comments"></i> My Comments</a></li>
                                     <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-route-userId="@Model.User.Id" asp-page="/Recipes/GetAllByUserId"><i class="fa-solid fa-bowl-food"></i> My Recipes</a></li>
                                 </ul>
                             </li>
@@ -76,12 +74,12 @@
 
                         }
                            
-                        <form method="get" class="d-flex" asp-page="/Shared/Search">
+                        @* <form method="get" class="d-flex" asp-page="/Shared/Search">
                             <input type="text" class="form-control align-content-center" name="query" placeholder="Search Box" />
                             <button type="submit" class="btn btn-primary mx-2">Search</button>
-                        </form>
+                        </form> *@
                     }
-                </ul>
+                </div>
             </div>
         </nav>
     </header>

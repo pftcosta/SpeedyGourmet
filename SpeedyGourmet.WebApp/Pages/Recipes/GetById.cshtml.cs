@@ -21,7 +21,7 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
 
         public List<Post> Posts { get; private set; }
         public Recipe Recipe { get; private set; }
-        public User User { get; set; }
+        public User User { get; private set; }
 
         public void OnGet(int recipeId)
         {
@@ -43,7 +43,6 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
 
             _postService.Create(post);
             OnGet(post.Recipe.Id);
-            //return RedirectToPage("/Recipes/GetById", new { id = recipeId });
         }
         public double MathRound()
         {

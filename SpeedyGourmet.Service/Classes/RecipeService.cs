@@ -69,6 +69,7 @@ namespace SpeedyGourmet.Service
         public void Delete(int recipeId)
         {
             _recipeRepository.Delete(recipeId);
+            _ingredientLineService.DeleteAllByRecipeId(recipeId);
         }
 
         public void DeleteAllByUserId(int userId)

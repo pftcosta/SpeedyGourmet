@@ -5,7 +5,7 @@
 
 <h2>All Recipes List <i class="fa-solid fa-bowl-food"></i></h2>
 <br />
-@if (Model.User.IsAdmin == true)
+@* @if (Model.User.IsAdmin == true)
 {
     <div class="d-flex">
         <div class="form-group">
@@ -28,7 +28,7 @@
         </form>
     </div>
     <br />
-}
+} *@
 
 <table class="table">
     <thead>
@@ -49,8 +49,8 @@
                 <td>@recipe.Category.Name</td>
                 <td>
                     <a asp-page="/Recipes/DeleteRecipe" asp-route-recipeId="@recipe.Id"><i class="fa-regular fa-trash-can" style="color: #d10000;"></i></a> /
-                    <a asp-page="/Recipes/GetById" asp-route-recipeId="@recipe.Id"><i class="fa-regular fa-eye"></i></a> /
                     <a asp-page="/Recipes/AddIngredients" asp-route-recipeId="@recipe.Id"><i class="fa-solid fa-pencil"></i></a>
+                    @* <a asp-page="/Recipes/GetById" asp-route-recipeId="@recipe.Id"><i class="fa-regular fa-eye"></i></a> / *@
                 </td>
             </tr>
         }

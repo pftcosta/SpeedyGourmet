@@ -22,7 +22,7 @@ namespace SpeedyGourmet.WebApp.Pages.Recipee
         {
             GetUser();
             _recipeService.Delete(recipeId);
-            return Redirect("/Recipes/GetAllByUserId");
+            return Redirect("/Index");
         }
         private void GetUser()
         {
