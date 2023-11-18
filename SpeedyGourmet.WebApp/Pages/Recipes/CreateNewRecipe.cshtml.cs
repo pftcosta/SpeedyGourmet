@@ -6,14 +6,14 @@ using System.Text.Json;
 
 namespace SpeedyGourmet.WebApp.Pages.Recipes
 {
-    public class CreateRecipe : PageModel
+    public class CreateNewRecipeModel : PageModel
     {
         private readonly IRecipeService _recipeService;
         private readonly IService<Category, int> _categoryService;
         private readonly IService<Difficulty, int> _difficultyService;
         private readonly IService<User, int> _userService;
 
-        public CreateRecipe(IRecipeService recipeService, IService<Category, int> categoryService, IService<Difficulty, int> difficultyService, IService<User, int> userService)
+        public CreateNewRecipeModel(IRecipeService recipeService, IService<Category, int> categoryService, IService<Difficulty, int> difficultyService, IService<User, int> userService)
         {
             _recipeService = recipeService;
             _categoryService = categoryService;

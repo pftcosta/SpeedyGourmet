@@ -1,0 +1,53 @@
+﻿@page
+@model SpeedyGourmet.WebApp.Pages.Recipes.CreateNewRecipeModel
+@{
+}
+
+<form method="post">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input name="title" class="form-control" placeholder="Enter Recipe's Title">
+        <br>
+
+        <p>User</p>
+        <select name="id_user" class="form-select" aria-label="Default select example">
+            <option selected>Select a User</option>
+            @foreach (Model.User user in Model.Users)
+            {
+                <option value="@user.Id">@user.UserName</option>
+            }
+        </select>
+        <br>
+
+        <p>Category</p>
+        <select name="id_category" class="form-select" aria-label="Default select example">
+            <option selected>Select a Category</option>
+            @foreach (Model.Category category in Model.Categories)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
+        </select>
+        <br>
+
+        <p>Difficulty</p>
+        <select name="id_difficulty" class="form-select" aria-label="Default select example">
+            <option selected>Select a Difficulty Level For The Recipe</option>
+            @foreach (Model.Difficulty difficulties in Model.Difficulties)
+            {
+                <option value="@difficulties.Id">@difficulties.Name</option>
+            }
+        </select>
+        <br>
+
+        <label for="time">Time</label>
+        <input type="number" name="prep_time" class="form-control" placeholder="Enter Preparation Time IN MINUTES">
+        <br>
+
+        <label for="method">Preparation</label>
+        <input name="prep_method" class="form-control" placeholder="Describe the Preparation Method">
+        <br>
+
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Continue to Ingredient's List</button>
+</form>
